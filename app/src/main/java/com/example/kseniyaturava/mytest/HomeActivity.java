@@ -20,44 +20,44 @@ public class HomeActivity extends AppCompatActivity {
                     //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            setTitle("Explore");//Set the title ActionBar
+                            //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                            // startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                            finish();
+
                             break;
                         case R.id.searchItem:
-                            setTitle("Search");
-                            startActivity(new Intent(HomeActivity.this,SearchActivity.class));
+                            // setTitle("Search");
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
 
 
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                            finish();
+
                             break;
                         case R.id.formItem:
-                            setTitle("Form");
-                            startActivity(new Intent(HomeActivity.this, FormActivity.class));
+                            // setTitle("Form");
+                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
 
                             // startActivity(new Intent(MainActivity.this, FormActivity.class));
-                            finish();
+
                             break;
 
                         case R.id.notificationItem:
-                            setTitle("Notifications");
-                            startActivity(new Intent(HomeActivity.this, AlertsActivity.class));
-                            finish();
+                            // setTitle("Notifications");
+                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+
                             break;
 
                         case R.id.profileItem:
-                            setTitle("Profile");
-                            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
-                            finish();
+                            // setTitle("Profile");
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
 
                             break;
 
                     }
-                    //finish();
-                    return false;
+                    finish();
+                    return true;
                 }
 
             };

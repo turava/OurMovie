@@ -18,48 +18,35 @@ public class SearchActivity extends AppCompatActivity {
                     //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            setTitle("Explore");//Set the title ActionBar
+                            //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(SearchActivity.this, HomeActivity.class));
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                            finish();
-                            break;
+                            return true;
                         case R.id.searchItem:
-                            setTitle("Search");
-                            startActivity(new Intent(SearchActivity.this,SearchActivity.class));
-
-
+                            // setTitle("Search");
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                            finish();
-                            break;
+                            return true;
                         case R.id.formItem:
-                            setTitle("Form");
-                            startActivity(new Intent(SearchActivity.this, FormActivity.class));
-
+                            // setTitle("Form");
+                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
                             // startActivity(new Intent(MainActivity.this, FormActivity.class));
-                            finish();
-                            break;
-
+                            return true;
                         case R.id.notificationItem:
-                            setTitle("Notifications");
-                            startActivity(new Intent(SearchActivity.this, AlertsActivity.class));
-                            finish();
-                            break;
-
+                            // setTitle("Notifications");
+                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            return true;
                         case R.id.profileItem:
-                            setTitle("Profile");
-                            startActivity(new Intent(SearchActivity.this, ProfileActivity.class));
-                            finish();
-
-                            break;
-
+                            // setTitle("Profile");
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            return true;
                     }
-                    //finish();
-                    return true;
+                    // finish();
+                    return false;
                 }
 
             };
-
 
 
     @Override
@@ -68,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        setTitle("search.");
+        setTitle("Search");//Set the title ActionBar
 
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...

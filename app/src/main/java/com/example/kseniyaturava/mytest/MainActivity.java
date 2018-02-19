@@ -26,49 +26,37 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull  MenuItem item) {
             //we are on the method when the menu's item is selected
             //type inside the instructions TODO
-           switch (item.getItemId()) {
+            switch (item.getItemId()) {
                 case R.id.homeItem:
                     //setTitle("Explore");//Set the title ActionBar
                     //instance Activity
-                   // startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                  // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-
-                    break;
-               case R.id.searchItem:
-                  // setTitle("Search");
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    // startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    return true;
+                case R.id.searchItem:
+                    // setTitle("Search");
                     startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-
-
-                   //startActivity(new Intent(MainActivity.this, SearchActivity.class));
-
-                    break;
+                    //startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                    return true;
                 case R.id.formItem:
-                   // setTitle("Form");
+                    // setTitle("Form");
                     startActivity(new Intent(getApplicationContext(), FormActivity.class));
-
-                   // startActivity(new Intent(MainActivity.this, FormActivity.class));
-
-                    break;
-
+                    // startActivity(new Intent(MainActivity.this, FormActivity.class));
+                    return true;
                 case R.id.notificationItem:
-                   // setTitle("Notifications");
+                    // setTitle("Notifications");
                     startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
-
-                    break;
-
+                    return true;
                 case R.id.profileItem:
-                   // setTitle("Profile");
+                    // setTitle("Profile");
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-
-
-                    break;
-
+                    return true;
             }
-            finish();
-            return true;
+            // finish();
+            return false;
         }
 
-    };
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,29 +71,9 @@ public class MainActivity extends AppCompatActivity {
        // MenuItem menuItem = menu.getItem(0);
       //  menuItem.setChecked(true);
 
-
-    }
+ }
 }
 
 
-        //When app starts this fragment will be desplayed by default
-
-        //Errors here!
-        //BottomNavigationView.setCheckedItem(R.id.bottomNavigationView);
-
-        /*Fragment fragment = null;
-        fragment = new HomeFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();*/
-
-        /*setTitle("Start");//Set the title ActionBar
-        HomeFragment FragmentExplore = new HomeFragment();
-        FragmentTransaction fragmentTransactionExplore = getSupportFragmentManager().beginTransaction();
-        fragmentTransactionExplore.replace(R.id.fragmentContainer, FragmentExplore, "Hola");
-        fragmentTransactionExplore.commit();
-*/
 
 

@@ -29,4 +29,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="write_movie_title">Escribe el título del film</string>
+    <string name="buscar">Buscar</string>
+    <string name="movie_image">Movie Image</string>
+    <string name="movie_description">Movie Description</string>
 </resources>

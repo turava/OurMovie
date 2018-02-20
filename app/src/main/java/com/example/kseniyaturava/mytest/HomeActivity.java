@@ -14,54 +14,40 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull  MenuItem item) {
-
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     //we are on the method when the menu's item is selected
                     //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            // startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-
-                            break;
+                            return true;
                         case R.id.searchItem:
                             // setTitle("Search");
                             startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-
-
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
-
-                            break;
+                            return true;
                         case R.id.formItem:
                             // setTitle("Form");
                             startActivity(new Intent(getApplicationContext(), FormActivity.class));
-
                             // startActivity(new Intent(MainActivity.this, FormActivity.class));
-
-                            break;
-
+                            return true;
                         case R.id.notificationItem:
                             // setTitle("Notifications");
                             startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
-
-                            break;
-
+                            return true;
                         case R.id.profileItem:
                             // setTitle("Profile");
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-
-
-                            break;
-
+                            return true;
                     }
-                    finish();
-                    return true;
+                    // finish();
+                    return false;
                 }
 
             };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

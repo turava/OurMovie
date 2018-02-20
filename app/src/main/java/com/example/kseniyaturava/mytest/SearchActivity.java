@@ -5,7 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
     private
@@ -62,6 +69,32 @@ public class SearchActivity extends AppCompatActivity {
         // Menu menu = BottomNavigationView.getMenu();
         //MenuItem menuItem = menu.getItem(1);
         //menuItem.setChecked(true);
+
+        //Eli writes from here
+        //variable searchText statement and IME_Action_Search
+
+        EditText searchText = (EditText) findViewById(R.id.search_text);
+        final TextView movieImage = (TextView) findViewById(R.id.movieImage);
+        final TextView movieDescription = (TextView) findViewById(R.id.movieDescription);
+
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean found=false;
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    Toast.makeText(SearchActivity.this, "Encontrada pelicula: " + v.getText().toString(), Toast.LENGTH_SHORT).show();
+                    InputMethodManager imm= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    found=true;
+                    movieImage.setVisibility(View.VISIBLE);
+                    movieDescription.setVisibility(View.VISIBLE);
+                }
+                return found;
+            }
+        });
+
+        //code if film found
+
 
     }
 }

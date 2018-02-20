@@ -58,9 +58,10 @@ public class HomeActivity extends AppCompatActivity {
         setTitle("Explore");
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
-       // Menu menu = BottomNavigationView.getMenu();
-        //MenuItem menuItem = menu.getItem(1);
-        //menuItem.setChecked(true);
+        //here the icon change color
+        Menu menu = BottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
 
     }
 }

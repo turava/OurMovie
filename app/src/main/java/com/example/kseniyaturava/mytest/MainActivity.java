@@ -61,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setTitle("Explore");
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
-       // Menu menu = BottomNavigationView.getMenu();
-       // MenuItem menuItem = menu.getItem(0);
-      //  menuItem.setChecked(true);
+        Menu menu = BottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
 
  }
 }

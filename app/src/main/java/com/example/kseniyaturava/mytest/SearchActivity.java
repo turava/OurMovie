@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -65,10 +66,10 @@ public class SearchActivity extends AppCompatActivity {
         setTitle("Search");//Set the title ActionBar
 
         // Ensure correct menu item is selected
-        //this part works good- the app starts on index number by case order from 0 to...
-        // Menu menu = BottomNavigationView.getMenu();
-        //MenuItem menuItem = menu.getItem(1);
-        //menuItem.setChecked(true);
+        //here the icon change color
+        Menu menu = BottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
 
         //Eli writes from here
         //variable searchText statement and IME_Action_Search

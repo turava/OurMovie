@@ -88,12 +88,14 @@ public class SearchActivity extends AppCompatActivity {
                     found=true;
                     movieImage.setVisibility(View.VISIBLE);
                     movieDescription.setVisibility(View.VISIBLE);
+                } else{
+                    Toast.makeText(SearchActivity.this, "La pelicula no está en la base de datos", Toast.LENGTH_SHORT).show();
                 }
                 return found;
             }
         });
 
-        //code if film found
+        //code if movie found in the database is pending write to next lesson
 
 
     }

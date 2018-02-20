@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A9A9A9"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.kseniyaturava.mytest.MainActivity">
+
+    <ImageView
+        android:id="@+id/matrix1"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        design:srcCompat="@drawable/matrix1"
+        android:contentDescription="@string/Movie" />
+
+    <EditText
+        android:id="@+id/Comentario1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        android:background="@color/colorBlanco"
+        android:textColor="@color/colorPrimaryDark"
+        android:inputType="textMultiLine" />
+
+    <TextClock
+        android:id="@+id/Comentario1Clock"
+        android:layout_width="195dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="160dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Comentario2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="250dp"
+        android:background="@color/colorBlanco"
+        android:textColor="@color/colorPrimaryDark"
+        android:inputType="textMultiLine" />
+
+    <TextClock
+        android:id="@+id/Comentario2Clock"
+        android:layout_width="195dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="230dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Comentario3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/colorBlanco"
+        android:textColor="@color/colorPrimaryDark"
+        android:inputType="textMultiLine" />
+
+    <TextClock
+        android:id="@+id/Comentario3Clock"
+        android:layout_width="195dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Comentario4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="390dp"
+        android:background="@color/colorBlanco"
+        android:textColor="@color/colorPrimaryDark"
+        android:inputType="textMultiLine" />
+
+    <TextClock
+        android:id="@+id/Comentario4Clock"
+        android:layout_width="195dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="370dp"
+        android:layout_height="wrap_content" />
+
+    <AutoCompleteTextView
+        android:id="@+id/movieDescription"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/titulo_director_actores_y_a_o_datos_que_estan_en_la_bbdd" />
+
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomNavigationView"
+        android:layout_gravity="bottom"
+        android:background="@color/colorBlanco"
+        >
+
+        <!--shadow.xml inside-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow"/>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/menu_navigation"
+
+            >
+
+        </android.support.design.widget.BottomNavigationView>
+        <!-- android:layout_height="wrap_content"
+         ALT+ENTER on design to add namespaces-->
+        <!---->
+    </FrameLayout>
+    <!--</RelativeLayout>-->
+
+</android.support.design.widget.CoordinatorLayout>

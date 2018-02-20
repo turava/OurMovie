@@ -33,4 +33,8 @@
     <string name="buscar">Buscar</string>
     <string name="movie_image">Movie Image</string>
     <string name="movie_description">Movie Description</string>
+    <string name="Movie">Movie</string>
+    <string name="matrix">Matrix</string>
+    <string name="pelicula_matrix">Pelicula: Matrix</string>
+    <string name="titulo_director_actores_y_a_o_datos_que_estan_en_la_bbdd">Titulo, director, actores y año. Datos que estan en la bbdd</string>
 </resources>

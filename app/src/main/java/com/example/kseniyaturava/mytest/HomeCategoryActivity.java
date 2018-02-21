@@ -7,13 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
-import static android.view.View.*;
+public class HomeCategoryActivity extends AppCompatActivity {
 
 
-public class HomeActivity extends AppCompatActivity implements OnClickListener {
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,7 +28,7 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
                             return true;
                         case R.id.searchItem:
                             // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
                             return true;
                         case R.id.formItem:
@@ -57,11 +54,11 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_category);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //change the title of actionBar
-        setTitle("OurMovie");
+        setTitle("Categorías");
+
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
         //here the icon change color
@@ -69,74 +66,6 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
         //disabled shift mode
-        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
-        //Popular listeners on images
-        ImageView visorImatge = findViewById(R.id.imageView2);
-        visorImatge.setOnClickListener(this);
-        visorImatge.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-
-            }
-        });
-
-        //Categories listeners on images
-        ImageView imgClick = (ImageView) findViewById(R.id.img_drama);
-        imgClick.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
-            }
-        });
-        ImageView img_comedy = (ImageView) findViewById(R.id.img_comedy);
-        img_comedy.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
-
-        }
-        });
-        ImageView img_fiction = (ImageView) findViewById(R.id.img_fiction);
-        img_fiction.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
-
-            }
-        });
-        ImageView img_horror = (ImageView) findViewById(R.id.img_horror);
-        img_horror.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
-
-            }
-        });
-
-}
-
-    @Override
-    public void onClick(View view) {
-
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
     }
 }
-   /* @Override
-    public void onClick(View v) {
-        ImageView visorImatge = findViewById(R.id.imageView2);
-
-       // Intent intent= new Intent(getApplicationContext() ,MovieActivity.class);
-        startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-       // startActivity(intent);
-
-
-    }
-}*/
-    /*     ImageView visorImatge = findViewById(R.id.imageView2);
-            visorImatge.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-                }
-            });
-    }*/

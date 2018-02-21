@@ -30,7 +30,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".ForoActivity" />
-        <activity android:name=".MovieActivity"></activity>
+        <activity android:name=".MovieActivity" />
+        <activity android:name=".HomeCategoryActivity"></activity>
     </application>
 
 </manifest>

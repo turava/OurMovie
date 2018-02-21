@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -55,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        setTitle("Explore");
+        setTitle("OurMovie");
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
         //here the icon change color
@@ -64,4 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         menuItem.setChecked(true);
 
     }
+
+
+
 }

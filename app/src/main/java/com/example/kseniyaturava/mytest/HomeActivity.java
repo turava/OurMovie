@@ -1,15 +1,15 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
     private
@@ -19,6 +19,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     //we are on the method when the menu's item is selected
                     //type inside the instructions TODO
+
                     switch (item.getItemId()) {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
@@ -64,8 +65,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
-
-
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
 
       /*     ImageView visorImatge = findViewById(R.id.imageView2);

@@ -60,5 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(4);
         menuItem.setChecked(true);
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+
     }
 }

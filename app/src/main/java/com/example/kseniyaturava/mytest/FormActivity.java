@@ -65,6 +65,9 @@ public class FormActivity extends AppCompatActivity {
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+
 
     }
 }

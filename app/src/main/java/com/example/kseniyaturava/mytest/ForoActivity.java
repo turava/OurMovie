@@ -1,14 +1,12 @@
 package com.example.kseniyaturava.mytest;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.view.Menu;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -58,6 +56,8 @@ public class ForoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
         // This code will be possible when we use the database
 

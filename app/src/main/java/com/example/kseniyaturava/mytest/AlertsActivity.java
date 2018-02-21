@@ -60,5 +60,8 @@ public class AlertsActivity extends AppCompatActivity {
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);
         menuItem.setChecked(true);
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+
     }
 }

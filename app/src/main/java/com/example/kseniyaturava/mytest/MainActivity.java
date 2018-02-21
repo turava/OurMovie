@@ -1,15 +1,12 @@
 package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
-import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -70,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
- }
+
+    }
 }
 
 

@@ -1,12 +1,10 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,6 +65,8 @@ public class SearchActivity extends AppCompatActivity {
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setTitle("Search");//Set the title ActionBar
+        //disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
         // Ensure correct menu item is selected
         //here the icon change color

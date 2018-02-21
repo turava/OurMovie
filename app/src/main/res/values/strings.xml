@@ -32,11 +32,11 @@
     <string name="write_movie_title">Escribe el título</string>
     <string name="buscar">Buscar</string>
     <string name="movie_image">Movie Image</string>
-    <string name="movie_description">Movie Description</string>
+    <string name="movie_description">Título: Matrix\nDirectores: Hermanas Wachowski\nActores: Keanu Reeves, Laurence Fishburne,
+        Carrie-Anne Moss, Hugo Wearing\nAño: 1999</string>
     <string name="Movie">Movie</string>
     <string name="matrix">Matrix</string>
     <string name="pelicula_matrix">Pelicula: Matrix</string>
-    <string name="titulo_director_actores_y_a_o_datos_que_estan_en_la_bbdd">Titulo, director, actores y año. Datos que estan en la bbdd</string>
-    <string name="localiza_aqui_la_peli_que_buscas">Localiza aqui la peli que buscas</string>
+    <string name="localiza_aqui_la_peli_que_buscas">Localiza aqui la peli que buscas:</string>
     <string name="accede_al_foro">Accede al Foro</string>
 </resources>

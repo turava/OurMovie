@@ -7,11 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ForoActivity extends AppCompatActivity {
-    private AutoCompleteTextView movieDescription;
+    private TextView movieDescription;
 
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,14 +59,15 @@ public class ForoActivity extends AppCompatActivity {
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // This code will be possible when we use the database
 
-        movieDescription=(AutoCompleteTextView)findViewById(R.id.movieDescription);
-        Bundle bundle=this.getIntent().getExtras();
-        if((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-            String cadena=bundle.getString("Titulo");
-            movieDescription.setText(cadena);
-        }else{
-            Toast.makeText(ForoActivity.this, "Ha habido un error al mostrar los datos", Toast.LENGTH_LONG).show();
-        }
+        // movieDescription=(TextView)findViewById(R.id.movieDescription);
+        // Bundle bundle=this.getIntent().getExtras();
+        // if((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+            // String cadena=bundle.getString("Titulo");
+            // movieDescription.setText(cadena);
+        // }else{
+            // Toast.makeText(ForoActivity.this, "Ha habido un error al mostrar los datos", Toast.LENGTH_LONG).show();
+        // }
     }
 }

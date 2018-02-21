@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
-public class HomeActivity extends AppCompatActivity {
-
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,8 +65,32 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
 
+
+
+
+      /*     ImageView visorImatge = findViewById(R.id.imageView2);
+            visorImatge.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+
+                }
+            });
+    }*/
+
+            ImageView visorImatge = findViewById(R.id.imageView2);
+            visorImatge.setOnClickListener(this);
+
     }
 
 
+    @Override
+    public void onClick(View v) {
+        ImageView visorImatge = findViewById(R.id.imageView2);
 
+       // Intent intent= new Intent(getApplicationContext() ,MovieActivity.class);
+        startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+       // startActivity(intent);
+
+    }
 }

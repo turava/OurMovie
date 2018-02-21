@@ -1,6 +1,8 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +36,7 @@ public class SearchActivity extends AppCompatActivity {
                             return true;
                         case R.id.searchItem:
                             // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(),ForoActivity.class));
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
                             return true;
                         case R.id.formItem:
@@ -71,12 +74,12 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
-        //Eli writes from here
         //variable searchText statement and IME_Action_Search
 
-        EditText searchText = (EditText) findViewById(R.id.search_text);
+        final EditText searchText = (EditText) findViewById(R.id.search_text);
         final TextView movieImage = (TextView) findViewById(R.id.movieImage);
         final TextView movieDescription = (TextView) findViewById(R.id.movieDescription);
+        final Button movieButton = (Button) findViewById(R.id.movieButton);
 
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -89,6 +92,16 @@ public class SearchActivity extends AppCompatActivity {
                     found=true;
                     movieImage.setVisibility(View.VISIBLE);
                     movieDescription.setVisibility(View.VISIBLE);
+                    movieButton.setVisibility(View.VISIBLE);
+                    movieButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String titulo=String.valueOf(searchText.getText());
+                            Intent intent=new Intent(SearchActivity.this,ForoActivity.class);
+                            intent.putExtra("Titulo", titulo);
+                            startActivity(intent);
+                        }
+                    });
                 } else{
                     Toast.makeText(SearchActivity.this, "La pelicula no está en la base de datos", Toast.LENGTH_SHORT).show();
                 }
@@ -96,7 +109,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        //code if movie found in the database is pending write to next lesson
+        //code if movie found in the database or not is pending write to next lesson
 
 
     }

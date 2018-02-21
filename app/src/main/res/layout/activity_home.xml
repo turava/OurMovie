@@ -67,17 +67,24 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <ImageButton
                             android:id="@+id/img_popular"
+                            style="@android:style/Widget.ImageButton"
                             android:layout_width="120dp"
                             android:layout_height="160dp"
-                            android:clickable="true"
-                            android:longClickable="false"
-                            android:maxHeight="160dp"
-                            android:maxWidth="120dp"
-                            android:minHeight="160dp"
-                            android:minWidth="120dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            android:scaleType="fitCenter"
                             design:srcCompat="@drawable/matrix1" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            android:scaleType="fitCenter"
+                            design:srcCompat="@drawable/american" />
 
                         <ImageView
                             android:id="@+id/imageView2"
@@ -88,6 +95,18 @@
                             android:minHeight="160dp"
                             android:minWidth="120dp"
                             design:srcCompat="@drawable/blade2" />
+
+                        <ImageView
+                            android:id="@+id/img_populawr"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp"
+                            android:clickable="true"
+                            android:longClickable="false"
+                            android:maxHeight="160dp"
+                            android:maxWidth="120dp"
+                            android:minHeight="160dp"
+                            android:minWidth="120dp"
+                            design:srcCompat="@drawable/matrix1" />
 
                         <ImageView
                             android:id="@+id/imageView3"

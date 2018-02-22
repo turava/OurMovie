@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackgroundFloating"
-    tools:context="com.example.kseniyaturava.mytest.MainActivity" tools:targetApi="m">
+    tools:context="com.example.kseniyaturava.mytest.MainActivity">
 
     <ScrollView
         android:id="@+id/scroll_vertical"
@@ -67,6 +67,7 @@
                             android:layout_weight="1"
                             android:text="@string/title_movie_foro"
                             android:textColor="@color/colorBlack"
+                            android:textSize="16dp"
                             android:textStyle="bold"
                             tools:ignore="NestedWeights" />
 
@@ -89,17 +90,18 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="60dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="20dp">
 
                         <ImageButton
                             android:id="@+id/button_info"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@color/colorBlanco"
-                            android:contentDescription="@string/button_info"
+                            android:contentDescription="@string/icon_info"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_info" />
                     </LinearLayout>
@@ -141,10 +143,10 @@
                             android:layout_weight="1"
                             android:adjustViewBounds="false"
 
+                            android:contentDescription="@string/img_post1"
                             android:cropToPadding="false"
                             android:scaleType="fitXY"
-                            design:srcCompat="@drawable/blade19"
-                            android:contentDescription="@string/todo"/>
+                            design:srcCompat="@drawable/blade19" />
 
                         <LinearLayout
                             android:id="@+id/layout_userName_Date1"
@@ -196,8 +198,8 @@
                             android:layout_height="30dp"
                             android:layout_weight="1"
                             android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/sym_action_chat"
-                            android:contentDescription="@string/todo1"/>
+                            android:contentDescription="@string/icon_comment"
+                            design:srcCompat="@android:drawable/sym_action_chat" />
 
                         <TextView
                             android:id="@+id/text_numberAnswers1"
@@ -214,7 +216,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_post22"
+                android:id="@+id/layout_postBox2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -246,6 +248,7 @@
                             android:layout_weight="1"
                             android:adjustViewBounds="false"
 
+                            android:contentDescription="@string/todo"
                             android:cropToPadding="false"
                             android:scaleType="fitXY"
                             design:srcCompat="@drawable/blade19" />
@@ -254,7 +257,7 @@
                             android:id="@+id/layout_userName_Date3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -300,6 +303,7 @@
                             android:layout_height="30dp"
                             android:layout_weight="1"
                             android:background="@color/colorBlanco"
+                            android:contentDescription="@string/img_post5"
                             design:srcCompat="@android:drawable/sym_action_chat" />
 
                         <TextView
@@ -317,7 +321,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_post3"
+                android:id="@+id/layout_postBox3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -349,6 +353,7 @@
                             android:layout_weight="1"
                             android:adjustViewBounds="false"
 
+                            android:contentDescription="@string/img_post3"
                             android:cropToPadding="false"
                             android:scaleType="fitXY"
                             design:srcCompat="@drawable/blade19" />
@@ -403,6 +408,7 @@
                             android:layout_height="30dp"
                             android:layout_weight="1"
                             android:background="@color/colorBlanco"
+                            android:contentDescription="@string/img_1"
                             design:srcCompat="@android:drawable/sym_action_chat" />
 
                         <TextView

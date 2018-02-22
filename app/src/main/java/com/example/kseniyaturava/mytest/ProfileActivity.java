@@ -1,14 +1,16 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TabHost;
 
 public class ProfileActivity extends AppCompatActivity {
+    TabHost Tabs;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,6 +64,38 @@ public class ProfileActivity extends AppCompatActivity {
         menuItem.setChecked(true);
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+        //Functionality of TabsHost here
+        Tabs = (TabHost) findViewById(R.id.tabs); //llamamos al Tabhost
+        Tabs.setup();  //lo activamos
+
+        TabHost.TabSpec tab1 = Tabs.newTabSpec("tab2");  //aspectos de cada Tab (pestaña)
+        TabHost.TabSpec tab2 = Tabs.newTabSpec("tab1");
+
+        tab1.setIndicator("Foros");    //qué queremos que aparezca en las pestañas
+        tab1.setContent(R.id.tab2); //definimos el id de cada Tab (pestaña)
+
+        tab2.setIndicator("Favoritas");
+        tab2.setContent(R.id.tab1);
+
+
+
+        Tabs.addTab(tab1); //añadimos los tabs ya programados
+        Tabs.addTab(tab2);
+
+        /*Tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                for (int i = 0; i < Tabs.getTabWidget().getChildCount(); i++) {
+                    Tabs.getTabWidget().getChildAt(i)
+                            .setBackgroundColor(Color.parseColor("#FF0000")); // unselected
+                }
+
+                Tabs.getTabWidget().getChildAt(Tabs.getCurrentTab())
+                        .setBackgroundColor(Color.parseColor("#0000FF")); // selected
+
+            }
+        });*/
+
 
     }
 }

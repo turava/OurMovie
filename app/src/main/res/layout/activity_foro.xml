@@ -6,98 +6,410 @@
     android:id="@+id/activity_foro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="?android:attr/colorBackgroundFloating"
     tools:context="com.example.kseniyaturava.mytest.MainActivity">
 
-    <ImageView
-        android:id="@+id/matrix1"
-        android:layout_width="220dp"
-        android:layout_height="150dp"
-        android:contentDescription="@string/Movie"
-        android:paddingStart="6dp"
-        design:srcCompat="@drawable/matrix1" />
-
-    <EditText
-        android:id="@+id/Comentario1"
-        android:layout_width="200dp"
+    <ScrollView
+        android:id="@+id/scroll_vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="180dp"
-        android:background="#9FA8DA"
-        android:inputType="textMultiLine"
-        android:textColor="#000" />
+        android:background="?attr/colorButtonNormal">
 
-    <TextClock
-        android:id="@+id/Comentario1Clock"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="160dp"
-        android:textColor="#000" />
+        <LinearLayout
+            android:id="@+id/layout_foro1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorButtonNormal"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/Comentario2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="250dp"
-        android:background="#9FA8DA"
-        android:inputType="textMultiLine"
-        android:textColor="#000" />
+            <LinearLayout
+                android:id="@+id/layout_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/botton_style"
+                android:orientation="vertical">
 
-    <TextClock
-        android:id="@+id/Comentario2Clock"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="230dp"
-        android:textColor="#000" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/Comentario3"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="320dp"
-        android:background="#9FA8DA"
-        android:inputType="textMultiLine"
-        android:textColor="#000" />
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-    <TextClock
-        android:id="@+id/Comentario3Clock"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="300dp"
-        android:textColor="#000" />
+                        <ImageView
+                            android:id="@+id/matrix1"
+                            android:layout_width="60dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/Movie"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/matrix1" />
+                    </LinearLayout>
 
-    <EditText
-        android:id="@+id/Comentario4"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="390dp"
-        android:background="#9FA8DA"
-        android:inputType="textMultiLine"
-        android:textColor="#000" />
+                    <LinearLayout
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-    <TextClock
-        android:id="@+id/Comentario4Clock"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="370dp"
-        android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/text_movie"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_weight="1"
+                            android:text="Matrix" />
 
-    <TextView
-        android:id="@+id/movieDescription"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="6dp"
-        android:text="@string/movie_description"
-        android:textColor="#000"
-        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/text_director"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Hermanas Wachowski" />
+
+                        <TextView
+                            android:id="@+id/text_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1999" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/button_info"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorBlanco"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@android:drawable/ic_menu_info_details" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_postBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/post_round"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_post1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_User1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_user1"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/blade19" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_userName_Date1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_username1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Lope de Vega"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Hoy a las 15:05"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_comment1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem ipsum , esta peli es muy chula, me encanta, cuando saldra una nueva?"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton1222"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/sym_action_chat" />
+
+                        <TextView
+                            android:id="@+id/text_numberAnswers1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="21"
+                            android:textAlignment="center"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_post22"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/post_round"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_post12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_User3"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_user3"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/blade19" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_userName_Date3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_username3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Lope de Vega"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Hoy a las 15:05"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_comment4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem ipsum , esta peli es muy chula, me encanta, cuando saldra una nueva?"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton1224"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/sym_action_chat" />
+
+                        <TextView
+                            android:id="@+id/text_numberAnswers4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="21"
+                            android:textAlignment="center"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_post3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/post_round"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_post2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_User"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_user"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/blade19" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_userName_Date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_username"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Lope de Vega"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Hoy a las 15:05"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem ipsum , esta peli es muy chula, me encanta, cuando saldra una nueva?"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton122"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/sym_action_chat" />
+
+                        <TextView
+                            android:id="@+id/text_numberAnswers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="21"
+                            android:textAlignment="center"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
     <FrameLayout
@@ -124,6 +436,7 @@
             >
 
         </android.support.design.widget.BottomNavigationView>
+
         <!-- android:layout_height="wrap_content"
          ALT+ENTER on design to add namespaces-->
         <!---->

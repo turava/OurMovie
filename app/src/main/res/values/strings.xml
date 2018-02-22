@@ -51,7 +51,9 @@
     <string name="enviar">Enviar</string>
     <string name="g_nero">Género:</string>
     <string name="descripci_n">Descripción:</string>
+    <string name="lope_de_vega">Lope de Vega</string>
     <string name="t_tulo_de_la_pel_cula">título de la película</string>
+    <string name="lorem_ipsum_esta_peli_es_muy_chula_me_encanta_cuando_saldra_una_nueva">Lorem Ipsum esta peli es muy chula me encanta cuando saldra una nueva</string>
     <string name="nombre_del_director">nombre del director</string>
     <string name="actor_actriz_principal">actor/actriz principal</string>
     <string name="actor_actriz_secundari">actor/actriz secundari@</string>
@@ -59,5 +61,16 @@
     <string name="g_nero_de_la_pel_cula">género de la película</string>
     <string name="descripci_n_de_la_pel_cula_l_mite_200_caracteres">descripción de la película, límite 200 caracteres</string>
     <string name="tu_nombre_de_usuario">tu nombre de usuario</string>
-
+    <string name="el_actor_revelaci_n_de_blade_runner_jared_leto_vendr_a_espanya_de_visita">El actor revelación de Blade Runner, Jared Leto, vendrá a Espanya de visita</string>
+    <string name="mensaje_de_foro_respondido">Mensaje de foro respondido</string>
+    <string name="hoy_a_las_15_05">Hoy a las 15:05</string>
+    <string name="francisco_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_matrix">Francisco ha respondido a un mensaje tuyo del foro de la pelicula Matrix</string>
+    <string name="novedades_de_pel_cula">Novedades de película</string>
+    <string name="los_directores_de_la_pel_cula_matrix_han_anunciado_una_secuela_para_el_a_o_que_viene">Los directores de la película Matrix han anunciado una secuela para el año que viene</string>
+    <string name="hoy_a_las_13_18">Hoy a las 13:18</string>
+    <string name="eventos_que_estabas_esperando">Eventos que estabas esperando</string>
+    <string name="_21_de_febrero_a_las_10_18">21 de Febrero a las 10:18</string>
+    <string name="el_club_de_fans_de_matrix_ha_convocado_una_quedada_en_la_plaza_catalunya_de_barcelona_para_marzo">El club de fans de Matrix ha convocado una quedada en la Plaza Catalunya de Barcelona para marzo</string>
+    <string name="_20_de_febrero_a_las_18_45">20 de Febrero a las 18:45</string>
+    <string name="un_amigo_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_blade_runner">Un amigo ha respondido a un mensaje tuyo del foro de la película Blade Runner</string>
 </resources>

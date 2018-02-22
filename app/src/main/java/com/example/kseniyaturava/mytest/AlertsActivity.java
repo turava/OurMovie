@@ -35,7 +35,7 @@ public class AlertsActivity extends AppCompatActivity {
                             // startActivity(new Intent(MainActivity.this, FormActivity.class));
                             return true;
                         case R.id.notificationItem:
-                            // setTitle("Notifications");
+                            // setTitle("My alerts");
                             startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
                             return true;
                         case R.id.profileItem:
@@ -55,7 +55,7 @@ public class AlertsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alerts);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        setTitle("Notifications");
+        setTitle("My alerts");
         //here the icon change color
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);

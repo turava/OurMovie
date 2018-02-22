@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_alerts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,32 +12,468 @@
 
     <!--inside id added for fragments(there're more options)-->
 
-    <TextView
-        android:id="@+id/infoTextView"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/scroll_vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="24sp"
-        android:text="Hello World!"/>
+        android:background="?attr/colorButtonNormal">
 
-    <!--app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"-->
+        <LinearLayout
+            android:id="@+id/layout_alerts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAlerts"
+            android:orientation="vertical">
 
-    <!--Bottom navigation code-->
-    <!--Match-parent is all the screen weight -->
-    <!-- <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">-->
+            <LinearLayout
+                android:id="@+id/layout_alertBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/alerts_design"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_alert1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/et_border"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_header1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_chat"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/ic_chat" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_header_Date1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_header1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/mensaje_de_foro_respondido"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/hoy_a_las_15_05"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_comment1"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/francisco_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_matrix"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/img_checkbox"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_alert2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/et_border"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_header2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_theaters"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/ic_theaters" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_header_Date2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_header2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/novedades_de_pel_cula"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/hoy_a_las_13_18"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_body2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_comment2"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/los_directores_de_la_pel_cula_matrix_han_anunciado_una_secuela_para_el_a_o_que_viene"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/img_check2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_alert3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_border"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_header3"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_event"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/ic_event_available" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_header_Date3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_header3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/eventos_que_estabas_esperando"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/_21_de_febrero_a_las_10_18"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_body3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_comment3"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/el_club_de_fans_de_matrix_ha_convocado_una_quedada_en_la_plaza_catalunya_de_barcelona_para_marzo"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/img_check3"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_alert4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_border"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_header4"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_chat2"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/ic_chat" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_header_Date4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_header4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/mensaje_de_foro_respondido"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/_20_de_febrero_a_las_18_45"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_body4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_comment4"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/un_amigo_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_blade_runner"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/img_check4"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_alert5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_border"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_header5"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_theaters2"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:scaleType="fitXY"
+                            design:srcCompat="@drawable/ic_theaters" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_header_Date5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_header5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/novedades_de_pel_cula"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_date5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/_20_de_febrero_a_las_18_45"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_body5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_comment5"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/el_actor_revelaci_n_de_blade_runner_jared_leto_vendr_a_espanya_de_visita"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@+id/img_check5"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <FrameLayout
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/menu_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomNavigationView"
         android:layout_gravity="bottom"
-        >
+        android:background="#ffff">
 
         <!--shadow.xml inside-->
         <View
@@ -49,9 +486,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_navigation"
-
-            />
+            app:menu="@menu/menu_navigation" />
         <!-- android:layout_height="wrap_content"
          ALT+ENTER on design to add namespaces-->
         <!---->

@@ -80,10 +80,33 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
             }
         });
+        //News listeners on images
+        ImageView img_new1 = (ImageView) findViewById(R.id.img_new1);
+        img_new1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+        ImageView img_new2 = (ImageView) findViewById(R.id.img_new2);
+        img_new2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+        ImageView img_new3 = (ImageView) findViewById(R.id.img_new3);
+        img_new3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+
 
         //Categories listeners on images
-        ImageView imgClick = (ImageView) findViewById(R.id.img_drama);
-        imgClick.setOnClickListener(new OnClickListener() {
+        ImageView img_drama = (ImageView) findViewById(R.id.img_drama);
+        img_drama.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));

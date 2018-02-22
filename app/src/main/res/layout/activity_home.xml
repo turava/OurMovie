@@ -166,17 +166,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <!-- <TextView
-            android:id="@+id/description_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:fontFamily="@font/amiko"
-            android:text="Descubre los foros con más interacción"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorBlanco"
-            android:textSize="18sp" />-->
-
 
             <TextView
                 android:id="@+id/subtittle_new"
@@ -206,11 +195,11 @@
 
                             <ImageView
                                 android:id="@+id/img_new1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_width="200dp"
+                                android:layout_height="300dp"
                                 android:adjustViewBounds="false"
-                                android:cropToPadding="true"
-                                android:scaleType="center"
+                                android:cropToPadding="false"
+                                android:scaleType="fitXY"
                                 design:srcCompat="@drawable/pie" />
                         </LinearLayout>
 
@@ -221,11 +210,11 @@
 
                             <ImageView
                                 android:id="@+id/img_new2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_width="200dp"
+                                android:layout_height="300dp"
                                 android:adjustViewBounds="false"
                                 android:cropToPadding="true"
-                                android:scaleType="center"
+                                android:scaleType="centerCrop"
                                 design:srcCompat="@drawable/blade2" />
                         </LinearLayout>
 
@@ -236,12 +225,12 @@
 
                             <ImageView
                                 android:id="@+id/img_new3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_width="200dp"
+                                android:layout_height="300dp"
                                 android:adjustViewBounds="false"
                                 android:cropToPadding="true"
-                                android:scaleType="center"
-                                design:srcCompat="@drawable/star" />
+                                android:scaleType="fitXY"
+                                design:srcCompat="@drawable/blade19" />
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>

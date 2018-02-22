@@ -103,16 +103,33 @@
                             android:layout_weight="1"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
-                            android:text="@string/francisco_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_matrix"
+                            android:text="@string/un_amigo_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_blade_runner"
                             android:textSize="16sp" />
 
-                        <ImageButton
-                            android:id="@+id/img_checkbox"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                        <LinearLayout
+                            android:id="@+id/layout_body1_check"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/checkbox_off_background" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_visto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:layout_weight="1"
+                                android:text="@string/le_do" />
+
+                            <ImageButton
+                                android:id="@+id/img_checkbox"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBlanco"
+                                design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -192,13 +209,30 @@
                             android:text="@string/los_directores_de_la_pel_cula_matrix_han_anunciado_una_secuela_para_el_a_o_que_viene"
                             android:textSize="16sp" />
 
-                        <ImageButton
-                            android:id="@+id/img_check2"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                        <LinearLayout
+                            android:id="@+id/layout_body2_check"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/checkbox_off_background" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_visto2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:layout_weight="1"
+                                android:text="@string/le_do" />
+
+                            <ImageButton
+                                android:id="@+id/img_check2"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBlanco"
+                                design:srcCompat="@android:drawable/checkbox_off_background" android:contentDescription="TODO" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -278,13 +312,30 @@
                             android:text="@string/el_club_de_fans_de_matrix_ha_convocado_una_quedada_en_la_plaza_catalunya_de_barcelona_para_marzo"
                             android:textSize="16sp" />
 
-                        <ImageButton
-                            android:id="@+id/img_check3"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                        <LinearLayout
+                            android:id="@+id/layout_body3_check"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/checkbox_off_background" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_visto3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:layout_weight="1"
+                                android:text="@string/le_do" />
+
+                            <ImageButton
+                                android:id="@+id/img_check3"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBlanco"
+                                design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -364,13 +415,30 @@
                             android:text="@string/un_amigo_ha_respondido_a_un_mensaje_tuyo_del_foro_de_la_pel_cula_blade_runner"
                             android:textSize="16sp" />
 
-                        <ImageButton
-                            android:id="@+id/img_check4"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                        <LinearLayout
+                            android:id="@+id/layout_body4_check"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/checkbox_off_background" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_visto4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:layout_weight="1"
+                                android:text="@string/le_do" />
+
+                            <ImageButton
+                                android:id="@+id/img_check4"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBlanco"
+                                design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -450,13 +518,30 @@
                             android:text="@string/el_actor_revelaci_n_de_blade_runner_jared_leto_vendr_a_espanya_de_visita"
                             android:textSize="16sp" />
 
-                        <ImageButton
-                            android:id="@+id/img_check5"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                        <LinearLayout
+                            android:id="@+id/layout_body5_check"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/checkbox_off_background" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_visto5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:layout_weight="1"
+                                android:text="Leído" />
+
+                            <ImageButton
+                                android:id="@+id/img_check5"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBlanco"
+                                design:srcCompat="@android:drawable/checkbox_off_background" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

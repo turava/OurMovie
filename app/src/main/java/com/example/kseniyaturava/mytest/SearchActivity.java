@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -77,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
         //variable searchText statement and IME_Action_Search
 
         final EditText searchText = (EditText) findViewById(R.id.search_text);
-        final TextView movieImage = (TextView) findViewById(R.id.movieImage);
+        final ImageView movieImage = (ImageView) findViewById(R.id.movieImage);
         final TextView movieDescription = (TextView) findViewById(R.id.movieDescription);
         final Button movieButton = (Button) findViewById(R.id.movieButton);
 

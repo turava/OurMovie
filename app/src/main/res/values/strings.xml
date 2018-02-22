@@ -122,5 +122,6 @@
     <string name="button_info">button_info</string>
     <string name="todo">TODO</string>
     <string name="todo1">TODO1</string>
+    <string name="le_do">Leído</string>
 
 </resources>

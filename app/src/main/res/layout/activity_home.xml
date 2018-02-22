@@ -26,32 +26,31 @@
             android:orientation="vertical">
 
 
+            <TextView
+                android:id="@+id/title_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/popular"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/title_popular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/amiko"
-                    android:lineSpacingExtra="8sp"
-                    android:text="Popular"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/subtitle_popular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="0dp"
-                    android:fontFamily="@font/amiko"
-                    android:text="Descubre los foros con más interacción"
-                    android:textAlignment="viewStart"
-                    android:textColor="#505254"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/subtitle_popular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/amiko"
+                android:text="@string/description"
+                android:textAlignment="viewStart"
+                android:textColor="#505254"
+                android:textSize="16sp" />
 
                 <HorizontalScrollView
                     android:id="@+id/Hscroll_popularity"
@@ -75,7 +74,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/blade2" />
+                            design:srcCompat="@drawable/blade2"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/img_populawr"
@@ -87,7 +87,9 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/matrix1" />
+                            design:srcCompat="@drawable/matrix1"
+                            android:contentDescription="@string/img_popular"
+                            android:focusable="true" />
 
                         <ImageView
                             android:id="@+id/imageView3"
@@ -97,7 +99,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/blade19" />
+                            design:srcCompat="@drawable/blade19"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/imageView4"
@@ -107,7 +110,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/matrix1" />
+                            design:srcCompat="@drawable/matrix1"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -117,7 +121,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/matrix1" />
+                            design:srcCompat="@drawable/matrix1"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/imageView6"
@@ -127,7 +132,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/blade2" />
+                            design:srcCompat="@drawable/blade2"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/imageView7"
@@ -137,7 +143,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/blade19" />
+                            design:srcCompat="@drawable/blade19"
+                            android:contentDescription="@string/img_popular" />
 
                         <ImageView
                             android:id="@+id/imageView8"
@@ -147,7 +154,8 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/matrix1" />
+                            design:srcCompat="@drawable/matrix1"
+                            android:contentDescription="@string/img_popular" />
 
 
                     </LinearLayout>
@@ -157,11 +165,11 @@
                     android:id="@+id/title_new"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/amiko"
                     android:lineSpacingExtra="8sp"
-                    android:text="Novedades"
+                    android:text="@string/novedades"
                     android:textColor="#000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -171,9 +179,9 @@
                 android:id="@+id/subtittle_new"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
                 android:fontFamily="@font/amiko"
-                android:text="Últimas películas añadidas"
+                android:text="@string/novedades_frase"
                 android:textSize="16sp" />
 
             <HorizontalScrollView
@@ -200,7 +208,8 @@
                                 android:adjustViewBounds="false"
                                 android:cropToPadding="false"
                                 android:scaleType="fitXY"
-                                design:srcCompat="@drawable/pie" />
+                                design:srcCompat="@drawable/pie"
+                                android:contentDescription="@string/img_new" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -215,7 +224,8 @@
                                 android:adjustViewBounds="false"
                                 android:cropToPadding="true"
                                 android:scaleType="centerCrop"
-                                design:srcCompat="@drawable/blade2" />
+                                design:srcCompat="@drawable/blade2"
+                                android:contentDescription="@string/img_new" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -230,7 +240,8 @@
                                 android:adjustViewBounds="false"
                                 android:cropToPadding="true"
                                 android:scaleType="fitXY"
-                                design:srcCompat="@drawable/blade19" />
+                                design:srcCompat="@drawable/blade19"
+                                android:contentDescription="@string/img_new" />
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -239,11 +250,11 @@
                     android:id="@+id/title_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/amiko"
                     android:lineSpacingExtra="8sp"
-                    android:text="Categorías"
+                    android:text="@string/categorias"
                     android:textColor="#000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -252,10 +263,10 @@
                     android:id="@+id/subtitle_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:fontFamily="@font/amiko"
                     android:lineSpacingExtra="8sp"
-                    android:text="Entra y descubre más películas"
+                    android:text="@string/descubre"
                     android:textColor="#505254"
                     android:textSize="16sp" />
 
@@ -289,15 +300,16 @@
                                 android:maxWidth="120dp"
                                 android:minHeight="160dp"
                                 android:minWidth="120dp"
-                                design:srcCompat="@drawable/american" />
+                                design:srcCompat="@drawable/american"
+                                android:contentDescription="@string/img_category" />
                             <Button
                                 android:id="@+id/button_drama"
                                 android:layout_width="120dp"
-                                android:layout_height="20dp"
+                                android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/botton_style"
                                 android:fontFamily="@font/amiko"
-                                android:text="Drama"
+                                android:text="@string/drama"
                                 android:textAllCaps="false"
                                 android:textColor="#505254" />
                         </LinearLayout>
@@ -318,15 +330,16 @@
                                 android:maxWidth="120dp"
                                 android:minHeight="160dp"
                                 android:minWidth="120dp"
-                                design:srcCompat="@drawable/pie" />
+                                design:srcCompat="@drawable/pie"
+                                android:contentDescription="@string/img_category"/>
                             <Button
                             android:id="@+id/button_comedy"
                             android:layout_width="120dp"
-                            android:layout_height="20dp"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:background="@drawable/botton_style"
                             android:fontFamily="@font/amiko"
-                            android:text="Comedia"
+                            android:text="@string/comedia"
                             android:textAllCaps="false"
                             android:textColor="#505254" />
                         </LinearLayout>
@@ -346,16 +359,17 @@
                                 android:maxWidth="120dp"
                                 android:minHeight="160dp"
                                 android:minWidth="120dp"
-                                design:srcCompat="@drawable/matrix1" />
+                                design:srcCompat="@drawable/matrix1"
+                                android:contentDescription="@string/img_category"/>
 
                             <Button
                                 android:id="@+id/button_fiction"
                                 android:layout_width="120dp"
-                                android:layout_height="20dp"
+                                android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/botton_style"
                                 android:fontFamily="@font/amiko"
-                                android:text="Ciencia Ficción"
+                                android:text="@string/ciencia_ficcion"
                                 android:textAllCaps="false"
                                 android:textColor="#505254" />
                         </LinearLayout>
@@ -377,15 +391,16 @@
                                 android:maxWidth="120dp"
                                 android:minHeight="160dp"
                                 android:minWidth="120dp"
-                                design:srcCompat="@drawable/blade19" />
+                                design:srcCompat="@drawable/blade19"
+                                android:contentDescription="@string/img_category"/>
                             <Button
                             android:id="@+id/button_horror"
                             android:layout_width="120dp"
-                            android:layout_height="20dp"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:background="@drawable/botton_style"
                             android:fontFamily="@font/amiko"
-                            android:text="Terror"
+                            android:text="@string/terror"
                             android:textAllCaps="false"
                             android:textColor="#505254" />
                         </LinearLayout>
@@ -397,11 +412,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="0dp"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/amiko"
                     android:lineSpacingExtra="8sp"
-                    android:text="Descubre"
+                    android:text="@string/descubre_"
                     android:textColor="#000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -410,14 +425,14 @@
                     android:id="@+id/subtitle_actor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="0dp"
                     android:fontFamily="@font/amiko"
-                    android:text="Descubre más sobre los actores"
+                    android:text="@string/actores"
                     android:textAlignment="viewStart"
                     android:textColor="#505254"
                     android:textSize="16sp" />
-            <HorizontalScrollView
+           <!-- <HorizontalScrollView
                 android:id="@+id/Hscroll_more"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -446,14 +461,7 @@
                             android:text="Actores"
                             android:textAllCaps="false"
                             android:textColor="#fff"  />
-                        <!--<ImageView
-                            android:id="@+id/img_new1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="false"
-                            android:cropToPadding="true"
-                            android:scaleType="center"
-                            design:srcCompat="@drawable/pie" />-->
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -473,14 +481,7 @@
                             android:text="Directores"
                             android:textAllCaps="false"
                             android:textColor="#fff" />
-                        <!--<ImageView
-                            android:id="@+id/img_new2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="false"
-                            android:cropToPadding="true"
-                            android:scaleType="center"
-                            design:srcCompat="@drawable/blade2" />-->
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -501,17 +502,10 @@
                             android:textAllCaps="false"
                             android:textColor="#fff"  />
 
-                        <!--<ImageView
-                            android:id="@+id/img_new3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="false"
-                            android:cropToPadding="true"
-                            android:scaleType="center"
-                            design:srcCompat="@drawable/star" />-->
+
                     </LinearLayout>
                 </LinearLayout>
-            </HorizontalScrollView>
+            </HorizontalScrollView>-->
         </LinearLayout>
 
     </ScrollView>

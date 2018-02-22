@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ForoActivity extends AppCompatActivity {
@@ -60,15 +63,22 @@ public class ForoActivity extends AppCompatActivity {
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
-        // This code will be possible when we use the database
+        //Info Listener
+        ImageButton button_info = (ImageButton) findViewById(R.id.button_info);
+        button_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+        //User img listener
+        ImageView img_user = (ImageView) findViewById(R.id.img_user1);
+        img_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            }
+        });
 
-        // movieDescription=(TextView)findViewById(R.id.movieDescription);
-        // Bundle bundle=this.getIntent().getExtras();
-        // if((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-            // String cadena=bundle.getString("Titulo");
-            // movieDescription.setText(cadena);
-        // }else{
-            // Toast.makeText(ForoActivity.this, "Ha habido un error al mostrar los datos", Toast.LENGTH_LONG).show();
-        // }
     }
 }

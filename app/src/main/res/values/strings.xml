@@ -39,4 +39,25 @@
     <string name="pelicula_matrix">Pelicula: Matrix</string>
     <string name="localiza_aqui_la_peli_que_buscas">Localiza aqui la peli que buscas:</string>
     <string name="accede_al_foro">Accede al Foro</string>
+    <string name="registro_de_nueva_pel_cula">Registro de nueva película</string>
+    <string name="titulo">Titulo:</string>
+    <string name="director">Director:</string>
+    <string name="actor1">Actor1:</string>
+    <string name="actor2">Actor2:</string>
+    <string name="actor3">Actor3:</string>
+    <string name="actor4">Actor4:</string>
+    <string name="a_o">Año:</string>
+    <string name="usuario">Usuario:</string>
+    <string name="enviar">Enviar</string>
+    <string name="g_nero">Género:</string>
+    <string name="descripci_n">Descripción:</string>
+    <string name="t_tulo_de_la_pel_cula">título de la película</string>
+    <string name="nombre_del_director">nombre del director</string>
+    <string name="actor_actriz_principal">actor/actriz principal</string>
+    <string name="actor_actriz_secundari">actor/actriz secundari@</string>
+    <string name="a_o_de_la_pel_cula">año de la película</string>
+    <string name="g_nero_de_la_pel_cula">género de la película</string>
+    <string name="descripci_n_de_la_pel_cula_l_mite_200_caracteres">descripción de la película, límite 200 caracteres</string>
+    <string name="tu_nombre_de_usuario">tu nombre de usuario</string>
+
 </resources>

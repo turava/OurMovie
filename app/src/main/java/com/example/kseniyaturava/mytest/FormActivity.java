@@ -6,7 +6,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -68,6 +70,9 @@ public class FormActivity extends AppCompatActivity {
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
+        Button sendForm = (Button)findViewById(R.id.sendForm);
 
+        // we will create code for the onClick Button in the following weeks
     }
+
 }

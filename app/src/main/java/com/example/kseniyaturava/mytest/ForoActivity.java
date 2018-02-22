@@ -2,10 +2,7 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,7 +10,7 @@ import android.widget.TextView;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-
+/*
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -51,18 +48,18 @@ public class ForoActivity extends AppCompatActivity {
                     return false;
                 }
 
-            };
+            };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         setTitle("Foro");
-        BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
+        /*BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
-
+*/
         //Info Listener
         ImageButton button_info = (ImageButton) findViewById(R.id.button_info);
         button_info.setOnClickListener(new View.OnClickListener() {

@@ -191,17 +191,25 @@
                         android:orientation="horizontal">
 
                         <ImageButton
+                            android:id="@+id/button_reply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorBlanco"
+                            design:srcCompat="@drawable/ic_reply" />
+
+                        <ImageButton
                             android:id="@+id/imageButton1222"
-                            android:layout_width="30dp"
+                            android:layout_width="10dp"
                             android:layout_height="30dp"
                             android:layout_weight="1"
                             android:background="@color/colorBlanco"
-                            design:srcCompat="@android:drawable/sym_action_chat"
-                            android:contentDescription="@string/todo1"/>
+                            android:contentDescription="@string/todo1"
+                            design:srcCompat="@android:drawable/sym_action_chat" />
 
                         <TextView
                             android:id="@+id/text_numberAnswers1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="10dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_weight="1"

@@ -685,7 +685,7 @@
                 <ImageButton
                     android:id="@+id/button_addFiles"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:background="@color/colorBlanco"
                     android:contentDescription="@string/icon_addfile"
@@ -703,7 +703,9 @@
                         android:id="@+id/input_message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/botton_style"
                         android:fontFamily="sans-serif"
+                        android:minHeight="30dp"
                         android:text="@string/mensaje"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat"

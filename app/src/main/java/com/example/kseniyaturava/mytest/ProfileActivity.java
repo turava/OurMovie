@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -96,6 +98,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });*/
 
+        //Listeners on click list "foros" selected
+        ImageView img_goForo = (ImageView) findViewById(R.id.img_GoForo);
+        img_goForo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ForoActivity.class));
 
+            }
+        });
+
+        //Listeners on click list "Favoritos" selected
+        ImageView img_goMovie = (ImageView) findViewById(R.id.img_favourite1);
+        img_goMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+
+            }
+        });
     }
 }

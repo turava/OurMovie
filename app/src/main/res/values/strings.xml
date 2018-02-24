@@ -130,6 +130,7 @@
     <string name="icon_addfile">icon_addFile</string>
     <string name="icon_reply">icon_reply</string>
     <string name="icon_reply0">icon_reply0</string>
+    <string name="icon_comment2">icondfdsf</string>
     <string-array name="array_movies">
         <item>Matrix</item>
         <item>Blade Runner</item>

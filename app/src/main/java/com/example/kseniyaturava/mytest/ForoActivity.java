@@ -77,12 +77,38 @@ public class ForoActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
-        //acordeon appear on click view comment/replies
+        //acordeon appear on click icon comment/replies
         ImageButton acordeon = (ImageButton) findViewById(R.id.button_comments);
         acordeon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_acordeon);
+                if (findMagicLl.getVisibility() == View.VISIBLE) {
+                    findMagicLl.setVisibility(View.GONE);
+                } else {
+                    findMagicLl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        //acordeon appear on click icon atach files in Reply
+        ImageButton acordeonFiles = (ImageButton) findViewById(R.id.button_addFilesReply);
+        acordeonFiles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_fileReply);
+                if (findMagicLl.getVisibility() == View.VISIBLE) {
+                    findMagicLl.setVisibility(View.GONE);
+                } else {
+                    findMagicLl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        //acordeon appear on click icon atach files on post
+        ImageButton acordeonFilesPost = (ImageButton) findViewById(R.id.button_addFiles);
+        acordeonFilesPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_file);
                 if (findMagicLl.getVisibility() == View.VISIBLE) {
                     findMagicLl.setVisibility(View.GONE);
                 } else {

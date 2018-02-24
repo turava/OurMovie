@@ -1,6 +1,7 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -74,6 +75,9 @@ public class SearchActivity extends AppCompatActivity {
         ListView lv=(ListView)findViewById(R.id.listViewMovies);
         ArrayList<String> arrayMovies=new ArrayList<>();
         arrayMovies.addAll(Arrays.asList(getResources().getStringArray(R.array.array_movies)));
+        lv.setBackgroundColor(Color.WHITE);
+        lv.setCacheColorHint(Color.BLACK);
+
 
         adapter=new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,arrayMovies);
         lv.setAdapter(adapter);

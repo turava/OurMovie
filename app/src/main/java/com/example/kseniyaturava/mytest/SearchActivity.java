@@ -1,21 +1,29 @@
 package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SearchActivity extends AppCompatActivity {
     private
@@ -59,10 +67,22 @@ public class SearchActivity extends AppCompatActivity {
             };
 
 
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        ListView lv=(ListView)findViewById(R.id.listViewMovies);
+        ArrayList<String> arrayMovies=new ArrayList<>();
+        arrayMovies.addAll(Arrays.asList(getResources().getStringArray(R.array.array_movies)));
+        lv.setBackgroundColor(Color.WHITE);
+        lv.setCacheColorHint(Color.BLACK);
+
+
+        adapter=new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,arrayMovies);
+        lv.setAdapter(adapter);
+
+
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setTitle("Search");//Set the title ActionBar
@@ -75,43 +95,31 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
-        //variable searchText statement and IME_Action_Search
 
-        final EditText searchText = (EditText) findViewById(R.id.search_text);
-        final ImageView movieImage = (ImageView) findViewById(R.id.movieImage);
-        final TextView movieDescription = (TextView) findViewById(R.id.movieDescription);
-        final Button movieButton = (Button) findViewById(R.id.movieButton);
+    }
 
-        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item=menu.findItem(R.id.menuSearch);
+        SearchView searchView=(SearchView)item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean found=false;
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                    Toast.makeText(SearchActivity.this, "Encontrada pelicula: " + v.getText().toString(), Toast.LENGTH_SHORT).show();
-                    InputMethodManager imm= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    found=true;
-                    movieImage.setVisibility(View.VISIBLE);
-                    movieDescription.setVisibility(View.VISIBLE);
-                    movieButton.setVisibility(View.VISIBLE);
-                    movieButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String titulo=String.valueOf(searchText.getText());
-                            Intent intent=new Intent(SearchActivity.this,ForoActivity.class);
-                            intent.putExtra("Titulo", titulo);
-                            startActivity(intent);
-                        }
-                    });
-                } else{
-                    Toast.makeText(SearchActivity.this, "La pelicula no está en la base de datos", Toast.LENGTH_SHORT).show();
-                }
-                return found;
+            public boolean onQueryTextSubmit(String query){
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText){
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
 
-        //code if movie found in the database or not is pending write to next lesson
-
-
+        return super.onCreateOptionsMenu(menu);
     }
+
 }

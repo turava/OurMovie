@@ -1,92 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/activity_search"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
-    xmlns:design="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.kseniyaturava.mytest.MainActivity">
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.example.kseniyaturava.mytest.LoginActivity">
+
+
+    <ListView
+        android:id="@+id/listViewMovies"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/amiko"
+        android:divider="@null"
+        android:autofillHints="@color/colorBlack"
+        android:cacheColorHint="@color/colorBlack"
+        android:textColor="#000000">
+
+    </ListView>
+
 
     <!--inside id added for fragments(there're more options)-->
 
-    <TextView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/amiko"
-        android:text="@string/localiza_aqui_la_peli_que_buscas"
-        android:textAlignment="viewStart"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/search_text"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="30dp"
-        android:background="#9FA8DA"
-        android:drawableEnd="@drawable/ic_search"
-        android:drawablePadding="25dp"
-        android:paddingStart="6dp"
-        android:hint="@string/write_movie_title"
-        android:inputType="text"
-        android:fontFamily="@font/amiko"
-        android:textColor="#000"
-        android:imeOptions="actionSearch"
-        android:textSize="25sp" />
-
-    <!--app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"-->
-
-    <!--Bottom navigation code-->
-    <!--Match-parent is all the screen weight -->
-    <!-- <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">-->
-
-
-    <ImageView
-        android:id="@+id/movieImage"
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:layout_marginTop="75dp"
-        android:scaleType="fitXY"
-        design:srcCompat="@drawable/matrix1"
-        android:visibility="invisible"
-        android:text="@string/movie_image" />
-
-    <TextView
-        android:id="@+id/movieDescription"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="405dp"
-        android:paddingStart="6dp"
-        android:background="@color/colorBlanco"
-        android:textColor="#000"
-        android:textSize="17sp"
-        android:visibility="invisible"
-        android:text="@string/movie_description" />
-
-    <Button
-        android:id="@+id/movieButton"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="507dp"
-        android:textSize="25sp"
-        android:background="@color/foroButton"
-        android:fontFamily="@font/amiko"
-        android:textAllCaps="false"
-        android:visibility="invisible"
-        android:textColor="#000"
-        android:text="@string/accede_al_foro" />
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
@@ -118,4 +61,5 @@
         <!---->
     </FrameLayout>
     <!--</RelativeLayout>-->
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+

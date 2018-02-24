@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ForoActivity extends AppCompatActivity {
@@ -74,6 +75,19 @@ public class ForoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            }
+        });
+        //acordeon appear on click view comment/replies
+        ImageButton acordeon = (ImageButton) findViewById(R.id.button_comments);
+        acordeon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_acordeon);
+                if (findMagicLl.getVisibility() == View.VISIBLE) {
+                    findMagicLl.setVisibility(View.GONE);
+                } else {
+                    findMagicLl.setVisibility(View.VISIBLE);
+                }
             }
         });
 

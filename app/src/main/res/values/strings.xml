@@ -32,8 +32,10 @@
     <string name="write_movie_title">Escribe el título</string>
     <string name="buscar">Buscar</string>
     <string name="movie_image">Movie Image</string>
-    <string name="movie_description">Título: Matrix\nDirectores: Hermanas Wachowski\nActores: Keanu Reeves, Laurence Fishburne,
-        Carrie-Anne Moss, Hugo Wearing\nAño: 1999</string>
+    <string name="movie_titles">Título: Matrix</string>
+    <string name="movie_director">Directores: Hermanas Wachowski</string>
+    <string name="movie_actors">Actores: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Wearing</string>
+    <string name="movie_year">Año: 1999</string>
     <string name="Movie">Movie</string>
     <string name="matrix">Matrix</string>
     <string name="pelicula_matrix">Pelicula: Matrix</string>
@@ -128,5 +130,14 @@
     <string name="icon_addfile">icon_addFile</string>
     <string name="icon_reply">icon_reply</string>
     <string name="icon_reply0">icon_reply0</string>
+    <string-array name="array_movies">
+        <item>Matrix</item>
+        <item>Blade Runner</item>
+        <item>American Beauty</item>
+        <item>Untoachable</item>
+        <item>Star Wars</item>
+        <item>American Pie</item>
+        <item>CasablancaMa</item>
+    </string-array>
 
 </resources>

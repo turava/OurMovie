@@ -51,7 +51,7 @@
             android:paddingStart="10dp">
 
             <TextView
-                android:id="@+id/edit_password"
+                android:id="@+id/edit_pasword"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"

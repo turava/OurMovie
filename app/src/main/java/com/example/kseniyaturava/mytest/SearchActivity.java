@@ -1,33 +1,20 @@
 package com.example.kseniyaturava.mytest;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.AlphabeticIndex;
-import android.media.browse.MediaBrowser;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.ListMenuItemView;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             // startActivity(new Intent(MainActivity.this, HomeActivity.class));
                             return true;
                         case R.id.searchItem:

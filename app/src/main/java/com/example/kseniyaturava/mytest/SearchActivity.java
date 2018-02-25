@@ -45,8 +45,9 @@ public class SearchActivity extends AppCompatActivity {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                           return true;
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            // startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            return true;
                         case R.id.searchItem:
                             // setTitle("Search");
                             startActivity(new Intent(getApplicationContext(),SearchActivity.class));
@@ -82,9 +83,7 @@ public class SearchActivity extends AppCompatActivity {
         ArrayList<String> arrayMovies=new ArrayList<>();
         arrayMovies.addAll(Arrays.asList(getResources().getStringArray(R.array.array_movies)));
         lv.setBackgroundColor(Color.WHITE);
-        lv.setCacheColorHint(Color.BLACK);
-
-
+        
         adapter=new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,arrayMovies);
         lv.setAdapter(adapter);
 
@@ -99,7 +98,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setTitle("Search");//Set the title ActionBar
@@ -112,7 +110,6 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
-
     }
 
     @Override
@@ -121,8 +118,6 @@ public class SearchActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_search, menu);
         final MenuItem item=menu.findItem(R.id.menuSearch);
         SearchView searchView=(SearchView)item.getActionView();
-
-
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override

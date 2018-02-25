@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".FormActivity" />
         <activity android:name=".AlertsActivity" />
@@ -31,7 +32,7 @@
         <activity android:name=".ForoActivity" />
         <activity android:name=".MovieActivity" />
         <activity android:name=".HomeCategoryActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

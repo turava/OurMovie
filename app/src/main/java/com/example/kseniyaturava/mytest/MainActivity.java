@@ -1,5 +1,6 @@
 package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,9 +8,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /*
       @author Kseniyaa Turava
      */
@@ -27,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.homeItem:
                     //setTitle("Explore");//Set the title ActionBar
                     //instance Activity
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                    // startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 case R.id.searchItem:
                     // setTitle("Search");
@@ -58,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        setTitle("Explore");
+        setTitle("OurMovie");
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
         Menu menu = BottomNavigationView.getMenu();
@@ -70,9 +72,101 @@ public class MainActivity extends AppCompatActivity {
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
+//disabled shift mode
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
+        //Popular listeners on images
+        ImageView visorImatge = findViewById(R.id.imageView2);
+        visorImatge.setOnClickListener(this);
+        visorImatge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+
+            }
+        });
+        //News listeners on images
+        ImageView img_new1 = (ImageView) findViewById(R.id.img_new1);
+        img_new1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+        ImageView img_new2 = (ImageView) findViewById(R.id.img_new2);
+        img_new2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+        ImageView img_new3 = (ImageView) findViewById(R.id.img_new3);
+        img_new3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+            }
+        });
+
+
+        //Categories listeners on images
+        ImageView img_drama = (ImageView) findViewById(R.id.img_drama);
+        img_drama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+            }
+        });
+        ImageView img_comedy = (ImageView) findViewById(R.id.img_comedy);
+        img_comedy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+
+            }
+        });
+        ImageView img_fiction = (ImageView) findViewById(R.id.img_fiction);
+        img_fiction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+
+            }
+        });
+        ImageView img_horror = (ImageView) findViewById(R.id.img_horror);
+        img_horror.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 }
+   /* @Override
+    public void onClick(View v) {
+        ImageView visorImatge = findViewById(R.id.imageView2);
+
+       // Intent intent= new Intent(getApplicationContext() ,MovieActivity.class);
+        startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+       // startActivity(intent);
+
+
+    }
+}*/
+    /*     ImageView visorImatge = findViewById(R.id.imageView2);
+            visorImatge.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getApplicationContext(), MovieActivity.class));
+                }
+            });
+    }*/
 
 
 

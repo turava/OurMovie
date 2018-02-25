@@ -23,9 +23,8 @@ public class HomeCategoryActivity extends AppCompatActivity {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                            // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                            return true;
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                           return true;
                         case R.id.searchItem:
                             // setTitle("Search");
                             startActivity(new Intent(getApplicationContext(),SearchActivity.class));

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e5e6e4"
+    android:background="@color/colorAlerts"
     android:paddingEnd="6dp"
     android:paddingStart="6dp"
     android:paddingTop="10dp"
     tools:context="com.example.kseniyaturava.mytest.MovieActivity">
 
     <LinearLayout
-        android:layout_width="410dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:background="@drawable/indivdual_box"
         android:orientation="vertical"
@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginStart="20dp"
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingEnd="10dp"
@@ -81,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
                         android:layout_marginTop="6dp"
-                        android:text="Estreno"
+                        android:text="Año"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
@@ -89,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:text="12 enero 2012" />
+                        android:text="2012" />
 
                     <TextView
                         android:id="@+id/title_genero"

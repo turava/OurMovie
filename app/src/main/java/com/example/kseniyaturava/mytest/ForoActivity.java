@@ -23,8 +23,6 @@ public class ForoActivity extends AppCompatActivity {
                         case R.id.homeItem:
                             //setTitle("Explore");//Set the title ActionBar
                             //instance Activity
-                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                            // startActivity(new Intent(MainActivity.this, HomeActivity.class));
                             return true;
                         case R.id.searchItem:
                             // setTitle("Search");

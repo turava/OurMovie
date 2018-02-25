@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kseniyaturava.mytest.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-2dp"
+            android:background="@drawable/botton_style"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/setting_Editprofile"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="14dp"
+                android:text="Redactar perfil"
+                android:textColor="@color/colorBlack" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAlerts"
+                app:srcCompat="@drawable/ic_right48" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-2dp"
+            android:layout_weight="1"
+            android:background="@drawable/botton_style"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <TextView
+                android:id="@+id/edit_password"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="14dp"
+                android:text="Cambiar contraseña"
+                android:textColor="@color/colorBlack" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAlerts"
+                app:srcCompat="@drawable/ic_right48" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/botton_style"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="14dp"
+                android:text="Condiciones"
+                android:textColor="@color/colorBlack" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAlerts"
+                app:srcCompat="@drawable/ic_right48" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/holo_red_light"
+                android:text="Cerrar sesión" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

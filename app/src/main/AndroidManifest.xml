@@ -31,7 +31,8 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".ForoActivity" />
         <activity android:name=".MovieActivity" />
-        <activity android:name=".HomeCategoryActivity"></activity>
+        <activity android:name=".HomeCategoryActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

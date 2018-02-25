@@ -1,16 +1,23 @@
 package com.example.kseniyaturava.mytest;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.AlphabeticIndex;
+import android.media.browse.MediaBrowser;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.ListMenuItemView;
+import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -76,11 +83,21 @@ public class SearchActivity extends AppCompatActivity {
         ArrayList<String> arrayMovies=new ArrayList<>();
         arrayMovies.addAll(Arrays.asList(getResources().getStringArray(R.array.array_movies)));
         lv.setBackgroundColor(Color.WHITE);
-        lv.setCacheColorHint(Color.BLACK);
 
 
         adapter=new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,arrayMovies);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String titulo=String.valueOf(RecyclerView.ItemAnimator.ItemHolderInfo.class.getName());
+                Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
+
+                intent.putExtra("Titulo", titulo);
+                startActivity(intent);
+            }
+        });
 
 
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -102,8 +119,10 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu (Menu menu){
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
-        MenuItem item=menu.findItem(R.id.menuSearch);
+        final MenuItem item=menu.findItem(R.id.menuSearch);
         SearchView searchView=(SearchView)item.getActionView();
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override

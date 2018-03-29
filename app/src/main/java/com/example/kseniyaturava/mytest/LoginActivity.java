@@ -29,7 +29,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button mEmailSignInButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,30 +85,56 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
+        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        registerButton = (Button) findViewById(R.id.register_button);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        Button registerButton = (Button) findViewById(R.id.register_button);
+        //mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            //@Override
+            //public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                //if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    //attemptLogin();
+                    //return true;
+                //}
+                //return false;
+            //}
+        //});
 
+        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //attemptLogin();
+                Thread tr=new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            final String res=confirmarLogin(mEmailView.getText().toString(),mPasswordView.getText().toString());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int r=objJSON(res);
+                                    if(r>0){
+                                        Toast.makeText(LoginActivity.this, "Usuario correcto", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        intent.putExtra("User",mEmailView.getText().toString());
+                                        intent.putExtra("Password",mPasswordView.getText().toString());
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(LoginActivity.this, "El mail o la contraseña no existen", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                tr.start();
+            }
+        });
+
+        //pendiente actualizar
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +144,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+    public int objJSON(String respuesta) {
+        int res=0;
+        try{
+            JSONArray json=new JSONArray(respuesta);
+            if(json.length()>0){
+                res=1;
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
+    public String confirmarLogin (String email, String password) throws IOException {
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/LoginConection.php?Email_User="+email+"&Password="+password);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
 
 
     private void populateAutoComplete() {

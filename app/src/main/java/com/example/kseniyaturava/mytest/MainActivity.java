@@ -1,6 +1,7 @@
 package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.ImageFormat;
 import android.media.Image;

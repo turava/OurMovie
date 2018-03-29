@@ -79,7 +79,6 @@
     <string name="description">Descubre los foros con más interacción</string>
     <string name="ciencia_ficcion">Ciencia Ficción</string>
     <string name="descubre">Entra y descubre más películas</string>
-    <string name="novedades">Novedades</string>
     <string name="categorias">Categorías</string>
     <string name="novedades_frase">Últimas películas añadidas</string>
     <string name="comedia">Comedia</string>
@@ -137,6 +136,8 @@
     <string name="nombre">Nombre</string>
     <string name="edad">Edad</string>
     <string name="ciudad">Ciudad</string>
+    <string name="interactua">Interactúa</string>
+    <string name="descubreForos">Descubre los foros que más gustan</string>
     <string-array name="array_movies">
         <item>Matrix</item>
         <item>Blade Runner</item>
@@ -146,5 +147,5 @@
         <item>American Pie</item>
         <item>Casablanca</item>
     </string-array>
-
+    <string name="novedades">Novedades</string>
 </resources>

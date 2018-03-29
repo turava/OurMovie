@@ -2,6 +2,8 @@ package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.ImageFormat;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,12 +11,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /*
       @author Kseniyaa Turava
+      @author Elisenda Coca
      */
     //Menu & Activities code here
     //method Listener
@@ -54,8 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // finish();
             return false;
         }
-
-            };
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
         //disabled shift mode
-        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
-//disabled shift mode
+        //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
         //Popular listeners on images
         ImageView visorImatge = findViewById(R.id.imageView2);
@@ -116,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
             }
         });
+
         ImageView img_comedy = (ImageView) findViewById(R.id.img_comedy);
         img_comedy.setOnClickListener(new View.OnClickListener() {
             @Override

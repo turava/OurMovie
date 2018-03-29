@@ -35,7 +35,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/amiko"
                 android:lineSpacingExtra="8sp"
-                android:text="Novedades"
+                android:text="@string/novedades"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -216,7 +216,9 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/american" />
+                            design:srcCompat="@drawable/american"/>
+
+
 
                         <Button
                             android:id="@+id/button_drama"
@@ -330,7 +332,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/amiko"
                 android:lineSpacingExtra="8sp"
-                android:text="Interactúa"
+                android:text="@string/interactua"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -342,7 +344,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:fontFamily="@font/amiko"
-                android:text="Descubre los foros que más gustan"
+                android:text="@string/descubreForos"
                 android:textSize="16sp" />
 
             <HorizontalScrollView

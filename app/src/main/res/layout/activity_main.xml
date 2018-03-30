@@ -216,7 +216,7 @@
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
                             android:minWidth="120dp"
-                            design:srcCompat="@drawable/american"/>
+                            design:srcCompat="@drawable/american" />
 
 
 
@@ -484,6 +484,9 @@
                  </LinearLayout>
              </HorizontalScrollView>-->
         </LinearLayout>
+
+
+       
 
     </ScrollView>
 

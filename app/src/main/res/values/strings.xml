@@ -148,4 +148,20 @@
         <item>Casablanca</item>
     </string-array>
     <string name="novedades">Novedades</string>
+    <string name="foro">Foro</string>
+    <string name="_13">13</string>
+    <string name="lorem_ipsum">Lorem ipsum nosequantorum porquorum latin is antiquorum, i pesque indefinidus il textus est, nus adentrus in peliculus mes plus mes</string>
+    <string name="descripcion">Descripción</string>
+    <string name="_21">21</string>
+    <string name="silvester_stallone">Silvester Stallone</string>
+    <string name="quentin_tarantino">Quentin Tarantino</string>
+    <string name="angelina_jolie">Angelina Jolie</string>
+    <string name="leonardo_dicaprio">Leonardo Dicaprio</string>
+    <string name="brad_pitt">Brad Pitt</string>
+    <string name="actors">Actores:</string>
+    <string name="anyo">Año</string>
+    <string name="titulo_de_la_pelicula">Título de la Película</string>
+    <string name="_2012">2012</string>
+    <string name="genero">Género</string>
+
 </resources>

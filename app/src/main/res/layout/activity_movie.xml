@@ -22,7 +22,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="20dp"
             android:orientation="vertical"
             android:paddingBottom="10dp"
@@ -38,7 +37,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="Título de la Película"
+                android:text="@string/titulo_de_la_pelicula"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -72,94 +71,92 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-
                     android:orientation="vertical">
-
 
                     <TextView
                         android:id="@+id/title_estreno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
                         android:layout_marginTop="6dp"
-                        android:text="Año"
+                        android:text="@string/anyo"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
                         android:id="@+id/text_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="2012" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/title_genero"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
                         android:layout_marginTop="10dp"
-                        android:text="Género"
+                        android:text="@string/genero"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
                         android:id="@+id/text_genero"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Drama" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/title_director"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
                         android:layout_marginTop="10dp"
-                        android:text="Director:"
+                        android:text="@string/director"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
                         android:id="@+id/text_director"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Quentin Tarantino" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/title_actors"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
                         android:layout_marginTop="10dp"
-                        android:text="Actores:"
+                        android:text="@string/actors"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
                         android:id="@+id/text_1actor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Brad Pitt" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
-                        android:id="@+id/tet_2actor"
+                        android:id="@+id/text_2actor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Angelina Jolie" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/text_3actor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Leonardo Dicaprio" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/text_4actor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="Silvester Stallone" />
+                        android:layout_marginStart="6dp"
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -178,18 +175,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:text="Descripción"
+                    android:text="@string/descripcion"
                     android:textColor="@color/colorBlack" />
 
                 <TextView
                     android:id="@+id/text_description"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_marginBottom="6dp"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="6dp"
                     android:layout_weight="1"
-                    android:text="Lorem ipsum nosequantorum porquorum latin is antiquorum, i pesque indefinidus il textus est, nus adentrus in peliculus mes plus mes" />
+                    android:maxLength="250"
+                    android:maxLines="7"
+                    android:text="" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,7 +210,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:background="@drawable/button_foro"
-                            android:text="Foro"
+                            android:text="@string/foro"
                             android:textColor="#fff" />
                     </LinearLayout>
 
@@ -227,16 +226,17 @@
                             android:layout_width="20dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
+                            android:clickable="false"
                             android:background="@color/colorBlanco"
                             app:srcCompat="@android:drawable/sym_action_chat" />
 
                         <TextView
-                            android:id="@+id/text_numStar"
+                            android:id="@+id/text_numCom"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:paddingTop="10dp"
-                            android:text="13" />
+                            android:text="@string/_13" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -259,12 +259,12 @@
                             app:srcCompat="@drawable/ic_staryellow" />
 
                         <TextView
-                            android:id="@+id/text_numCom"
+                            android:id="@+id/text_numStar"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:paddingTop="10dp"
-                            android:text="21"
+                            android:text="@string/_21"
                             android:textAlignment="textStart" />
                     </LinearLayout>
 

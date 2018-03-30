@@ -82,6 +82,70 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvAño"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:paddingTop="3dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:fontFamily="@font/amiko"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/a_o" />
+
+            <EditText
+                android:id="@+id/etAño"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="6dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/et_border"
+                android:hint="@string/a_o_de_la_pel_cula"
+                android:fontFamily="@font/amiko"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:maxLength="4"
+                android:inputType="number"
+                android:labelFor="@+id/tvAño" />
+
+            <TextView
+                android:id="@+id/tvGenero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:paddingTop="3dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:fontFamily="@font/amiko"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/g_nero" />
+
+            <EditText
+                android:id="@+id/etGenero"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="6dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/et_border"
+                android:hint="@string/g_nero_de_la_pel_cula"
+                android:inputType="text"
+                android:fontFamily="@font/amiko"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:maxLength="10"
+                android:labelFor="@+id/tvGenero" />
+
+            <TextView
                 android:id="@+id/tvDirector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -242,70 +306,6 @@
                 android:labelFor="@+id/tvActor4" />
 
             <TextView
-                android:id="@+id/tvAño"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:paddingTop="3dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="@string/a_o" />
-
-            <EditText
-                android:id="@+id/etAño"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="6dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/et_border"
-                android:hint="@string/a_o_de_la_pel_cula"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:maxLength="4"
-                android:inputType="number"
-                android:labelFor="@+id/tvAño" />
-
-            <TextView
-                android:id="@+id/tvGenero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:paddingTop="3dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="@string/g_nero" />
-
-            <EditText
-                android:id="@+id/etGenero"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="6dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/et_border"
-                android:hint="@string/g_nero_de_la_pel_cula"
-                android:inputType="text"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:maxLength="10"
-                android:labelFor="@+id/tvGenero" />
-
-            <TextView
                 android:id="@+id/tvDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -336,38 +336,6 @@
                 android:inputType="textMultiLine"
                 android:maxLength="200"
                 android:labelFor="@+id/tvDescripcion" />
-
-            <TextView
-                android:id="@+id/tvUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:paddingTop="3dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="@string/usuario" />
-
-            <EditText
-                android:id="@+id/etUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="6dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/et_border"
-                android:hint="@string/tu_nombre_de_usuario"
-                android:inputType="textPersonName"
-                android:fontFamily="@font/amiko"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:maxLength="15"
-                android:labelFor="@+id/tvUsuario" />
 
             <Button
                 android:id="@+id/sendForm"

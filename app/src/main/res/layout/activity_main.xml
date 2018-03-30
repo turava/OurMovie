@@ -67,95 +67,84 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/img_news_1"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
+                        android:contentDescription="@string/img_popular"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade2"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/blade2" />
 
                     <ImageView
-                        android:id="@+id/img_populawr"
+                        android:id="@+id/img_news_2"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
                         android:clickable="true"
+                        android:contentDescription="@string/img_popular"
+                        android:focusable="true"
                         android:longClickable="false"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1"
+                        design:srcCompat="@drawable/matrix1" />
+
+                    <ImageView
+                        android:id="@+id/img_news_3"
+                        android:layout_width="120dp"
+                        android:layout_height="160dp"
                         android:contentDescription="@string/img_popular"
-                        android:focusable="true" />
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade19"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/blade19" />
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/img_news_4"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
+                        android:contentDescription="@string/img_popular"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/matrix1" />
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/img_news_5"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
+                        android:contentDescription="@string/img_popular"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/matrix1" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/img_news_6"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
+                        android:contentDescription="@string/img_popular"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade2"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/blade2" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/img_news_7"
                         android:layout_width="120dp"
                         android:layout_height="160dp"
+                        android:contentDescription="@string/img_popular"
                         android:maxHeight="160dp"
                         android:maxWidth="120dp"
                         android:minHeight="160dp"
                         android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade19"
-                        android:contentDescription="@string/img_popular" />
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1"
-                        android:contentDescription="@string/img_popular" />
+                        design:srcCompat="@drawable/blade19" />
 
 
                 </LinearLayout>
@@ -486,7 +475,7 @@
         </LinearLayout>
 
 
-       
+
 
     </ScrollView>
 

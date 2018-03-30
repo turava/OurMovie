@@ -5,6 +5,18 @@ package com.example.kseniyaturava.mytest;
  */
 
 public class Peliculas {
+    private String Id_Genero="";
+    private String Imagen = "";
+    private String Id_Film = "";
+
+    public String getId_Film() {
+        return Id_Film;
+    }
+
+    public void setId_Film(String id_Film) {
+        Id_Film = id_Film;
+    }
+
 
     public String getImagen() {
         return Imagen;
@@ -14,6 +26,15 @@ public class Peliculas {
         Imagen = imagen;
     }
 
-    private String Imagen = "";
+
+    public String getId_Genero() {
+        return Id_Genero;
+    }
+
+    public void setId_Genero(String id_Genero) {
+        Id_Genero = id_Genero;
+    }
+
+
 
 }

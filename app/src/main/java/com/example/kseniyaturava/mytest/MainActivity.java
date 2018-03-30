@@ -36,10 +36,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Menu & Activities code here
     //method Listener
     private Bitmap bitmap;//variable que guarda datos en hilo de ejecucion?
-    private ImageView img_horror;
+    private ImageView img_horror;//genero
     private ImageView img_drama;
     private ImageView img_comedy;
     private ImageView img_fiction;
+    private ImageView img_new2;//interactua
+    private ImageView img_new3;//interactua
+    private ImageView img_new1;//interactua
+    private ImageView visorImatge;
+    private ImageView img_news_1, img_news_2, img_news_3, img_news_4, img_news_5,
+            img_news_6, img_news_7; //novedades
+
+
+
+    final String QUERY_CATEGORY = "http://www.webelicurso.hol.es/homeConnection.php?";
+    final String QUERY_NEWS = "http://www.webelicurso.hol.es/homeConnection2.php?";
 
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
@@ -98,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Popular listeners on images
-        ImageView visorImatge = findViewById(R.id.imageView2);
+        visorImatge = findViewById(R.id.img_news_1);
         visorImatge.setOnClickListener(this);
         visorImatge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,21 +119,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         //News listeners on images
-        ImageView img_new1 = (ImageView) findViewById(R.id.img_new1);
+
+        img_news_1 = findViewById(R.id.img_news_1);
+        img_news_2 = findViewById(R.id.img_news_2);
+        img_news_3 = findViewById(R.id.img_news_3);
+        img_news_4 = findViewById(R.id.img_news_4);
+        img_news_5 = findViewById(R.id.img_news_5);
+        img_news_6 = findViewById(R.id.img_news_6);
+        img_news_7 = findViewById(R.id.img_news_7);
+
+
+        img_new1 = (ImageView) findViewById(R.id.img_new1);
         img_new1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MovieActivity.class));
             }
         });
-        ImageView img_new2 = (ImageView) findViewById(R.id.img_new2);
+         img_new2 = (ImageView) findViewById(R.id.img_new2);
         img_new2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MovieActivity.class));
             }
         });
-        ImageView img_new3 = (ImageView) findViewById(R.id.img_new3);
+
+        img_new3 = (ImageView) findViewById(R.id.img_new3);
         img_new3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,9 +188,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-        //PICASSO LIBRARY TODO
-        //String urlDrama = "http://www.webelicurso.hol.es/ImagenDrama.jpg";
-        //Picasso.with(this).load(urlDrama).into(img_horror);
 
 
         //CONNECTION TO DB TODO
@@ -176,22 +195,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Thread tr = new Thread() {
             @Override
             public void run() {
-                final String res = connectDB();
-                runOnUiThread(new Runnable() {
+
+
+                final String cathegoryJson = connectDB(QUERY_CATEGORY);//consulta las categorias
+                final String newsJson = connectDB(QUERY_NEWS);//consulta las novedades
+                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //resultado de la conexión
-                        int r = 0;
+                        int r = 0, r2 = 0, r3 = 0;
+                        String accion="";
                         try {
-                            r = objJSON(res);
+                            //cargamos los resutados de las querys json.toString
+                            accion = "categoria";
+                            r = objJSON(cathegoryJson, accion);
+                            accion = "news";
+                            r2 = objJSON(newsJson,accion);
+                            //r3 = objJSON(newsJson);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        try {
-                            cargarImagenes(res);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
 
                         if (r > 0) {
                             Toast.makeText(MainActivity.this, "REQUEST CORRECT", Toast.LENGTH_LONG).show();
@@ -201,24 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
 
-                    private void cargarImagenes(String res) throws JSONException {
 
-                        //  Toast.makeText(MainActivity.this, res, Toast.LENGTH_LONG).show();
-
-
-                        // JSONObject json = new JSONObject(res);
-                        //JSONArray json=new JSONArray(res);
-
-
-                        // String imagen = json.getString("Imagen");
-
-                        //String urlDrama = imagen;
-                        //Picasso.with(MainActivity.this).load(urlDrama).into(img_horror);
-
-
-                        //String urlDrama = "http://www.webelicurso.hol.es/ImagenDrama.jpg";
-                        //Picasso.with(MainActivity.this).load(urlDrama).into(img_horror);
-                    }
                 });
             }
         };
@@ -228,17 +236,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //METHODS TO CONNECT WITH BD
-    public int objJSON(String respuesta) throws JSONException {
+    public int objJSON(String respuesta, String accion) throws JSONException {
 
         int res = 0;
         // function to show json
-        showJSON(respuesta);
-
+        showJSON(respuesta, accion);//PICASSO LIBRARY To set images form url
 
         try {
             JSONArray json = new JSONArray(respuesta);
-
-
             if (json.length() > 0) {
                 res = 1;
             }
@@ -248,14 +253,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return res;
     }
 
-    public String connectDB() {
+    public String connectDB(String QUERY) {
         URL url = null;
         String linea = "";
         int respuesta = 0;
         StringBuilder resul = null;
 
         try {
-            url = new URL("http://www.webelicurso.hol.es/homeConnection.php?");
+            url = new URL(QUERY);//Pasamos la url por parametro, dependiendo del caso
             HttpURLConnection conection = (HttpURLConnection) url.openConnection();
             respuesta = conection.getResponseCode();
             resul = new StringBuilder();
@@ -276,22 +281,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //Muestra los datos recogidos de la BD
-    public void showJSON(String respuesta) throws JSONException {
+    public void showJSON(String respuesta, String accion) throws JSONException {
 
         JSONArray json = new JSONArray(respuesta);
-        Peliculas  peli = new Peliculas();
 
-        //pruebas
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject jsonArrayChild = json.getJSONObject(i);
-           // String imagen = jsonArrayChild.optString("Imagen");//extrae la clave del json
-            peli.setImagen(jsonArrayChild.optString("Imagen"));
-            //String img = json.getJSONObject(i).toString();//string json
-            //String urlDrama = imagen;
-            Picasso.with(MainActivity.this).load(peli.getImagen()).into(img_drama);
 
-            Toast.makeText(MainActivity.this, peli.getImagen(), Toast.LENGTH_LONG).show();
+        if(accion.equalsIgnoreCase("categoria")) {
+            Peliculas  peli []= new Peliculas[5];
+            //bucle para escribir los valores del json en la clase pelicula
+            for (int i = 0; i < json.length(); i++) {
+                JSONObject jsonArrayChild = json.getJSONObject(i);
+                // String imagen = jsonArrayChild.optString("Imagen");//extrae la clave del json
+                peli[i] = new Peliculas();
+                peli[i].setId_Genero(jsonArrayChild.optString("Id_Genero"));
+                peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+            }
+            //bucle para cargar los valores de la clase en el id de imageView
+            //fit estira las imagenes, centercrop, centra pero recorta
+            for (int i = 0; i < peli.length; i++) {
+                //TODO subir nuevas imagenes
+                Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_drama);
+                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_comedy);
+                Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_fiction);
+                Picasso.with(MainActivity.this).load(peli[4].getImagen()).fit().centerCrop().into(img_horror);
+               // Toast.makeText(MainActivity.this, peli[i].getImagen() + peli[1].getId_Genero(), Toast.LENGTH_LONG).show();
+                //falta añadir peli de accion TODO
+            }
+
         }
+        else if(accion.equalsIgnoreCase("news"))
+        {
+            Peliculas  peli []= new Peliculas[8];
+            //bucle para escribir los valores del json en la clase pelicula
+            for (int i = 0; i < json.length(); i++) {
+                JSONObject jsonArrayChild = json.getJSONObject(i);
+                // String imagen = jsonArrayChild.optString("Imagen");//extrae la clave del json
+                peli[i] = new Peliculas();
+                peli[i].setId_Genero(jsonArrayChild.optString("Id_Film"));
+                peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+
+            }//bucle para cargar los valores de la clase en el id de imageView
+            //fit estira las imagenes, centercrop, centra pero recorta
+            for (int i = 0; i < peli.length; i++) {
+
+                Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_news_2);
+                Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_news_6);
+                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_news_3);
+
+                Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_news_4);
+                Picasso.with(MainActivity.this).load(peli[4].getImagen()).fit().centerCrop().into(img_news_5);
+                Picasso.with(MainActivity.this).load(peli[5].getImagen()).fit().centerCrop().into(img_news_1);
+                Picasso.with(MainActivity.this).load(peli[6].getImagen()).fit().centerCrop().into(img_news_7);
+                //   Toast.makeText(MainActivity.this,  i+peli[i].getImagen() + peli[i].getId_Film(), Toast.LENGTH_LONG).show();
+                //falta añadir peli de accion TODO
+
+
+                //asignaos con el mismo json, urls a las img Interactua
+                //TODO asignar imagenes
+                Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_new1);
+                Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_new2);
+                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_new3);
+
+            }
+
+        }
+
+
 
     }
         @Override

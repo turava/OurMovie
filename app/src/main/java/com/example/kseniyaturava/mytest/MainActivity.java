@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         visorImatge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Falta poner que recoja el dato del Titulo y lo pase en el Intent.put Extra para que lo recoja en la
+                //MovieActivity en el bundle y presente los datos de esa pelicula
                 startActivity(new Intent(getApplicationContext(), MovieActivity.class));
 
             }

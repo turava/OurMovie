@@ -98,7 +98,7 @@ public class MovieActivity extends AppCompatActivity {
                                 int longitud;
                                 String palabra;
                                 for (int i=0;i<res.length();i++) {
-                                    if (res.charAt(i)==(',')) {
+                                    if (res.charAt(i)==(',')&& res.charAt(i+1)==('"')) {
                                         longitud=i;
                                         palabra=res.substring(inicio, longitud);
                                         inicio=longitud+1;

@@ -138,15 +138,6 @@
     <string name="ciudad">Ciudad</string>
     <string name="interactua">Interactúa</string>
     <string name="descubreForos">Descubre los foros que más gustan</string>
-    <string-array name="array_movies">
-        <item>Matrix</item>
-        <item>Blade Runner</item>
-        <item>American Beauty</item>
-        <item>Untoachable</item>
-        <item>Star Wars</item>
-        <item>American Pie</item>
-        <item>Casablanca</item>
-    </string-array>
     <string name="novedades">Novedades</string>
     <string name="foro">Foro</string>
     <string name="_13">13</string>

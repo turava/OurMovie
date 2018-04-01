@@ -17,6 +17,16 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,28 +73,19 @@ public class SearchActivity extends AppCompatActivity {
 
 
     ArrayAdapter<String> adapter;
+    ListView lv;
+    ArrayList<String> arrayMovies;
+    protected String titulo="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        ListView lv=(ListView)findViewById(R.id.listViewMovies);
-        ArrayList<String> arrayMovies=new ArrayList<>();
-        arrayMovies.addAll(Arrays.asList(getResources().getStringArray(R.array.array_movies)));
+
+        lv=(ListView)findViewById(R.id.listViewMovies);
+        arrayMovies=new ArrayList<>();
         lv.setBackgroundColor(Color.WHITE);
-        
-        adapter=new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,arrayMovies);
-        lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String titulo=String.valueOf(RecyclerView.ItemAnimator.ItemHolderInfo.class.getName());
-                Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
-
-                intent.putExtra("Titulo", titulo);
-                startActivity(intent);
-            }
-        });
 
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -98,6 +99,95 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
+        Thread tr=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    final String res=recogerTitulos();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int r=objJSON(res);
+                            if(r>0){
+                                int inicio=0;
+                                int longitud;
+                                String palabra;
+                                for (int i=0;i<res.length();i++) {
+                                    if (res.charAt(i) == ('"') && res.charAt(i + 1) == ('}')) {
+                                        longitud = i;
+                                        palabra = res.substring(inicio, longitud);
+                                        inicio = longitud + 3;
+                                        if (palabra.startsWith("[")) {
+                                            titulo = palabra.substring(17, palabra.length());
+                                            arrayMovies.add(titulo);
+                                            adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, arrayMovies);
+                                            lv.setAdapter(adapter);
+                                        }else if (!palabra.startsWith("[")) {
+                                            titulo = palabra.substring(16, palabra.length());
+                                            arrayMovies.add(titulo);
+                                            adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, arrayMovies);
+                                            lv.setAdapter(adapter);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        tr.start();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                titulo = arrayMovies.get(position);
+                Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
+                intent.putExtra("Titulo", titulo);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public int objJSON(String respuesta) {
+        int res=0;
+        try{
+            JSONArray json=new JSONArray(respuesta);
+            if(json.length()>0){
+                res=1;
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public String recogerTitulos () throws IOException {
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/ListaTitulos.php");
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
     }
 
     @Override

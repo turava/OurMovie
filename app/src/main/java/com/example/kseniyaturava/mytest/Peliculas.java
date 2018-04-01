@@ -5,9 +5,12 @@ package com.example.kseniyaturava.mytest;
  */
 
 public class Peliculas {
+
     private String Id_Genero="";
     private String Imagen = "";
     private String Id_Film = "";
+
+
 
     public String getId_Film() {
         return Id_Film;

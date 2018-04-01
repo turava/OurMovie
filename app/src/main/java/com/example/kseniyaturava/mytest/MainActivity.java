@@ -2,7 +2,6 @@ package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     //Menu & Activities code here
     //method Listener
-    private Bitmap bitmap;//variable que guarda datos en hilo de ejecucion?
     private ImageView img_horror;//genero
     private ImageView img_drama;
     private ImageView img_comedy;
@@ -57,30 +55,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    //we are on the method when the menu's item is selected
-                    //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            //setTitle("Explore");//Set the title ActionBar
-                            //instance Activity
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             return true;
                         case R.id.searchItem:
-                            // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                            //startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                           startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                             return true;
                         case R.id.formItem:
-                            // setTitle("Form");
                             startActivity(new Intent(getApplicationContext(), FormActivity.class));
-                            // startActivity(new Intent(MainActivity.this, FormActivity.class));
                             return true;
                         case R.id.notificationItem:
-                            // setTitle("Notifications");
                             startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
                             return true;
                         case R.id.profileItem:
-                            // setTitle("Profile");
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                             return true;
                     }
@@ -106,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
-
 
         //Popular listeners on images
         visorImatge = findViewById(R.id.img_news_1);
@@ -186,9 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
-
 
         //CONNECTION TO DB TODO
 

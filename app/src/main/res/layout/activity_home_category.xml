@@ -5,9 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kseniyaturava.mytest.HomeCategoryActivity">
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-    <ScrollView
+        <LinearLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_category"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/categor_a"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvandroidosnames"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="@string/_123_pel_culas"
+                android:textAlignment="center" />
+        </LinearLayout>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+    </LinearLayout>
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -168,7 +205,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 
     <FrameLayout
         android:id="@+id/menu_container"

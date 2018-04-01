@@ -81,8 +81,7 @@ public class MovieActivity extends AppCompatActivity {
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
             String titulo=bundle.getString("Titulo");
-            //Hasta que no funcione el que recoja bien el titulo del Search, pongo a mano un título de la bbdd
-            text_title.setText("Matrix");
+            text_title.setText(titulo);
         }
         Thread tr=new Thread(){
             @Override
@@ -98,7 +97,7 @@ public class MovieActivity extends AppCompatActivity {
                                 int longitud;
                                 String palabra;
                                 for (int i=0;i<res.length();i++) {
-                                    if (res.charAt(i)==(',')) {
+                                    if (res.charAt(i)==(',')&& res.charAt(i+1)==('"')) {
                                         longitud=i;
                                         palabra=res.substring(inicio, longitud);
                                         inicio=longitud+1;

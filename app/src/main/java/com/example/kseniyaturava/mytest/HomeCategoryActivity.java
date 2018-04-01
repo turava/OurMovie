@@ -7,8 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,9 +24,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HomeCategoryActivity extends AppCompatActivity {
-   private ListView listView;
+   private GridView listView;
     private final String QUERY_CATHEGORY= "http://www.webelicurso.hol.es/homeConnection.php?";
-    private ListView lv;
+    private GridView lv;
     private ImageView imagen;
 
 
@@ -195,7 +195,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
     {
 
         imagen = findViewById(R.id.imagen);
-        lv = (ListView) findViewById(R.id.listView);
+        lv = (GridView) findViewById(R.id.listView);
         AdapterItem adapter = new AdapterItem(this,  listaImg);//2nd param. data
         lv.setAdapter(adapter);
 

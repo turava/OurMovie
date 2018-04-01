@@ -7,91 +7,12 @@
 
             <ImageView
                 android:id="@+id/imagen"
-                android:layout_width="134dp"
-                android:layout_height="160dp"
-                android:paddingStart="1dp"
+                android:layout_width="136dp"
+                android:layout_height="136dp"
                 android:scaleType="fitXY"
                 />
 
 
-        <!--
-                                <LinearLayout
-                                    android:id="@+id/layout_row2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="1dp"
-                                    android:paddingTop="1dp">
-
-                                    <ImageView
-                                        android:id="@+id/img4"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:adjustViewBounds="false"
-                                        android:cropToPadding="false"
-                                        android:paddingRight="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/american" />
-
-                                    <ImageView
-                                        android:id="@+id/img5"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="1dp"
-                                        android:paddingRight="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/blade2" />
-
-                                    <ImageView
-                                        android:id="@+id/img6"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/blade19" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/layout_row3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:paddingTop="1dp">
-
-                                    <ImageView
-                                        android:id="@+id/img7"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:paddingRight="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/american" />
-
-                                    <ImageView
-                                        android:id="@+id/imh8"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="1dp"
-                                        android:paddingRight="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/blade2" />
-
-                                    <ImageView
-                                        android:id="@+id/img9"
-                                        android:layout_width="134dp"
-                                        android:layout_height="160dp"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="1dp"
-                                        android:scaleType="fitXY"
-                                        app:srcCompat="@drawable/blade19" />
-
-                                </LinearLayout>
-                                -->
     </LinearLayout>
 
 

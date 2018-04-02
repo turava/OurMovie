@@ -158,7 +158,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_comedy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+                Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
+                String categoria = "Comedia";
+                intent.putExtra("titulo", categoria);
+                startActivity(intent);
 
             }
         });
@@ -166,7 +169,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_fiction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+                Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
+                String categoria = "Ciencia Ficción";
+                intent.putExtra("titulo", categoria);
+                startActivity(intent);
 
             }
         });
@@ -174,7 +180,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_horror.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+                Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
+                String categoria = "Terror";
+                intent.putExtra("titulo", categoria);
+                startActivity(intent);
 
             }
         });

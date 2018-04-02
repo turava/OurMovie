@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,6 +32,8 @@ public class HomeCategoryActivity extends AppCompatActivity {
     private GridView lv;
     private ImageView imagen;
     private String categoria = "";
+    private TextView categoriaTitle;
+    private TextView subtitle;
 
 
     private
@@ -80,11 +83,14 @@ public class HomeCategoryActivity extends AppCompatActivity {
         menuItem.setChecked(true);
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
+        categoriaTitle = (TextView) findViewById(R.id.title_category);
+        subtitle = (TextView) findViewById(R.id.tvandroidosnames);
 
 
         categoria = getIntent().getExtras().getString("titulo");
         Toast.makeText(HomeCategoryActivity.this, categoria, Toast.LENGTH_LONG).show();
 
+        categoriaTitle.setText(categoria);
 
 
         //CONNECTION TO DB
@@ -112,7 +118,8 @@ public class HomeCategoryActivity extends AppCompatActivity {
                         }
 
                         if (r < 0) {
-                            Toast.makeText(HomeCategoryActivity.this, "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(HomeCategoryActivity.this,
+                                    "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -170,30 +177,39 @@ public class HomeCategoryActivity extends AppCompatActivity {
 //TODO
     //Get the data from Json and create the object to show with adapter on the screen
     public String[] showJSON(String respuesta) throws JSONException {
-        String[] listaImg = new String[7];
-        String[] listaTitulo = new String[7];
+
+
         JSONArray json = new JSONArray(respuesta);
+        int count = json.length();//count objects in json
+        // System.out.println("**********"+count);
 
-        Peliculas peli[] = new Peliculas[7];
+        String[] listaImg = new String[count];
+        String[] listaTitulo = new String[count];
+        Peliculas peli[] = new Peliculas[count];
+        String countStr = Integer.toString(count);
+
+        subtitle.setText(countStr + " películas");//cantidad de peliculas
+
         //  Peliculas peli = new Peliculas();
-
         //loop to write values from JSON on object Pelicua
 
-        for (int i = 0; i < json.length(); i++) {
+
+        for (int i = 0; i < count; i++) {
             JSONObject jsonArrayChild = json.getJSONObject(i);
+
             peli[i] = new Peliculas();
             peli[i].setId_Film(jsonArrayChild.optString("Id_Film"));
             peli[i].setImagen(jsonArrayChild.optString("Imagen"));
             peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
         }
         //loop to set the values from object to the array
-       // for (int i = 0; i < 7; i++) {
-            listaImg[0] = peli[0].getImagen();
-            listaTitulo[0] = peli[0].getTitulo_FIlm();
-           Toast.makeText(HomeCategoryActivity.this, peli[0].getImagen() + peli[0].getId_Film(),
-                    Toast.LENGTH_LONG).show();
+        for (int i = 0; i < count; i++) {
+            listaImg[i] = peli[i].getImagen();
+            listaTitulo[i] = peli[i].getTitulo_FIlm();
+          // Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
+            //        Toast.LENGTH_LONG).show();
 
-        //}
+        }
 
         displayAdapter(listaImg, listaTitulo);// display the data from Array in listview with adapter
         return listaImg;
@@ -205,24 +221,16 @@ public class HomeCategoryActivity extends AppCompatActivity {
         AdapterItem adapter = new AdapterItem(this, listaImg);//2nd param. data
         lv.setAdapter(adapter);
 
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
-                for (int i = 0; i < 5; i++) {
-                    Peliculas peli[] = new Peliculas[5];
-                    peli[i] = new Peliculas();
-                    peli[i].getId_Film();
-                    peli[i].getImagen();
-
-                }
                 //Go to MovieActivity with params: title movie
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                 intent.putExtra("titulo", listaTitulo[position]);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Hiciste click en el número "
-                                +listaTitulo[position],
+                Toast.makeText(getApplicationContext(),
+                                listaTitulo[position],
                         Toast.LENGTH_LONG).show();
             }
         });

@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,8 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HomeCategoryActivity extends AppCompatActivity {
-   private GridView listView;
-    private final String QUERY_CATHEGORY= "http://www.webelicurso.hol.es/homeConnection.php?";
+    private GridView listView;
+    private final String QUERY_CATHEGORY = "http://www.webelicurso.hol.es/Categoria.php?";
     private GridView lv;
     private ImageView imagen;
 
@@ -40,10 +42,10 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                           startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                           return true;
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            return true;
                         case R.id.searchItem:
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                             return true;
                         case R.id.formItem:
                             startActivity(new Intent(getApplicationContext(), FormActivity.class));
@@ -62,8 +64,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
             };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_category);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -77,7 +78,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
         //disabled shift mode
-        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
 
         //CONNECTION TO DB
@@ -102,8 +103,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        if (r < 0)
-                        {
+                        if (r < 0) {
                             Toast.makeText(HomeCategoryActivity.this, "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -118,8 +118,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
 
     //METHODS TO CONNECT WITH BD
-    public int objJSON(String respuesta) throws JSONException
-    {
+    public int objJSON(String respuesta) throws JSONException {
 
         int res = 0;
         try {
@@ -134,8 +133,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
     }
 
 
-    public String connectDB(String QUERY)
-    {
+    public String connectDB(String QUERY) {
         URL url = null;
         String linea = "";
         int respuesta = 0;
@@ -161,47 +159,69 @@ public class HomeCategoryActivity extends AppCompatActivity {
         return resul.toString();
     }
 
-
+//TODO
     //Get the data from Json and create the object to show with adapter on the screen
-    public String[] showJSON(String respuesta) throws JSONException
-    {
-        String[] listaImg = new String[5];
+    public String[] showJSON(String respuesta) throws JSONException {
+        String[] listaImg = new String[7];
+        String[] listaTitulo = new String[7];
         JSONArray json = new JSONArray(respuesta);
 
-           Peliculas peli[] = new Peliculas[5];
-          //  Peliculas peli = new Peliculas();
+        Peliculas peli[] = new Peliculas[7];
+        //  Peliculas peli = new Peliculas();
 
-            //loop to write values from JSON on object Pelicua
+        //loop to write values from JSON on object Pelicua
 
-            for (int i = 0; i < json.length(); i++) {
-                JSONObject jsonArrayChild = json.getJSONObject(i);
-                peli[i] = new Peliculas();
-                peli[i].setId_Film(jsonArrayChild.optString("Id_Film"));
-                peli[i].setImagen(jsonArrayChild.optString("Imagen"));
-            }
-            //loop to set the values from object to the array
-            for (int i = 0; i < 5; i++) {
-                listaImg[i] = peli[i].getImagen();
-                 Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
-                         Toast.LENGTH_LONG).show();
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject jsonArrayChild = json.getJSONObject(i);
+            peli[i] = new Peliculas();
+            peli[i].setId_Film(jsonArrayChild.optString("Id_Film"));
+            peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+            peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
+        }
+        //loop to set the values from object to the array
+        for (int i = 0; i < 7; i++) {
+            listaImg[i] = peli[i].getImagen();
+            listaTitulo[i] = peli[i].getTitulo_FIlm();
+          //  Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
+            //        Toast.LENGTH_LONG).show();
 
         }
 
-        displayAdapter(listaImg);// display the data from Array in listview with adapter
+        displayAdapter(listaImg, listaTitulo);// display the data from Array in listview with adapter
         return listaImg;
     }
 
-    private void displayAdapter(String listaImg[])
-    {
-
+    private void displayAdapter(final String listaImg[], final String listaTitulo[]) {
         imagen = findViewById(R.id.imagen);
         lv = (GridView) findViewById(R.id.listView);
-        AdapterItem adapter = new AdapterItem(this,  listaImg);//2nd param. data
+        AdapterItem adapter = new AdapterItem(this, listaImg);//2nd param. data
         lv.setAdapter(adapter);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos = position;
+                for (int i = 0; i < 5; i++) {
+                    Peliculas peli[] = new Peliculas[5];
+                    peli[i] = new Peliculas();
+                    peli[i].getId_Film();
+                    peli[i].getImagen();
+
+                }
+                //Go to MovieActivity with params: title movie
+                Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                intent.putExtra("titulo", listaTitulo[position]);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Hiciste click en el número "
+                                +listaTitulo[position],
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
 }
-
 
 
 

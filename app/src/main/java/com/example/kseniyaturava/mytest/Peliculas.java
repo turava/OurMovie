@@ -12,6 +12,10 @@ public class Peliculas {
 
 
 
+    private String Titulo_FIlm = "";
+
+
+
     public String getId_Film() {
         return Id_Film;
     }
@@ -38,6 +42,12 @@ public class Peliculas {
         Id_Genero = id_Genero;
     }
 
+    public String getTitulo_FIlm() {
+        return Titulo_FIlm;
+    }
 
+    public void setTitulo_FIlm(String titulo_FIlm) {
+        Titulo_FIlm = titulo_FIlm;
+    }
 
 }

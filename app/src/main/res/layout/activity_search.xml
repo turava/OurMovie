@@ -25,9 +25,21 @@
 
         </ListView>
 
+        <Button
+            android:id="@+id/btInsertar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            android:text="Insertar Nueva Pelicula"
+            />
+
     </LinearLayout>
     <!--inside id added for fragments(there're more options)-->
-
 
     <FrameLayout
         android:id="@+id/menu_container"

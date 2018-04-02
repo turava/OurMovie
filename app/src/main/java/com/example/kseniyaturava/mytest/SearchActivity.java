@@ -144,7 +144,7 @@ public class SearchActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                titulo = arrayMovies.get(position);
+                String titulo = (String)(lv.getItemAtPosition(position));
                 Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
                 intent.putExtra("Titulo", titulo);
                 startActivity(intent);
@@ -200,7 +200,6 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query){
-
                 return false;
             }
 
@@ -212,6 +211,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+
     }
 
 }

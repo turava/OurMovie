@@ -27,9 +27,10 @@ import java.net.URL;
 
 public class HomeCategoryActivity extends AppCompatActivity {
     private GridView listView;
-    private final String QUERY_CATHEGORY = "http://www.webelicurso.hol.es/Categoria.php?";
+   // private final String QUERY_CATHEGORY = "http://www.webelicurso.hol.es/Categoria.php?";
     private GridView lv;
     private ImageView imagen;
+    private String categoria = "";
 
 
     private
@@ -81,11 +82,18 @@ public class HomeCategoryActivity extends AppCompatActivity {
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
 
+        categoria = getIntent().getExtras().getString("titulo");
+        Toast.makeText(HomeCategoryActivity.this, categoria, Toast.LENGTH_LONG).show();
+
+
+
         //CONNECTION TO DB
 
         Thread tr = new Thread() {
             @Override
             public void run() {
+
+                final String QUERY_CATHEGORY = "http://www.webelicurso.hol.es/Categoria.php?categoria="+categoria;
 
                 //TODO query con el parametro de la categoria, que busca peliculas donde categoria sea =...
                 final String cathegoryJSON = connectDB(QUERY_CATHEGORY);
@@ -179,13 +187,13 @@ public class HomeCategoryActivity extends AppCompatActivity {
             peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
         }
         //loop to set the values from object to the array
-        for (int i = 0; i < 7; i++) {
-            listaImg[i] = peli[i].getImagen();
-            listaTitulo[i] = peli[i].getTitulo_FIlm();
-          //  Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
-            //        Toast.LENGTH_LONG).show();
+       // for (int i = 0; i < 7; i++) {
+            listaImg[0] = peli[0].getImagen();
+            listaTitulo[0] = peli[0].getTitulo_FIlm();
+           Toast.makeText(HomeCategoryActivity.this, peli[0].getImagen() + peli[0].getId_Film(),
+                    Toast.LENGTH_LONG).show();
 
-        }
+        //}
 
         displayAdapter(listaImg, listaTitulo);// display the data from Array in listview with adapter
         return listaImg;

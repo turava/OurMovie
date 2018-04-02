@@ -147,7 +147,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_drama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeCategoryActivity.class));
+                Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
+                String categoria = "Drama";
+                intent.putExtra("titulo", categoria);
+                startActivity(intent);
             }
         });
 

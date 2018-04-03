@@ -4,13 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
+
+    TextView text_movie, text_director, text_year;
+    ImageButton button_info;
+
 /*
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -115,5 +132,103 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
 
+        text_movie =(TextView) findViewById(R.id.text_movie);
+        text_director =(TextView) findViewById(R.id.text_director);
+        text_year =(TextView) findViewById(R.id.text_year);
+        button_info = (ImageButton) findViewById(R.id.button_info);
+
+        button_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String titulo=text_movie.getText().toString();
+                Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
+                intent.putExtra("Titulo", titulo);
+                startActivity(intent);
+            }
+        });
+
+        Bundle bundle=this.getIntent().getExtras();
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+            String titulo=bundle.getString("Titulo");
+            text_movie.setText(titulo);
+        }
+
+        Thread tr=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    final String res=recogerDatos(text_movie.getText().toString());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int r=objJSON(res);
+                            if(r>0){
+                                int inicio=0;
+                                int longitud;
+                                String palabra;
+                                for (int i=0;i<res.length();i++) {
+                                    if ((res.charAt(i)==(',')&& res.charAt(i+1)==('"')) || (res.charAt(i)==('}')&& res.charAt(i+1)==(']'))) {
+                                        longitud = i;
+                                        palabra = res.substring(inicio, longitud);
+                                        inicio = longitud + 1;
+                                        if (palabra.contains("Anyo_Film")) {
+                                            String anyo = palabra.substring(13, palabra.length() - 1);
+                                            text_year.setText(anyo);
+                                        } else if (palabra.contains("Director_Film")) {
+                                            String director = palabra.substring(17, palabra.length() - 1);
+                                            text_director.setText(director);
+                                        }
+                                    }
+                                }
+                            }else{
+                                Toast.makeText(ForoActivity.this, "Esta pelicula no está en la base", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        tr.start();
+
     }
+    public int objJSON(String respuesta) {
+        int res=0;
+        try{
+            JSONArray json=new JSONArray(respuesta);
+            if(json.length()>0){
+                res=1;
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public String recogerDatos (String titulo) throws IOException {
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/MovieDatos.php?Titulo_Film="+titulo);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+
 }

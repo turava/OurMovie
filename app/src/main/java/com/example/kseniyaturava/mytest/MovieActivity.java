@@ -57,19 +57,13 @@ public class MovieActivity extends AppCompatActivity {
         text_numCom =(TextView) findViewById(R.id.text_numCom);
         text_numStar =(TextView) findViewById(R.id.text_numStar);
 
-
-        //Faltará modificar esta inicialización, en lugar de 0 deberá ser el valor que tenga guardado en la bbdd
-        text_numCom.setText("0");
-
         button_foro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String valor=String.valueOf(text_numCom.getText());
-                int num=Integer.parseInt(valor);
-                int numFinal=num+1;
-                String valorFinal=String.valueOf(numFinal);
-                text_numCom.setText(valorFinal);
-                startActivity(new Intent(getApplicationContext(), ForoActivity.class));
+                String titulo=text_title.getText().toString();
+                Intent intent = new Intent(MovieActivity.this, ForoActivity.class);
+                intent.putExtra("Titulo", titulo);
+                startActivity(intent);
             }
         });
 
@@ -151,6 +145,9 @@ public class MovieActivity extends AppCompatActivity {
                                         } else if (palabra.contains("Votos_Estrella")) {
                                             String num_star = palabra.substring(18, palabra.length() - 1);
                                             text_numStar.setText(num_star);
+                                        } else if (palabra.contains("Num_Coments")) {
+                                            String num_com = palabra.substring(15, palabra.length() - 1);
+                                            text_numCom.setText(num_com);
                                         } else if (palabra.contains("Imagen")) {
                                             String imagen = palabra.substring(10, palabra.length() - 1);
                                             //Expediente X -> carga ok las imagenes de Blade Runner y de Forrest gump, el resto

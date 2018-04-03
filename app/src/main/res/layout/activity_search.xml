@@ -35,7 +35,7 @@
             android:textColor="#000"
             android:textSize="15sp"
             android:visibility="invisible"
-            android:text="Insertar Nueva Pelicula"
+            android:text="@string/insertar_nueva_pelicula"
             />
 
     </LinearLayout>

@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -25,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_horror;//genero
     private ImageView img_drama;
     private ImageView img_comedy;
+    private ImageView img_accion;
     private ImageView img_fiction;
     private ImageView img_new2;//interactua
     private ImageView img_new3;//interactua
@@ -45,10 +51,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_news_1, img_news_2, img_news_3, img_news_4, img_news_5,
             img_news_6, img_news_7; //novedades
 
+    //Recycler
+    private static final String TAG = "MainActivity";
+    //vars
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<String> mImageUrls = new ArrayList<>();
+    //Recycler
+    private ArrayList<String> titleList = new ArrayList<>();
+    private ArrayList<String> imgList = new ArrayList<>();
 
 
     final String QUERY_CATEGORY = "http://www.webelicurso.hol.es/homeConnection.php?";
     final String QUERY_NEWS = "http://www.webelicurso.hol.es/homeConnection2.php?";
+    private ListView lv;
+    private ImageView imagen;
 
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
@@ -60,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             return true;
                         case R.id.searchItem:
-                           startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                             return true;
                         case R.id.formItem:
                             startActivity(new Intent(getApplicationContext(), FormActivity.class));
@@ -96,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
         //Popular listeners on images
-        visorImatge = findViewById(R.id.img_news_1);
+      /*  visorImatge = findViewById(R.id.img_news_1);
         visorImatge.setOnClickListener(this);
         visorImatge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         //News listeners on images
-
+/*
         img_news_1 = findViewById(R.id.img_news_1);
         img_news_2 = findViewById(R.id.img_news_2);
         img_news_3 = findViewById(R.id.img_news_3);
@@ -116,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_news_5 = findViewById(R.id.img_news_5);
         img_news_6 = findViewById(R.id.img_news_6);
         img_news_7 = findViewById(R.id.img_news_7);
+*/
 
-
-        img_new1 = (ImageView) findViewById(R.id.img_new1);
+       /* img_new1 = (ImageView) findViewById(R.id.img_new1);
         img_new1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,8 +157,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
+*/
         //Categories listeners on images
+        img_accion = (ImageView) findViewById(R.id.img_accion);
+        img_accion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
+                String categoria = "Acción";
+                intent.putExtra("titulo", categoria);
+                startActivity(intent);
+            }
+        });
         img_drama = (ImageView) findViewById(R.id.img_drama);
         img_drama.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
         //CONNECTION TO DB TODO
 
         Thread tr = new Thread() {
@@ -197,18 +224,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 final String cathegoryJson = connectDB(QUERY_CATEGORY);//consulta las categorias
                 final String newsJson = connectDB(QUERY_NEWS);//consulta las novedades
-                 runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //resultado de la conexión
                         int r = 0, r2 = 0, r3 = 0;
-                        String accion="";
+                        String accion = "";
                         try {
                             //cargamos los resutados de las querys json.toString
                             accion = "categoria";
                             r = objJSON(cathegoryJson, accion);
                             accion = "news";
-                            r2 = objJSON(newsJson,accion);
+                            r2 = objJSON(newsJson, accion);
                             //r3 = objJSON(newsJson);
 
                         } catch (JSONException e) {
@@ -284,8 +311,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         JSONArray json = new JSONArray(respuesta);
 
 
-        if(accion.equalsIgnoreCase("categoria")) {
-            Peliculas  peli []= new Peliculas[5];
+        if (accion.equalsIgnoreCase("categoria")) {
+            Peliculas peli[] = new Peliculas[5];
             //bucle para escribir los valores del json en la clase pelicula
             for (int i = 0; i < json.length(); i++) {
                 JSONObject jsonArrayChild = json.getJSONObject(i);
@@ -298,18 +325,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //fit estira las imagenes, centercrop, centra pero recorta
             for (int i = 0; i < peli.length; i++) {
                 //TODO subir nuevas imagenes
+                Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_accion);
                 Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_drama);
-                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_comedy);
-                Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_fiction);
+                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_fiction);
+                Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_comedy);
                 Picasso.with(MainActivity.this).load(peli[4].getImagen()).fit().centerCrop().into(img_horror);
-               // Toast.makeText(MainActivity.this, peli[i].getImagen() + peli[1].getId_Genero(), Toast.LENGTH_LONG).show();
+                // Toast.makeText(MainActivity.this, peli[i].getImagen() + peli[1].getId_Genero(), Toast.LENGTH_LONG).show();
                 //falta añadir peli de accion TODO
             }
 
+        } else if (accion.equalsIgnoreCase("news")) {
+            JSONArray json1 = new JSONArray(respuesta);
+            int count = json1.length();//count objects in json
+            // System.out.println("**********"+count);
+
+            String[] listaImg = new String[count];
+            String[] listaTitulo = new String[count];
+            Peliculas peli[] = new Peliculas[count];
+            String countStr = Integer.toString(count);
+
+
+            //  Peliculas peli = new Peliculas();
+            //loop to write values from JSON on object Pelicua
+
+
+            for (int i = 0; i < count; i++) {
+                JSONObject jsonArrayChild = json.getJSONObject(i);
+
+                peli[i] = new Peliculas();
+                peli[i].setId_Film(jsonArrayChild.optString("Id_Film"));
+                peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+                peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
+            }
+            //loop to set the values from object to the array
+            for (int i = 0; i < count; i++) {
+                listaImg[i] = peli[i].getImagen();
+                listaTitulo[i] = peli[i].getTitulo_FIlm();
+                // Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
+                //        Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(),
+                        listaTitulo[i] + peli[i].getImagen() + count, Toast.LENGTH_LONG).show();
+                titleList.add(peli[i].getTitulo_FIlm());
+                imgList.add(peli[i].getImagen());
+
+
+            }
+            initRecyclerView(imgList, titleList);//muestra las imagenes en horizontal con adapter
+
         }
-        else if(accion.equalsIgnoreCase("news"))
-        {
-            Peliculas  peli []= new Peliculas[8];
+            else{
+
+           Peliculas  peli []= new Peliculas[8];
             //bucle para escribir los valores del json en la clase pelicula
             for (int i = 0; i < json.length(); i++) {
                 JSONObject jsonArrayChild = json.getJSONObject(i);
@@ -322,17 +389,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //fit estira las imagenes, centercrop, centra pero recorta
             for (int i = 0; i < peli.length; i++) {
 
-                Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_news_2);
-                Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_news_6);
-                Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_news_3);
-
-                Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_news_4);
-                Picasso.with(MainActivity.this).load(peli[4].getImagen()).fit().centerCrop().into(img_news_5);
-                Picasso.with(MainActivity.this).load(peli[5].getImagen()).fit().centerCrop().into(img_news_1);
-                Picasso.with(MainActivity.this).load(peli[6].getImagen()).fit().centerCrop().into(img_news_7);
-                //   Toast.makeText(MainActivity.this,  i+peli[i].getImagen() + peli[i].getId_Film(), Toast.LENGTH_LONG).show();
-                //falta añadir peli de accion TODO
-
 
                 //asignaos con el mismo json, urls a las img Interactua
                 //TODO asignar imagenes
@@ -342,17 +398,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-        }
-
+       }
 
 
     }
-        @Override
-        public void onClick (View view){
 
-        }
+    @Override
+    public void onClick(View view) {
+
     }
 
+    private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList){
+        Log.d(TAG, "initRecyclerView: init recyclerview");
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, titleList, imgList);
+        recyclerView.setAdapter(adapter);
+        //Event onclick in RecyclerViewAdapter
+
+
+    }
+}
    /* @Override
     public void onClick(View v) {
         ImageView visorImatge = findViewById(R.id.imageView2);

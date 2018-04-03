@@ -227,7 +227,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
                 final int pos = position;
                 //Go to MovieActivity with params: title movie
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
-                intent.putExtra("titulo", listaTitulo[position]);
+                intent.putExtra("Titulo", listaTitulo[position]);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),
                                 listaTitulo[position],

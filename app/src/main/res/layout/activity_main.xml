@@ -52,103 +52,20 @@
                 android:textColor="#505254"
                 android:textSize="16sp" />
 
-            <HorizontalScrollView
-                android:id="@+id/Hscroll_popularity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
 
 
-                <LinearLayout
-                    android:id="@+id/scroll_popularity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/img_news_1"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade2" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerView"
+                android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/img_news_2"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:clickable="true"
-                        android:contentDescription="@string/img_popular"
-                        android:focusable="true"
-                        android:longClickable="false"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1" />
-
-                    <ImageView
-                        android:id="@+id/img_news_3"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade19" />
-
-                    <ImageView
-                        android:id="@+id/img_news_4"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1" />
-
-                    <ImageView
-                        android:id="@+id/img_news_5"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/matrix1" />
-
-                    <ImageView
-                        android:id="@+id/img_news_6"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade2" />
-
-                    <ImageView
-                        android:id="@+id/img_news_7"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"
-                        android:contentDescription="@string/img_popular"
-                        android:maxHeight="160dp"
-                        android:maxWidth="120dp"
-                        android:minHeight="160dp"
-                        android:minWidth="120dp"
-                        design:srcCompat="@drawable/blade19" />
+            </android.support.v7.widget.RecyclerView>
 
 
-                </LinearLayout>
-            </HorizontalScrollView>
+
+
 
             <TextView
                 android:id="@+id/title_category"
@@ -188,6 +105,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/layout_accion"
+                        android:layout_width="120dp"
+                        android:layout_height="190dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_accion"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp"
+                            android:contentDescription="@string/img_category"
+                            android:maxHeight="160dp"
+                            android:maxWidth="120dp"
+                            android:minHeight="160dp"
+                            android:minWidth="120dp"
+                            design:srcCompat="@drawable/american" />
+
+                        <Button
+                            android:id="@+id/button_accion"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/botton_style"
+                            android:fontFamily="@font/amiko"
+                            android:text="Acción"
+                            android:textAllCaps="false"
+                            android:textColor="#505254" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/layout_drama"

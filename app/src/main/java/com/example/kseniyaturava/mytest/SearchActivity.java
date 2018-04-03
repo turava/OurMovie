@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -76,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView lv;
     ArrayList<String> arrayMovies;
     protected String titulo="";
+    Button btInsertar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class SearchActivity extends AppCompatActivity {
         lv=(ListView)findViewById(R.id.listViewMovies);
         arrayMovies=new ArrayList<>();
         lv.setBackgroundColor(Color.WHITE);
+        btInsertar=(Button) findViewById(R.id.btInsertar);
 
 
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -129,7 +132,6 @@ public class SearchActivity extends AppCompatActivity {
                                             lv.setAdapter(adapter);
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -147,6 +149,14 @@ public class SearchActivity extends AppCompatActivity {
                 String titulo = (String)(lv.getItemAtPosition(position));
                 Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
                 intent.putExtra("Titulo", titulo);
+                startActivity(intent);
+            }
+        });
+
+        btInsertar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, FormActivity.class);
                 startActivity(intent);
             }
         });
@@ -200,18 +210,24 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query){
+                if(lv.getChildCount()<1){
+                    Toast.makeText(SearchActivity.this, "La pelicula que buscas no está en la base, pero puedes insertarla", Toast.LENGTH_LONG).show();
+                    btInsertar.setVisibility(View.VISIBLE);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText){
                 adapter.getFilter().filter(newText);
+                if(lv.getChildCount()>0){
+                    btInsertar.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
+
         });
-
         return super.onCreateOptionsMenu(menu);
-
     }
 
 }

@@ -2,8 +2,10 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,71 +23,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
 
-    TextView text_movie, text_director, text_year;
-    ImageButton button_info;
-
-/*
-    BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                    //we are on the method when the menu's item is selected
-                    //type inside the instructions TODO
-                    switch (item.getItemId()) {
-                        case R.id.homeItem:
-                            //setTitle("Explore");//Set the title ActionBar
-                            //instance Activity
-                            return true;
-                        case R.id.searchItem:
-                            // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                            //startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                            return true;
-                        case R.id.formItem:
-                            // setTitle("Form");
-                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
-                            // startActivity(new Intent(MainActivity.this, FormActivity.class));
-                            return true;
-                        case R.id.notificationItem:
-                            // setTitle("Notifications");
-                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
-                            return true;
-                        case R.id.profileItem:
-                            // setTitle("Profile");
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                            return true;
-                    }
-                    // finish();
-                    return false;
-                }
-
-            };*/
+    TextView text_movie, text_director, text_year, text_numberAnswers, text_numberAnswers1, text_comment1, text_reply,
+            text_reply2, text_comment4, text_date1, text_dateReply;
+    ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, button_sendReply;
+    AutoCompleteTextView input_reply, input_message;
+    ImageView img_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         setTitle("Foro");
-        /*BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //disabled shift mode
-        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
-*/
-        //Info Listener
-        ImageButton button_info = (ImageButton) findViewById(R.id.button_info);
-        button_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-            }
-        });
+
         //User img listener
-        ImageView img_user = (ImageView) findViewById(R.id.img_user1);
+        img_user = (ImageView) findViewById(R.id.img_user1);
         img_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +54,7 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
         //acordeon appear on click icon comment/replies
-        ImageButton acordeon = (ImageButton) findViewById(R.id.button_comments);
+        acordeon = (ImageButton) findViewById(R.id.button_comments);
         acordeon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +67,7 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
         //acordeon appear on click icon atach files in Reply
-        ImageButton acordeonFiles = (ImageButton) findViewById(R.id.button_addFilesReply);
+        acordeonFiles = (ImageButton) findViewById(R.id.button_addFilesReply);
         acordeonFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +80,7 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
         //acordeon appear on click icon atach files on post
-        ImageButton acordeonFilesPost = (ImageButton) findViewById(R.id.button_addFiles);
+        acordeonFilesPost = (ImageButton) findViewById(R.id.button_addFiles);
         acordeonFilesPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +90,83 @@ public class ForoActivity extends AppCompatActivity {
                 } else {
                     findMagicLl.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        text_numberAnswers = (TextView) findViewById(R.id.text_numberAnswers);
+        text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
+        text_comment1 = (TextView) findViewById(R.id.text_comment1);
+        text_reply = (TextView) findViewById(R.id.text_reply);
+        text_reply2 = (TextView) findViewById(R.id.text_reply2);
+        text_comment4 = (TextView) findViewById(R.id.text_comment4);
+        text_date1 = (TextView) findViewById(R.id.text_date1);
+        text_dateReply = (TextView) findViewById(R.id.text_dateReply);
+        input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
+        input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
+
+        button_send = (ImageButton) findViewById(R.id.button_send);
+        button_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valor=String.valueOf(text_numberAnswers.getText());
+                int num=Integer.parseInt(valor);
+                int numFinal=num+1;
+                String valorFinal=String.valueOf(numFinal);
+                text_numberAnswers.setText(valorFinal);
+                text_numberAnswers1.setText(valorFinal);
+                text_date1.setText(getDate());
+                text_comment1.setText(input_message.getText());
+                Thread tr=new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            sumarComent(text_numberAnswers.getText().toString(), text_movie.getText().toString());
+                            guardarComent(input_message.getText().toString(), text_date1.getText().toString());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                tr.start();
+            }
+        });
+
+        button_sendReply = (ImageButton) findViewById(R.id.button_sendReply);
+        button_sendReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valor=String.valueOf(text_numberAnswers.getText());
+                int num=Integer.parseInt(valor);
+                int numFinal=num+1;
+                String valorFinal=String.valueOf(numFinal);
+                text_numberAnswers.setText(valorFinal);
+                text_numberAnswers1.setText(valorFinal);
+                text_dateReply.setText(getDate());
+                text_reply.setText(input_reply.getText());
+                Thread tr=new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            sumarComent(text_numberAnswers.getText().toString(), text_movie.getText().toString());
+                            guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                tr.start();
             }
         });
 
@@ -177,6 +215,13 @@ public class ForoActivity extends AppCompatActivity {
                                         } else if (palabra.contains("Director_Film")) {
                                             String director = palabra.substring(17, palabra.length() - 1);
                                             text_director.setText(director);
+                                        } else if (palabra.contains("Num_Coments")) {
+                                            String num_com = palabra.substring(15, palabra.length() - 1);
+                                            text_numberAnswers.setText(num_com);
+                                            text_numberAnswers1.setText(num_com);
+                                        } else if (palabra.contains("Imagen")) {
+                                            String imagen = palabra.substring(10, palabra.length() - 1);
+                                            //Falta código aquí, para que muestre la imagen de la pelicula en el lado superior izq.
                                         }
                                     }
                                 }
@@ -231,4 +276,42 @@ public class ForoActivity extends AppCompatActivity {
         return resul.toString();
     }
 
+    public void sumarComent(String comentario, String titulo)  throws IOException{
+        URL url=null;
+        int respuesta;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/ComentUpdate.php?Num_Coments="+comentario+"&Titulo_Film="+titulo);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarComent(String mensaje, String fecha)  throws IOException{
+        URL url=null;
+        int respuesta;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Texto="+mensaje+"&Fecha="+fecha);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getDate(){
+        Date dt = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(dt);
+        return date;
+    }
 }

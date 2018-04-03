@@ -156,5 +156,6 @@
     <string name="genero">Género</string>
     <string name="categor_a">Categoría</string>
     <string name="_123_pel_culas">123 películas</string>
+    <string name="insertar_nueva_pelicula">Insertar Nueva Pelicula</string>
 
 </resources>

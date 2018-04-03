@@ -8,9 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,12 +41,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
+        /* Da errores de compilación en el gradle dependencies
         Glide.with(mContext)
                 .asBitmap()
                 .load(mImageUrls.get(position))
                 .into(holder.image);
+                */
+        Picasso.with(mContext).load(mImageUrls.get(position)).into(holder.image);
 
-        holder.name.setText(mNames.get(position));
+       // holder.name.setText(mNames.get(position));
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +72,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView name;
+       // TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image_view);
-            name = itemView.findViewById(R.id.name);
+           // name = itemView.findViewById(R.id.name);
         }
     }
 }

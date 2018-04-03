@@ -27,7 +27,7 @@
                 android:src="@drawable/american"/>
 
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:text="Canada"
@@ -40,7 +40,7 @@
                 android:layout_marginBottom="5dp"
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="8sp"
-                android:autoSizeMaxTextSize="15sp"/>
+                android:autoSizeMaxTextSize="15sp"/>-->
 
         </RelativeLayout>
 

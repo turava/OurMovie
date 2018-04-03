@@ -120,8 +120,7 @@
                             android:maxHeight="160dp"
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
-                            android:minWidth="120dp"
-                            design:srcCompat="@drawable/american" />
+                            android:minWidth="120dp" />
 
                         <Button
                             android:id="@+id/button_accion"
@@ -150,8 +149,7 @@
                             android:maxHeight="160dp"
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
-                            android:minWidth="120dp"
-                            design:srcCompat="@drawable/american" />
+                            android:minWidth="120dp" />
 
 
 
@@ -182,8 +180,7 @@
                             android:maxHeight="160dp"
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
-                            android:minWidth="120dp"
-                            design:srcCompat="@drawable/pie" />
+                            android:minWidth="120dp" />
 
                         <Button
                             android:id="@+id/button_comedy"
@@ -212,8 +209,7 @@
                             android:maxHeight="160dp"
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
-                            android:minWidth="120dp"
-                            design:srcCompat="@drawable/matrix1" />
+                            android:minWidth="120dp" />
 
                         <Button
                             android:id="@+id/button_fiction"
@@ -242,8 +238,7 @@
                             android:maxHeight="160dp"
                             android:maxWidth="120dp"
                             android:minHeight="160dp"
-                            android:minWidth="120dp"
-                            design:srcCompat="@drawable/blade19" />
+                            android:minWidth="120dp" />
 
                         <Button
                             android:id="@+id/button_horror"
@@ -306,8 +301,7 @@
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/img_new"
                             android:cropToPadding="false"
-                            android:scaleType="fitXY"
-                            design:srcCompat="@drawable/pie" />
+                            android:scaleType="fitXY" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -322,8 +316,7 @@
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/img_new"
                             android:cropToPadding="true"
-                            android:scaleType="centerCrop"
-                            design:srcCompat="@drawable/blade2" />
+                            android:scaleType="centerCrop" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -338,86 +331,10 @@
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/img_new"
                             android:cropToPadding="true"
-                            android:scaleType="fitXY"
-                            design:srcCompat="@drawable/blade19" />
+                            android:scaleType="fitXY" />
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-
-            <!-- <HorizontalScrollView
-                 android:id="@+id/Hscroll_more"
-                 android:layout_width="match_parent"
-                 android:layout_height="300dp"
-                 android:layout_marginBottom="10dp"
-                 android:layout_marginTop="10dp">
-
-                 <LinearLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="10dp"
-                         android:layout_marginRight="15dp"
-                         android:orientation="horizontal">
-
-                         <Button
-                             android:id="@+id/button_actors"
-                             android:layout_width="110dp"
-                             android:layout_height="110dp"
-                             android:layout_weight="1"
-                             android:background="@drawable/button_disk_style"
-                             android:fontFamily="@font/amiko"
-                             android:text="Actores"
-                             android:textAllCaps="false"
-                             android:textColor="#fff"  />
-
-                     </LinearLayout>
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="15dp"
-                         android:layout_marginRight="15dp"
-                         android:orientation="horizontal">
-
-                         <Button
-                             android:id="@+id/button_directors"
-                             android:layout_width="110dp"
-                             android:layout_height="110dp"
-                             android:layout_weight="1"
-                             android:background="@drawable/button_disk_style"
-                             android:fontFamily="@font/amiko"
-                             android:text="Directores"
-                             android:textAllCaps="false"
-                             android:textColor="#fff" />
-
-                     </LinearLayout>
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="15dp"
-                         android:layout_marginRight="10dp"
-                         android:orientation="horizontal">
-
-                         <Button
-                             android:id="@+id/button_music"
-                             android:layout_width="110dp"
-                             android:layout_height="110dp"
-                             android:layout_weight="1"
-                             android:background="@drawable/button_disk_style"
-                             android:fontFamily="@font/amiko"
-                             android:text="Sonido"
-                             android:textAllCaps="false"
-                             android:textColor="#fff"  />
-
-
-                     </LinearLayout>
-                 </LinearLayout>
-             </HorizontalScrollView>-->
         </LinearLayout>
 
 

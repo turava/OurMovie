@@ -47,16 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_new2;//interactua
     private ImageView img_new3;//interactua
     private ImageView img_new1;//interactua
-    private ImageView visorImatge;
-    private ImageView img_news_1, img_news_2, img_news_3, img_news_4, img_news_5,
-            img_news_6, img_news_7; //novedades
+
 
     //Recycler
     private static final String TAG = "MainActivity";
-    //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
-    //Recycler
     private ArrayList<String> titleList = new ArrayList<>();
     private ArrayList<String> imgList = new ArrayList<>();
 
@@ -111,53 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
-        //Popular listeners on images
-      /*  visorImatge = findViewById(R.id.img_news_1);
-        visorImatge.setOnClickListener(this);
-        visorImatge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Falta poner que recoja el dato del Titulo y lo pase en el Intent.put Extra para que lo recoja en la
-                //MovieActivity en el bundle y presente los datos de esa pelicula
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-
-            }
-        });
-        //News listeners on images
-/*
-        img_news_1 = findViewById(R.id.img_news_1);
-        img_news_2 = findViewById(R.id.img_news_2);
-        img_news_3 = findViewById(R.id.img_news_3);
-        img_news_4 = findViewById(R.id.img_news_4);
-        img_news_5 = findViewById(R.id.img_news_5);
-        img_news_6 = findViewById(R.id.img_news_6);
-        img_news_7 = findViewById(R.id.img_news_7);
-*/
-
-       /* img_new1 = (ImageView) findViewById(R.id.img_new1);
-        img_new1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-            }
-        });
-         img_new2 = (ImageView) findViewById(R.id.img_new2);
-        img_new2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-            }
-        });
-
+        //Interactua
+        img_new1 = (ImageView) findViewById(R.id.img_new1);
+        img_new2 = (ImageView) findViewById(R.id.img_new2);
         img_new3 = (ImageView) findViewById(R.id.img_new3);
-        img_new3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-            }
-        });
-
-*/
         //Categories listeners on images
         img_accion = (ImageView) findViewById(R.id.img_accion);
         img_accion.setOnClickListener(new View.OnClickListener() {
@@ -218,55 +169,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //CONNECTION TO DB TODO
 
         Thread tr = new Thread() {
-            @Override
-            public void run() {
+        @Override
+        public void run() {
+            final String cathegoryJson = connectDB(QUERY_CATEGORY);//consulta las categorias
+            final String newsJson = connectDB(QUERY_NEWS);//consulta las novedades
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //resultado de la conexión
+                    try {
 
+                        final Runnable runnable = new Runnable() {
+                            public void run() {
+                                int r = 0;
+                                try {
+                                  String  accion = "categoria";
+                                   r = objJSON(cathegoryJson, accion);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (r < 0) {
+                                    Toast.makeText(MainActivity.this,
+                                            "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        };
+                        runnable.run();
 
-                final String cathegoryJson = connectDB(QUERY_CATEGORY);//consulta las categorias
-                final String newsJson = connectDB(QUERY_NEWS);//consulta las novedades
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //resultado de la conexión
-                        int r = 0, r2 = 0, r3 = 0;
-                        String accion = "";
-                        try {
-                            //cargamos los resutados de las querys json.toString
-                            accion = "categoria";
-                            r = objJSON(cathegoryJson, accion);
-                            accion = "news";
-                            r2 = objJSON(newsJson, accion);
-                            //r3 = objJSON(newsJson);
+                        final Runnable runnable1 = new Runnable() {
+                            public void run() {
+                                int r2 = 0;
+                                try {
+                                   String accion = "news";
+                                   r2 = objJSON(newsJson, accion);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (r2 < 0) {
+                                    Toast.makeText(MainActivity.this,
+                                            "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        };
+                        //runnable1.wait(1*1000);
+                        runnable1.run();
+                        final Runnable runnable2= new Runnable() {
+                            public void run() {
+                                String accion = "foro";int r3 = 0;
+                                try {
+                                    r3 = objJSON(newsJson, accion);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (r3 < 0) {
+                                    Toast.makeText(MainActivity.this,
+                                            "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        };
+                        runnable2.run();
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        if (r > 0) {
-                            Toast.makeText(MainActivity.this, "REQUEST CORRECT", Toast.LENGTH_LONG).show();
-
-                        } else {
-                            Toast.makeText(MainActivity.this, "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
-                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-
-                });
-            }
-        };
+                }
+            });
+        }
+    };
         tr.start();
-
-    }
-
+}
 
     //METHODS TO CONNECT WITH BD
     public int objJSON(String respuesta, String accion) throws JSONException {
-
         int res = 0;
         // function to show json
         showJSON(respuesta, accion);//PICASSO LIBRARY To set images form url
-
         try {
             JSONArray json = new JSONArray(respuesta);
             if (json.length() > 0) {
@@ -295,9 +272,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 while ((linea = reader.readLine()) != null) {
                     resul.append(linea);
                 }
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -306,11 +281,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //Muestra los datos recogidos de la BD
-    public void showJSON(String respuesta, String accion) throws JSONException {
-
+    public void showJSON(String respuesta, String accion) throws JSONException
+    {
         JSONArray json = new JSONArray(respuesta);
-
-
         if (accion.equalsIgnoreCase("categoria")) {
             Peliculas peli[] = new Peliculas[5];
             //bucle para escribir los valores del json en la clase pelicula
@@ -331,7 +304,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Picasso.with(MainActivity.this).load(peli[3].getImagen()).fit().centerCrop().into(img_comedy);
                 Picasso.with(MainActivity.this).load(peli[4].getImagen()).fit().centerCrop().into(img_horror);
                 // Toast.makeText(MainActivity.this, peli[i].getImagen() + peli[1].getId_Genero(), Toast.LENGTH_LONG).show();
-                //falta añadir peli de accion TODO
             }
 
         } else if (accion.equalsIgnoreCase("news")) {
@@ -347,8 +319,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             //  Peliculas peli = new Peliculas();
             //loop to write values from JSON on object Pelicua
-
-
             for (int i = 0; i < count; i++) {
                 JSONObject jsonArrayChild = json.getJSONObject(i);
 
@@ -361,34 +331,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int i = 0; i < count; i++) {
                 listaImg[i] = peli[i].getImagen();
                 listaTitulo[i] = peli[i].getTitulo_FIlm();
-                // Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
-                //        Toast.LENGTH_LONG).show();
-
-                Toast.makeText(getApplicationContext(),
-                        listaTitulo[i] + peli[i].getImagen() + count, Toast.LENGTH_LONG).show();
                 titleList.add(peli[i].getTitulo_FIlm());
                 imgList.add(peli[i].getImagen());
-
-
             }
-            initRecyclerView(imgList, titleList);//muestra las imagenes en horizontal con adapter
+            //muestra las imagenes en horizontal con adapter
+            initRecyclerView(imgList, titleList);
 
-        }
-            else{
-
-           Peliculas  peli []= new Peliculas[8];
+        } else if (accion.equalsIgnoreCase("foro")) {
+            final Peliculas  peli []= new Peliculas[3];
             //bucle para escribir los valores del json en la clase pelicula
-            for (int i = 0; i < json.length(); i++) {
+            for (int i = 0; i < peli.length; i++) {
                 JSONObject jsonArrayChild = json.getJSONObject(i);
                 // String imagen = jsonArrayChild.optString("Imagen");//extrae la clave del json
                 peli[i] = new Peliculas();
                 peli[i].setId_Genero(jsonArrayChild.optString("Id_Film"));
                 peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+                peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
 
             }//bucle para cargar los valores de la clase en el id de imageView
             //fit estira las imagenes, centercrop, centra pero recorta
             for (int i = 0; i < peli.length; i++) {
-
 
                 //asignaos con el mismo json, urls a las img Interactua
                 //TODO asignar imagenes
@@ -397,17 +359,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_new3);
 
             }
+            img_new3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    intent.putExtra("Titulo", peli[2].getTitulo_FIlm());
+                    startActivity(intent);
+                }
+            });
+            img_new2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    intent.putExtra("Titulo", peli[1].getTitulo_FIlm());
+                    startActivity(intent);
 
-       }
-
-
+                }
+            });
+            img_new1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    intent.putExtra("Titulo", peli[0].getTitulo_FIlm());
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
     public void onClick(View view) {
-
     }
-
     private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
@@ -416,31 +398,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(layoutManager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, titleList, imgList);
         recyclerView.setAdapter(adapter);
+
         //Event onclick in RecyclerViewAdapter
-
-
     }
 }
-   /* @Override
-    public void onClick(View v) {
-        ImageView visorImatge = findViewById(R.id.imageView2);
-
-       // Intent intent= new Intent(getApplicationContext() ,MovieActivity.class);
-        startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-       // startActivity(intent);
-
-
-    }
-}*/
-    /*     ImageView visorImatge = findViewById(R.id.imageView2);
-            visorImatge.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-                }
-            });
-    }*/
-
 
 
 

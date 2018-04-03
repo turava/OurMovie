@@ -88,7 +88,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
 
         categoria = getIntent().getExtras().getString("titulo");
-        Toast.makeText(HomeCategoryActivity.this, categoria, Toast.LENGTH_LONG).show();
+        //Toast.makeText(HomeCategoryActivity.this, categoria, Toast.LENGTH_LONG).show();
 
         categoriaTitle.setText(categoria);
 
@@ -229,9 +229,9 @@ public class HomeCategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                 intent.putExtra("Titulo", listaTitulo[position]);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),
+               /* Toast.makeText(getApplicationContext(),
                                 listaTitulo[position],
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG).show();*/
             }
         });
 

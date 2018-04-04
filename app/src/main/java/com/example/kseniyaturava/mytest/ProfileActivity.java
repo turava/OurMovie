@@ -10,9 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
     TabHost Tabs;
+    private final int PETICION_ACTIVITY_SEGUNDA = 1;
+    private TextView tvName;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
                             break;
                         case R.id.searchItem:
                             // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                             //startActivity(new Intent(MainActivity.this, SearchActivity.class));
                             break;
                         case R.id.formItem:
@@ -64,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(4);
         menuItem.setChecked(true);
         //disabled shift mode
-        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
+        BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
         //Functionality of TabsHost here
         Tabs = (TabHost) findViewById(R.id.tabs); //llamamos al Tabhost
         Tabs.setup();  //lo activamos
@@ -77,7 +81,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         tab2.setIndicator("Favoritas");
         tab2.setContent(R.id.tab1);
-
 
 
         Tabs.addTab(tab1); //añadimos los tabs ya programados
@@ -116,5 +119,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        tvName = (TextView) findViewById(R.id.tvName);
+
+
+
+
+        Toast.makeText(getApplicationContext(),
+                "resultado",
+                Toast.LENGTH_LONG).show();
     }
+
+
 }

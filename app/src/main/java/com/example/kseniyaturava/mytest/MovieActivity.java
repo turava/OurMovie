@@ -180,6 +180,47 @@ public class MovieActivity extends AppCompatActivity {
         tr.start();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Thread tr=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    final String res=recogerDatos(text_title.getText().toString());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int r=objJSON(res);
+                            if(r>0){
+                                int inicio=0;
+                                int longitud;
+                                String palabra;
+                                for (int i=0;i<res.length();i++) {
+                                    if ((res.charAt(i)==(',')&& res.charAt(i+1)==('"')) || (res.charAt(i)==('}')&& res.charAt(i+1)==(']'))) {
+                                        longitud = i;
+                                        palabra = res.substring(inicio, longitud);
+                                        inicio = longitud + 1;
+                                        if (palabra.contains("Num_Coments")) {
+                                            String num_com = palabra.substring(15, palabra.length() - 1);
+                                            text_numCom.setText(num_com);
+
+                                        }
+                                    }
+                                }
+                            }else{
+                                Toast.makeText(MovieActivity.this, "Esta pelicula no está en la base", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        tr.start();
+    }
+
     public int objJSON(String respuesta) {
         int res=0;
         try{

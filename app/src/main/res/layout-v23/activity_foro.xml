@@ -221,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_weight="1"
-                            android:text="@string/number_comments"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -451,7 +451,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="sans-serif"
-                                            android:text="@string/mensaje"
+                                            android:hint="@string/mensaje"
                                             android:textAlignment="viewStart"
                                             android:textAppearance="@style/TextAppearance.AppCompat"
                                             android:textColor="@color/background2"
@@ -620,7 +620,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_weight="1"
-                            android:text="@string/number_comments"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -706,7 +706,7 @@
                         android:background="@drawable/botton_style"
                         android:fontFamily="sans-serif"
                         android:minHeight="30dp"
-                        android:text="@string/mensaje"
+                        android:hint="@string/mensaje"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textColor="@color/background2"

@@ -47,7 +47,7 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via user/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView user;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         setTitle("Log in");
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        user = (AutoCompleteTextView) findViewById(R.id.user);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void run() {
                         try {
-                            final String res=confirmarLogin(mEmailView.getText().toString(),mPasswordView.getText().toString());
+                            final String res=confirmarLogin(user.getText().toString(),mPasswordView.getText().toString());
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -117,11 +117,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     if(r>0){
                                         Toast.makeText(LoginActivity.this, "Usuario correcto", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                        intent.putExtra("User",mEmailView.getText().toString());
+                                        intent.putExtra("User",user.getText().toString());
                                         intent.putExtra("Password",mPasswordView.getText().toString());
                                         startActivity(intent);
                                     }else{
-                                        Toast.makeText(LoginActivity.this, "El mail o la contraseña no existen", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -156,14 +156,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return res;
     }
 
-    public String confirmarLogin (String email, String password) throws IOException {
+    public String confirmarLogin (String user, String password) throws IOException {
         URL url=null;
         String linea="";
         int respuesta=0;
         StringBuilder resul=null;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/LoginConection.php?Email_User="+email+"&Password="+password);
+            url=new URL("http://www.webelicurso.hol.es/LoginConection.php?User="+user+"&Password="+password);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             resul=new StringBuilder();
@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(user, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -237,11 +237,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        user.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = user.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -256,12 +256,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            user.setError(getString(R.string.error_field_required));
+            focusView = user;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            user.setError(getString(R.string.error_invalid_email));
+            focusView = user;
             cancel = true;
         }
 
@@ -364,7 +364,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        user.setAdapter(adapter);
     }
 
 

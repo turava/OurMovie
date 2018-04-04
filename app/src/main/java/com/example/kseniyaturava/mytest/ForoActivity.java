@@ -34,10 +34,10 @@ public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
 
     TextView text_movie, text_director, text_year, text_numberAnswers, text_numberAnswers1, text_comment1, text_reply,
-            text_reply2, text_comment4, text_date1, text_dateReply;
+            text_reply2, text_comment4, text_date1, text_dateReply, text_username1;
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, button_sendReply;
     AutoCompleteTextView input_reply, input_message;
-    ImageView img_user;
+    ImageView img_user1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class ForoActivity extends AppCompatActivity {
         setTitle("Foro");
 
         //User img listener
-        img_user = (ImageView) findViewById(R.id.img_user1);
-        img_user.setOnClickListener(new View.OnClickListener() {
+        img_user1 = (ImageView) findViewById(R.id.img_user1);
+        img_user1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
@@ -101,6 +101,7 @@ public class ForoActivity extends AppCompatActivity {
         text_comment4 = (TextView) findViewById(R.id.text_comment4);
         text_date1 = (TextView) findViewById(R.id.text_date1);
         text_dateReply = (TextView) findViewById(R.id.text_dateReply);
+        text_username1 = (TextView) findViewById(R.id.text_username1);
         input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
 
@@ -114,8 +115,11 @@ public class ForoActivity extends AppCompatActivity {
                 String valorFinal=String.valueOf(numFinal);
                 text_numberAnswers.setText(valorFinal);
                 text_numberAnswers1.setText(valorFinal);
+                //Los 4 campos siguientes deben recogerse de la base, pero de momento los asigno al escribir. Faltará cambiar
                 text_date1.setText(getDate());
                 text_comment1.setText(input_message.getText());
+                //text_username1.setText(user);
+                //img_user1.setImage(user);
                 Thread tr=new Thread(){
                     @Override
                     public void run() {

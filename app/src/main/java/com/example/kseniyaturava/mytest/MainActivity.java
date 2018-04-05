@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = this.getIntent().getExtras();
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
-            Toast.makeText(MainActivity.this,
-                    user, Toast.LENGTH_LONG).show();
         }
         //Interactua
         img_new1 = (ImageView) findViewById(R.id.img_new1);
@@ -356,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imgList.add(peli[i].getImagen());
             }
             //muestra las imagenes en horizontal con adapter
-            initRecyclerView(imgList, titleList);
+            initRecyclerView(imgList, titleList, user);
 
         } else if (accion.equalsIgnoreCase("foro")) {
             final Peliculas  peli []= new Peliculas[3];
@@ -414,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
     }
-    private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList){
+    private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList, String user){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -424,6 +422,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapter);
 
         //Event onclick in RecyclerViewAdapter
+
     }
 }
 

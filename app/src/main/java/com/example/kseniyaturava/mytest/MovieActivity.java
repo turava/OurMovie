@@ -2,13 +2,10 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +32,7 @@ public class MovieActivity extends AppCompatActivity {
     ImageView img_movie;
     URL url2=null;
     Bitmap loadImage;
+    private String  user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +57,9 @@ public class MovieActivity extends AppCompatActivity {
         text_numCom =(TextView) findViewById(R.id.text_numCom);
         text_numStar =(TextView) findViewById(R.id.text_numStar);
 
+
+        user = getIntent().getExtras().getString("User");
+
         button_foro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,12 +83,17 @@ public class MovieActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             sumarVoto(text_numStar.getText().toString(), text_title.getText().toString());
+                            //INSERT Estrellas
+                            insertVoto(text_title.getText().toString(), user);
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(MovieActivity.this, "Gracias por dar una Estrella!!", Toast.LENGTH_LONG).show();
                                 }
                             });
+
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -102,6 +108,9 @@ public class MovieActivity extends AppCompatActivity {
             String titulo=bundle.getString("Titulo");
             text_title.setText(titulo);
         }
+
+
+
         Thread tr=new Thread(){
             @Override
             public void run() {
@@ -263,6 +272,20 @@ public class MovieActivity extends AppCompatActivity {
         try {
             url=new URL("http://www.webelicurso.hol.es/VotoUpdate.php?Votos_Estrella="+estrella+"&Titulo_Film="+titulo);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void insertVoto(String titulo, String user)  throws IOException{
+       URL url=null;
+        int respuesta;
+        try {
+            url=new URL("http://www.webelicurso.hol.es/VotoInsert.php?titulo="+titulo+"&user="+user);
+            HttpURLConnection  conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){
             }

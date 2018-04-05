@@ -6,17 +6,18 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
     TabHost Tabs;
     private final int PETICION_ACTIVITY_SEGUNDA = 1;
     private TextView tvName;
+    private String user;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,6 +70,13 @@ public class ProfileActivity extends AppCompatActivity {
         menuItem.setChecked(true);
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
+
+        //Recoge user del Login
+        Bundle bundle = this.getIntent().getExtras();
+        if ((bundle != null)&&(bundle.getString("User")!=null)){
+            user = bundle.getString("User");
+        }
+
         //Functionality of TabsHost here
         Tabs = (TabHost) findViewById(R.id.tabs); //llamamos al Tabhost
         Tabs.setup();  //lo activamos
@@ -120,13 +128,31 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         tvName = (TextView) findViewById(R.id.tvName);
+        tvName.setText(user);
 
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_profile, menu);
+        final MenuItem item=menu.findItem(R.id.menuProfile);
+        return true;
+    }
 
-        Toast.makeText(getApplicationContext(),
-                "resultado",
-                Toast.LENGTH_LONG).show();
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuProfile:
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent.putExtra("User", user);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

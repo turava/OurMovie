@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_new2;//interactua
     private ImageView img_new3;//interactua
     private ImageView img_new1;//interactua
+    private String user;
 
 
     //Recycler
@@ -79,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
                             return true;
                         case R.id.profileItem:
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                           // startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            intent.putExtra("User", user);
+                            startActivity(intent);
                             return true;
                     }
                     // finish();
@@ -105,6 +109,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
+        //Recoge user del Login
+        Bundle bundle = this.getIntent().getExtras();
+        if ((bundle != null)&&(bundle.getString("User")!=null)){
+            user = bundle.getString("User");
+            Toast.makeText(MainActivity.this,
+                    user, Toast.LENGTH_LONG).show();
+        }
         //Interactua
         img_new1 = (ImageView) findViewById(R.id.img_new1);
         img_new2 = (ImageView) findViewById(R.id.img_new2);
@@ -117,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
                 String categoria = "Acción";
                 intent.putExtra("titulo", categoria);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });
@@ -127,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
                 String categoria = "Drama";
                 intent.putExtra("titulo", categoria);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });
@@ -138,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
                 String categoria = "Comedia";
                 intent.putExtra("titulo", categoria);
+                intent.putExtra("User", user);
                 startActivity(intent);
 
             }
@@ -149,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
                 String categoria = "Ciencia Ficción";
                 intent.putExtra("titulo", categoria);
+                intent.putExtra("User", user);
                 startActivity(intent);
 
             }
@@ -160,10 +175,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), HomeCategoryActivity.class);
                 String categoria = "Terror";
                 intent.putExtra("titulo", categoria);
+                intent.putExtra("User", user);
                 startActivity(intent);
 
             }
         });
+
 
 
         //CONNECTION TO DB TODO
@@ -171,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Thread tr = new Thread() {
         @Override
         public void run() {
+
             final String cathegoryJson = connectDB(QUERY_CATEGORY);//consulta las categorias
             final String newsJson = connectDB(QUERY_NEWS);//consulta las novedades
             runOnUiThread(new Runnable() {
@@ -178,13 +196,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     //resultado de la conexión
                     try {
+                        Toast.makeText(MainActivity.this,
+                                user, Toast.LENGTH_LONG).show();
+
 
                         final Runnable runnable = new Runnable() {
                             public void run() {
                                 int r = 0;
                                 try {
                                   String  accion = "categoria";
-                                   r = objJSON(cathegoryJson, accion);
+                                   r = objJSON(cathegoryJson, accion, user);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -201,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 int r2 = 0;
                                 try {
                                    String accion = "news";
-                                   r2 = objJSON(newsJson, accion);
+                                   r2 = objJSON(newsJson, accion, user);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -217,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void run() {
                                 String accion = "foro";int r3 = 0;
                                 try {
-                                    r3 = objJSON(newsJson, accion);
+                                    r3 = objJSON(newsJson, accion, user);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -240,10 +261,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 
     //METHODS TO CONNECT WITH BD
-    public int objJSON(String respuesta, String accion) throws JSONException {
+    public int objJSON(String respuesta, String accion, String user) throws JSONException {
         int res = 0;
         // function to show json
-        showJSON(respuesta, accion);//PICASSO LIBRARY To set images form url
+        showJSON(respuesta, accion, user);//PICASSO LIBRARY To set images form url
         try {
             JSONArray json = new JSONArray(respuesta);
             if (json.length() > 0) {
@@ -281,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //Muestra los datos recogidos de la BD
-    public void showJSON(String respuesta, String accion) throws JSONException
+    public void showJSON(String respuesta, String accion, final String user) throws JSONException
     {
         JSONArray json = new JSONArray(respuesta);
         if (accion.equalsIgnoreCase("categoria")) {
@@ -308,9 +329,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (accion.equalsIgnoreCase("news")) {
             JSONArray json1 = new JSONArray(respuesta);
-            int count = json1.length();//count objects in json
+           // int count = json1.length();//count objects in json
             // System.out.println("**********"+count);
-
+            int count = 8;
             String[] listaImg = new String[count];
             String[] listaTitulo = new String[count];
             Peliculas peli[] = new Peliculas[count];
@@ -364,6 +385,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                     intent.putExtra("Titulo", peli[2].getTitulo_FIlm());
+                    intent.putExtra("User", user);
                     startActivity(intent);
                 }
             });
@@ -372,6 +394,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                     intent.putExtra("Titulo", peli[1].getTitulo_FIlm());
+                    intent.putExtra("User", user);
                     startActivity(intent);
 
                 }
@@ -381,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                     intent.putExtra("Titulo", peli[0].getTitulo_FIlm());
+                    intent.putExtra("User", user);
                     startActivity(intent);
                 }
             });
@@ -396,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, titleList, imgList);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,user, titleList, imgList);
         recyclerView.setAdapter(adapter);
 
         //Event onclick in RecyclerViewAdapter

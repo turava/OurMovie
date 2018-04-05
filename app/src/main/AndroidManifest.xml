@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +33,9 @@
         <activity android:name=".ForoActivity" />
         <activity android:name=".MovieActivity" />
         <activity android:name=".HomeCategoryActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SettingsProfile"></activity>
     </application>
 
 </manifest>

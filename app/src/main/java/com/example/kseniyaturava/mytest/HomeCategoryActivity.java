@@ -34,6 +34,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
     private String categoria = "";
     private TextView categoriaTitle;
     private TextView subtitle;
+    private String user;
 
 
     private
@@ -92,6 +93,13 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
         categoriaTitle.setText(categoria);
 
+        //Recoge user del Login
+        Bundle bundle = this.getIntent().getExtras();
+        if ((bundle != null)&&(bundle.getString("User")!=null)){
+            user = bundle.getString("User");
+            Toast.makeText(HomeCategoryActivity.this,
+                    user, Toast.LENGTH_LONG).show();
+        }
 
         //CONNECTION TO DB
 

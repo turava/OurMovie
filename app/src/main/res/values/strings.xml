@@ -157,5 +157,8 @@
     <string name="categor_a">Categoría</string>
     <string name="_123_pel_culas">123 películas</string>
     <string name="insertar_nueva_pelicula">Insertar Nueva Pelicula</string>
+    <string name="repita_pass">Repita la contraseña</string>
+    <string name="escriba_pass">Escriba una contraseña</string>
+    <string name="guardar">Guardar</string>
 
 </resources>

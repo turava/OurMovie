@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 public class SettingsActivity extends AppCompatActivity {
 
     private LinearLayout layout_redactProfile;
+    private LinearLayout layout_changePass;
     private String user;
 
 
@@ -35,6 +36,17 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        layout_changePass = (LinearLayout) findViewById(R.id.layout_changePass);
+        layout_changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsPassword.class);
+                intent.putExtra("User", user);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 }

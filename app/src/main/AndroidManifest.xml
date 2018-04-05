@@ -35,7 +35,8 @@
         <activity android:name=".HomeCategoryActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".SettingsProfile"></activity>
+        <activity android:name=".SettingsProfile" />
+        <activity android:name=".SettingsPassword"></activity>
     </application>
 
 </manifest>

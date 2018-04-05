@@ -40,8 +40,7 @@ public class SettingsProfile extends AppCompatActivity {
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
         }
-        //Inicializacion de inputs
-
+        //Inicializacion de eventos
 
         et_user = (EditText) findViewById(R.id.et_user);
         et_user.setText(user);

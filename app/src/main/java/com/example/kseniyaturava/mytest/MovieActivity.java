@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -150,20 +152,15 @@ public class MovieActivity extends AppCompatActivity {
                                             text_numCom.setText(num_com);
                                         } else if (palabra.contains("Imagen")) {
                                             String imagen = palabra.substring(10, palabra.length() - 1);
-                                            //Expediente X -> carga ok las imagenes de Blade Runner y de Forrest gump, el resto
-                                            //peta la app, no consigo averiguar porqué
-                                            //try{
-                                                //url2 = new URL(imagen);
-                                                //HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-                                                //conn.connect();
-                                                //loadImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                                //img_movie.setImageBitmap(loadImage);
-
-                                            //} catch (IOException e) {
-                                                //Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(),Toast.LENGTH_LONG).show();
-                                                //e.printStackTrace();
-                                            //}
-
+                                            try{
+                                                url2 = new URL(imagen);
+                                                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                                                conn.connect();
+                                                Picasso.with(MovieActivity.this).load(String.valueOf(url2)).into(img_movie);
+                                            } catch (IOException e) {
+                                                Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(),Toast.LENGTH_LONG).show();
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 }

@@ -9,9 +9,6 @@ public class Peliculas {
     private String Id_Genero="";
     private String Imagen = "";
     private String Id_Film = "";
-
-
-
     private String Titulo_FIlm = "";
 
 

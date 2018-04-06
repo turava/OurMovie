@@ -208,10 +208,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
         subtitle.setText(countStr + " películas");//cantidad de peliculas
 
-        //  Peliculas peli = new Peliculas();
         //loop to write values from JSON on object Pelicua
-
-
         for (int i = 0; i < count; i++) {
             JSONObject jsonArrayChild = json.getJSONObject(i);
 
@@ -224,9 +221,6 @@ public class HomeCategoryActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             listaImg[i] = peli[i].getImagen();
             listaTitulo[i] = peli[i].getTitulo_FIlm();
-          // Toast.makeText(HomeCategoryActivity.this, peli[i].getImagen() + peli[i].getId_Film(),
-            //        Toast.LENGTH_LONG).show();
-
         }
 
         displayAdapter(listaImg, listaTitulo, user);// display the data from Array in listview with adapter

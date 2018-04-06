@@ -31,7 +31,7 @@ import java.net.URL;
 public class ProfileActivity extends AppCompatActivity {
     TabHost Tabs;
     private final int PETICION_ACTIVITY_SEGUNDA = 1;
-    private TextView tvName;
+    private TextView tvName, tvDescription;
     private String user;
     private GridView lv;
     private ImageView imagen;
@@ -154,43 +154,96 @@ public class ProfileActivity extends AppCompatActivity {
 */
         tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(user);
+        tvDescription = (TextView) findViewById(R.id.tvDescription);
         //CONNECTION TO DB
-
+        //  ProfileUserDescription
 
         Thread tr = new Thread() {
             @Override
             public void run() {
-
-                final String QUERY_GET_TITLES_FAVORITES = "http://www.webelicurso.hol.es/ProfileGetTtitleFavorites.php?user="+user;
-                final String titlesJson = connectDB(QUERY_GET_TITLES_FAVORITES);//consulta las categorias
+                    //QUERYS y CONEXIONES
+                final String QUERY_FAVOURITES = "http://www.webelicurso.hol.es/ProfileGetTtitleFavorites.php?user="+user;
+                final String titlesJson = connectDB(QUERY_FAVOURITES);
+                final String QUERY_USER_DESCR = "http://www.webelicurso.hol.es/ProfileUserDescription.php?user="+user;
+                final String DescripJson = connectDB(QUERY_USER_DESCR);
+                final String QUERY_FORO = "http://www.webelicurso.hol.es/ProfileForos.php?user="+user;
+                final String forosJson = connectDB(QUERY_FORO);
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //result of connection
-                        int r = 0;
                         try {
-                            r = objJSON(titlesJson);
-                            //Get movie's title and Url
-                            TitleFavoritesJSON(titlesJson,user);
+                            //Get Data for "Favoritas" TAB
+                            final Runnable runnable= new Runnable() {
+                                public void run() {
+                                   int r = 0;
+                                    try {
+                                        r = objJSON(titlesJson);
+                                        //Get movie's title and Url
+                                        GetFavorites(titlesJson,user);
 
-                        } catch (JSONException e) {
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (r < 0) {
+                                        Toast.makeText(ProfileActivity.this,
+                                                "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            };
+                            runnable.run();
+
+                            //Get User's description
+                            final Runnable runnable1= new Runnable() {
+                                public void run() {
+                                    int r = 0;
+                                    try {
+                                        r = objJSON(DescripJson);
+
+                                        GetDescription(DescripJson,user);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (r < 0) {
+                                        Toast.makeText(ProfileActivity.this,
+                                                "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            };
+                            runnable1.run();
+                            //Get Data for "Foros" TAB
+                            final Runnable runnable2= new Runnable() {
+                                public void run() {
+                                    int r = 0;
+                                    try {
+                                        Toast.makeText(ProfileActivity.this,
+                                                "Buscando foros", Toast.LENGTH_LONG).show();
+
+                                        r = objJSON(DescripJson);
+                                        GetForos(forosJson,user);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (r < 0) {
+                                        Toast.makeText(ProfileActivity.this,
+                                                "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            };
+                            runnable2.run();
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                        if (r < 0) {
-                            Toast.makeText(ProfileActivity.this,
-                                    "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
-                        }
                     }
-
-
                 });
             }
         };
         tr.start();
-
     }
+
+
+
     //METHODS TO CONNECT WITH BD
     public int objJSON(String respuesta) throws JSONException {
 
@@ -224,18 +277,14 @@ public class ProfileActivity extends AppCompatActivity {
                 while ((linea = reader.readLine()) != null) {
                     resul.append(linea);
                 }
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         return resul.toString();
     }
-
-
     //Get the data from Json and create the object to show with adapter on the screen
-    public void TitleFavoritesJSON(String respuesta,String user) throws JSONException {
+    public void GetFavorites(String respuesta,String user) throws JSONException {
         JSONArray json = new JSONArray(respuesta);
         int count = json.length();//count objects in json
 
@@ -287,7 +336,51 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+    private void GetDescription(String descripJson, String user) throws JSONException {
+        JSONArray json = new JSONArray(descripJson);
+        JSONObject jsonArrayChild = json.getJSONObject(0);
+        String descripcion = jsonArrayChild.optString("Descripcion");
+        if(!(descripcion.trim().isEmpty() || descripcion.trim().equalsIgnoreCase("NULL"))) {
+            tvDescription.setText(descripcion);
+        }
+    }
 
+    private void GetForos(String respuesta, String user) throws JSONException {
+        Toast.makeText(ProfileActivity.this, "entra en el bucle",
+                Toast.LENGTH_LONG).show();
+        JSONArray json = new JSONArray(respuesta);
+        int count = json.length();//count objects in json
+
+        String[] listaImg = new String[count];
+        String[] listaTitulo = new String[count];
+        String[] numComents = new String[count];
+        Peliculas peli[] = new Peliculas[count];
+        //String countStr = Integer.toString(count);
+
+        //GET movie's title  from JSON
+        for (int i = 0; i < count; i++) {
+            JSONObject jsonArrayChild = json.getJSONObject(i);
+            peli[i] = new Peliculas();
+            peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+            peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
+            peli[i].setNum_Coments(jsonArrayChild.optString("Num_Coments"));
+        }
+        //loop to set the values from object to the array
+        for (int i = 0; i < count; i++) {
+            listaImg[i] = peli[i].getImagen();
+            listaTitulo[i] = peli[i].getTitulo_FIlm();
+           numComents[i] = peli[i].getNum_Coments();
+
+             Toast.makeText(ProfileActivity.this, peli[i].getImagen() + peli[i].getTitulo_FIlm()+peli[i].getNum_Coments(),
+                   Toast.LENGTH_LONG).show();
+
+        }
+       // Toast.makeText(ProfileActivity.this, "loop"+peli[0].getImagen() + peli[0].getTitulo_FIlm()+ peli[0].getNum_Coments(),
+         //       Toast.LENGTH_LONG).show();
+        //TODO ADAPTER
+       // displayAdapter(listaImg, listaTitulo);// display the data from Array in gridview with adapter
+
+    }
 
 
     //MENU EVENTS

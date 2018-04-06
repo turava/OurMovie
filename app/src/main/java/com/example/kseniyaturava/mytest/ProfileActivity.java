@@ -9,15 +9,32 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ProfileActivity extends AppCompatActivity {
     TabHost Tabs;
     private final int PETICION_ACTIVITY_SEGUNDA = 1;
     private TextView tvName;
     private String user;
+    private GridView lv;
+    private ImageView imagen;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -108,8 +125,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });*/
 
+
+
         //Listeners on click list "foros" selected
-        ImageView img_goForo = (ImageView) findViewById(R.id.img_GoForo);
+       /* ImageView img_goForo = (ImageView) findViewById(R.id.img_GoForo);
         img_goForo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,10 +148,146 @@ public class ProfileActivity extends AppCompatActivity {
         });
         tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(user);
+*/
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvName.setText(user);
+        //CONNECTION TO DB
 
+
+        Thread tr = new Thread() {
+            @Override
+            public void run() {
+
+                final String QUERY_GET_TITLES_FAVORITES = "http://www.webelicurso.hol.es/ProfileGetTtitleFavorites.php?user="+user;
+                final String titlesJson = connectDB(QUERY_GET_TITLES_FAVORITES);//consulta las categorias
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //result of connection
+                        int r = 0;
+                        try {
+                            r = objJSON(titlesJson);
+                            //Get movie's title and Url
+                            TitleFavoritesJSON(titlesJson,user);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (r < 0) {
+                            Toast.makeText(ProfileActivity.this,
+                                    "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+
+                });
+            }
+        };
+        tr.start();
+
+    }
+    //METHODS TO CONNECT WITH BD
+    public int objJSON(String respuesta) throws JSONException {
+
+        int res = 0;
+        try {
+            JSONArray json = new JSONArray(respuesta);
+            if (json.length() > 0) {
+                res = 1;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+
+    public String connectDB(String QUERY) {
+        URL url = null;
+        String linea = "";
+        int respuesta = 0;
+        StringBuilder resul = null;
+
+        try {
+            url = new URL(QUERY);
+            HttpURLConnection conection = (HttpURLConnection) url.openConnection();
+            respuesta = conection.getResponseCode();
+            resul = new StringBuilder();
+            if (respuesta == HttpURLConnection.HTTP_OK) {
+                InputStream in = new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                while ((linea = reader.readLine()) != null) {
+                    resul.append(linea);
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+
+
+    //Get the data from Json and create the object to show with adapter on the screen
+    public void TitleFavoritesJSON(String respuesta,String user) throws JSONException {
+        JSONArray json = new JSONArray(respuesta);
+        int count = json.length();//count objects in json
+
+        String[] listaImg = new String[count];
+        String[] listaTitulo = new String[count];
+        Peliculas peli[] = new Peliculas[count];
+        //String countStr = Integer.toString(count);
+
+        //GET movie's title  from JSON
+        for (int i = 0; i < count; i++) {
+            JSONObject jsonArrayChild = json.getJSONObject(i);
+            peli[i] = new Peliculas();
+            peli[i].setImagen(jsonArrayChild.optString("Imagen"));
+            peli[i].setTitulo_FIlm(jsonArrayChild.optString("Titulo_Film"));
+        }
+        //loop to set the values from object to the array
+        for (int i = 0; i < count; i++) {
+            listaImg[i] = peli[i].getImagen();
+            listaTitulo[i] = peli[i].getTitulo_FIlm();
+
+          // Toast.makeText(ProfileActivity.this, "loop"+peli[i].getImagen() + peli[i].getTitulo_FIlm(),
+            //       Toast.LENGTH_LONG).show();
+
+        }
+
+        displayAdapter(listaImg, listaTitulo);// display the data from Array in gridview with adapter
+    }
+
+
+    private void displayAdapter(final String listaImg[], final String listaTitulo[]) {
+        imagen = findViewById(R.id.imagen);
+        lv = (GridView) findViewById(R.id.listView);
+        AdapterProfileForo adapter = new AdapterProfileForo(this, listaImg);//2nd param. data
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos = position;
+                //Go to MovieActivity with params: title movie
+                Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                intent.putExtra("Titulo", listaTitulo[position]);
+                startActivity(intent);
+               /* Toast.makeText(getApplicationContext(),
+                                listaTitulo[position],
+                        Toast.LENGTH_LONG).show();*/
+            }
+        });
 
 
     }
+
+
+
+    //MENU EVENTS
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         MenuInflater inflater=getMenuInflater();

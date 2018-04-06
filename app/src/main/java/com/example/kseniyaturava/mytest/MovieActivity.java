@@ -66,6 +66,7 @@ public class MovieActivity extends AppCompatActivity {
                 String titulo=text_title.getText().toString();
                 Intent intent = new Intent(MovieActivity.this, ForoActivity.class);
                 intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });
@@ -102,7 +103,7 @@ public class MovieActivity extends AppCompatActivity {
                 tr.start();
             }
         });
-
+        user = getIntent().getExtras().getString("User");
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
             String titulo=bundle.getString("Titulo");
@@ -294,4 +295,17 @@ public class MovieActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
+    //Override back button android to do something
+  /* @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(MovieActivity.this, MainActivity.class);
+        intent.putExtra("User", user);
+        startActivity(intent);
+        super.onBackPressed();
+    }*/
+
 }

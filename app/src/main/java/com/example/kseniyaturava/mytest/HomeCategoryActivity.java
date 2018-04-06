@@ -42,30 +42,41 @@ public class HomeCategoryActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    //we are on the method when the menu's item is selected
-                    //type inside the instructions TODO
-
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Intent intent0 = new Intent(getApplicationContext(), MainActivity.class);
+                            intent0.putExtra("User", user);
+                            startActivity(intent0);
                             return true;
                         case R.id.searchItem:
-                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
+                            intent1.putExtra("User", user);
+                            startActivity(intent1);
                             return true;
                         case R.id.formItem:
-                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            Intent intent2 = new Intent(getApplicationContext(), FormActivity.class);
+                            intent2.putExtra("User", user);
+                            startActivity(intent2);
                             return true;
                         case R.id.notificationItem:
-                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            Intent intent3 = new Intent(getApplicationContext(), AlertsActivity.class);
+                            intent3.putExtra("User", user);
+                            startActivity(intent3);
                             return true;
                         case R.id.profileItem:
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            // startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            Intent intent4 = new Intent(getApplicationContext(), ProfileActivity.class);
+                            intent4.putExtra("User", user);
+                            startActivity(intent4);
                             return true;
                     }
                     // finish();
                     return false;
                 }
-
             };
 
     @Override
@@ -119,7 +130,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
                         try {
                             r = objJSON(cathegoryJSON);
                             //return Array with data and go to method adapter listview
-                            showJSON(cathegoryJSON);
+                            showJSON(cathegoryJSON, user);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -184,12 +195,11 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
 //TODO
     //Get the data from Json and create the object to show with adapter on the screen
-    public String[] showJSON(String respuesta) throws JSONException {
+    public String[] showJSON(String respuesta, String user) throws JSONException {
 
 
         JSONArray json = new JSONArray(respuesta);
         int count = json.length();//count objects in json
-        // System.out.println("**********"+count);
 
         String[] listaImg = new String[count];
         String[] listaTitulo = new String[count];
@@ -219,11 +229,11 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
         }
 
-        displayAdapter(listaImg, listaTitulo);// display the data from Array in listview with adapter
+        displayAdapter(listaImg, listaTitulo, user);// display the data from Array in listview with adapter
         return listaImg;
     }
 
-    private void displayAdapter(final String listaImg[], final String listaTitulo[]) {
+    private void displayAdapter(final String listaImg[], final String listaTitulo[], final String user) {
         imagen = findViewById(R.id.imagen);
         lv = (GridView) findViewById(R.id.listView);
         AdapterItem adapter = new AdapterItem(this, listaImg);//2nd param. data
@@ -236,10 +246,11 @@ public class HomeCategoryActivity extends AppCompatActivity {
                 //Go to MovieActivity with params: title movie
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                 intent.putExtra("Titulo", listaTitulo[position]);
+                intent.putExtra("User", user);
                 startActivity(intent);
-               /* Toast.makeText(getApplicationContext(),
-                                listaTitulo[position],
-                        Toast.LENGTH_LONG).show();*/
+                Toast.makeText(getApplicationContext(),
+                                user+"Categoria",
+                        Toast.LENGTH_LONG).show();
             }
         });
 

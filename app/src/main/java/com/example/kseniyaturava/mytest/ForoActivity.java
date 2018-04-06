@@ -2,11 +2,9 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,12 +21,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -38,6 +32,7 @@ public class ForoActivity extends AppCompatActivity {
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, button_sendReply;
     AutoCompleteTextView input_reply, input_message;
     ImageView img_user1;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,10 +180,11 @@ public class ForoActivity extends AppCompatActivity {
                 String titulo=text_movie.getText().toString();
                 Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
                 intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });
-
+        user = getIntent().getExtras().getString("User");
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
             String titulo=bundle.getString("Titulo");
@@ -318,4 +314,14 @@ public class ForoActivity extends AppCompatActivity {
         String date = df.format(dt);
         return date;
     }
+    //Override back button android to do something
+    /*@Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
+        intent.putExtra("Titulo", text_movie.getText().toString());
+        intent.putExtra("User", user);
+        startActivity(intent);
+        super.onBackPressed();
+    }*/
 }

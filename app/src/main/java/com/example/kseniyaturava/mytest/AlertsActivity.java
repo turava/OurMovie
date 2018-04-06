@@ -2,61 +2,60 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AlertsActivity extends AppCompatActivity {
+   private String user;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                    //we are on the method when the menu's item is selected
-                    //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            //setTitle("Explore");//Set the title ActionBar
-                            //instance Activity
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                             return true;
+                            // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Intent intent0 = new Intent(getApplicationContext(), MainActivity.class);
+                            intent0.putExtra("User", user);
+                            startActivity(intent0);
+                            return true;
                         case R.id.searchItem:
-                            // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                            //startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
+                            intent1.putExtra("User", user);
+                            startActivity(intent1);
                             return true;
                         case R.id.formItem:
-                            // setTitle("Form");
-                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
-                            // startActivity(new Intent(MainActivity.this, FormActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            Intent intent2 = new Intent(getApplicationContext(), FormActivity.class);
+                            intent2.putExtra("User", user);
+                            startActivity(intent2);
                             return true;
                         case R.id.notificationItem:
-                            // setTitle("My alerts");
-                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            Intent intent3 = new Intent(getApplicationContext(), AlertsActivity.class);
+                            intent3.putExtra("User", user);
+                            startActivity(intent3);
                             return true;
                         case R.id.profileItem:
-                            // setTitle("Profile");
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            // startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            Intent intent4 = new Intent(getApplicationContext(), ProfileActivity.class);
+                            intent4.putExtra("User", user);
+                            startActivity(intent4);
                             return true;
                     }
-                   // finish();
+                    // finish();
                     return false;
                 }
-
             };
+
 
     private LinearLayout la1;
     private LinearLayout la2;
@@ -78,6 +77,12 @@ public class AlertsActivity extends AppCompatActivity {
         menuItem.setChecked(true);
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
+
+        //Recoge user del Login
+        Bundle bundle = this.getIntent().getExtras();
+        if ((bundle != null)&&(bundle.getString("User")!=null)){
+            user = bundle.getString("User");
+        }
 
         la1=(LinearLayout) findViewById(R.id.layout_alert1);
         la2=(LinearLayout) findViewById(R.id.layout_alert2);

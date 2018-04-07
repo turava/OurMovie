@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,9 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvName, tvDescription;
     private String user;
     private GridView lv;
+    private ListView listview;
     private ImageView imagen;
+    private TextView tv_title, numComments;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -93,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Recoge user del Login
         Bundle bundle = this.getIntent().getExtras();
-        if ((bundle != null)&&(bundle.getString("User")!=null)){
+        if ((bundle != null) && (bundle.getString("User") != null)) {
             user = bundle.getString("User");
         }
 
@@ -110,48 +113,9 @@ public class ProfileActivity extends AppCompatActivity {
         tab2.setIndicator("Favoritas");
         tab2.setContent(R.id.tab1);
 
-
         Tabs.addTab(tab1); //añadimos los tabs ya programados
         Tabs.addTab(tab2);
 
-        /*Tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                for (int i = 0; i < Tabs.getTabWidget().getChildCount(); i++) {
-                    Tabs.getTabWidget().getChildAt(i)
-                            .setBackgroundColor(Color.parseColor("#FF0000")); // unselected
-                }
-
-                Tabs.getTabWidget().getChildAt(Tabs.getCurrentTab())
-                        .setBackgroundColor(Color.parseColor("#0000FF")); // selected
-
-            }
-        });*/
-
-
-
-        //Listeners on click list "foros" selected
-       /* ImageView img_goForo = (ImageView) findViewById(R.id.img_GoForo);
-        img_goForo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ForoActivity.class));
-
-            }
-        });
-
-        //Listeners on click list "Favoritos" selected
-        ImageView img_goMovie = (ImageView) findViewById(R.id.img_favourite1);
-        img_goMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MovieActivity.class));
-
-            }
-        });
-        tvName = (TextView) findViewById(R.id.tvName);
-        tvName.setText(user);
-*/
         tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(user);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
@@ -161,26 +125,29 @@ public class ProfileActivity extends AppCompatActivity {
         Thread tr = new Thread() {
             @Override
             public void run() {
-                    //QUERYS y CONEXIONES
-                final String QUERY_FAVOURITES = "http://www.webelicurso.hol.es/ProfileGetTtitleFavorites.php?user="+user;
+                //QUERYS y CONEXIONES
+                final String QUERY_FAVOURITES = "http://www.webelicurso.hol.es/ProfileGetTtitleFavorites.php?user=" + user;
                 final String titlesJson = connectDB(QUERY_FAVOURITES);
-                final String QUERY_USER_DESCR = "http://www.webelicurso.hol.es/ProfileUserDescription.php?user="+user;
+                final String QUERY_USER_DESCR = "http://www.webelicurso.hol.es/ProfileUserDescription.php?user=" + user;
                 final String DescripJson = connectDB(QUERY_USER_DESCR);
-                final String QUERY_FORO = "http://www.webelicurso.hol.es/ProfileForos.php?user="+user;
+                final String QUERY_FORO = "http://www.webelicurso.hol.es/ProfileForos.php?user=" + user;
                 final String forosJson = connectDB(QUERY_FORO);
+                //TODO comentario foro
+                //final String QUERY_FORO_COMM = "http://www.webelicurso.hol.es/ProfileForoComments.php?user=" + user;
+                //final String commJson = connectDB(QUERY_FORO_COMM);
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             //Get Data for "Favoritas" TAB
-                            final Runnable runnable= new Runnable() {
+                            final Runnable runnable = new Runnable() {
                                 public void run() {
-                                   int r = 0;
+                                    int r = 0;
                                     try {
                                         r = objJSON(titlesJson);
                                         //Get movie's title and Url
-                                        GetFavorites(titlesJson,user);
+                                        GetFavorites(titlesJson, user);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -194,13 +161,13 @@ public class ProfileActivity extends AppCompatActivity {
                             runnable.run();
 
                             //Get User's description
-                            final Runnable runnable1= new Runnable() {
+                            final Runnable runnable1 = new Runnable() {
                                 public void run() {
                                     int r = 0;
                                     try {
                                         r = objJSON(DescripJson);
 
-                                        GetDescription(DescripJson,user);
+                                        GetDescription(DescripJson, user);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -213,15 +180,15 @@ public class ProfileActivity extends AppCompatActivity {
                             };
                             runnable1.run();
                             //Get Data for "Foros" TAB
-                            final Runnable runnable2= new Runnable() {
+                            final Runnable runnable2 = new Runnable() {
                                 public void run() {
                                     int r = 0;
                                     try {
-                                        Toast.makeText(ProfileActivity.this,
-                                                "Buscando foros", Toast.LENGTH_LONG).show();
-
+                                        //TODO comentario en el foro
+                                       // r = objJSON(commJson);
+                                       // GetComentario(commJson);
                                         r = objJSON(DescripJson);
-                                        GetForos(forosJson,user);
+                                        GetForos(forosJson, user);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -283,8 +250,9 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return resul.toString();
     }
+
     //Get the data from Json and create the object to show with adapter on the screen
-    public void GetFavorites(String respuesta,String user) throws JSONException {
+    public void GetFavorites(String respuesta, String user) throws JSONException {
         JSONArray json = new JSONArray(respuesta);
         int count = json.length();//count objects in json
 
@@ -305,8 +273,6 @@ public class ProfileActivity extends AppCompatActivity {
             listaImg[i] = peli[i].getImagen();
             listaTitulo[i] = peli[i].getTitulo_FIlm();
 
-          // Toast.makeText(ProfileActivity.this, "loop"+peli[i].getImagen() + peli[i].getTitulo_FIlm(),
-            //       Toast.LENGTH_LONG).show();
 
         }
 
@@ -316,8 +282,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void displayAdapter(final String listaImg[], final String listaTitulo[]) {
         imagen = findViewById(R.id.imagen);
-        lv = (GridView) findViewById(R.id.listView);
-        AdapterProfileForo adapter = new AdapterProfileForo(this, listaImg);//2nd param. data
+        lv = (GridView) findViewById(R.id.gridView);
+        AdapterProfileFavorites adapter = new AdapterProfileFavorites(this, listaImg, listaTitulo);//2nd param. data
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -328,26 +294,42 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
                 intent.putExtra("Titulo", listaTitulo[position]);
                 startActivity(intent);
-               /* Toast.makeText(getApplicationContext(),
-                                listaTitulo[position],
-                        Toast.LENGTH_LONG).show();*/
             }
         });
 
 
     }
+
     private void GetDescription(String descripJson, String user) throws JSONException {
         JSONArray json = new JSONArray(descripJson);
         JSONObject jsonArrayChild = json.getJSONObject(0);
         String descripcion = jsonArrayChild.optString("Descripcion");
-        if(!(descripcion.trim().isEmpty() || descripcion.trim().equalsIgnoreCase("NULL"))) {
+        if (!(descripcion.trim().isEmpty() || descripcion.trim().equalsIgnoreCase("NULL"))) {
             tvDescription.setText(descripcion);
         }
     }
+    /*private void GetComentario(String respuesta) throws JSONException {
+        JSONArray json = new JSONArray(respuesta);
+        int count = json.length();//count objects in json
+
+        String[] ultimoComment = new String[count];
+        Peliculas peli[] = new Peliculas[count];
+        //String countStr = Integer.toString(count);
+
+        for (int i = 0; i < count; i++) {
+            JSONObject jsonArrayChild = json.getJSONObject(i);
+
+            ultimoComment[i]=(jsonArrayChild.optString("Texto"));
+            Toast.makeText(ProfileActivity.this,
+                    "coment"+ultimoComment[i], Toast.LENGTH_LONG).show();
+
+        }
+        //loop to set the values from object to the array
+
+    }*/
+
 
     private void GetForos(String respuesta, String user) throws JSONException {
-        Toast.makeText(ProfileActivity.this, "entra en el bucle",
-                Toast.LENGTH_LONG).show();
         JSONArray json = new JSONArray(respuesta);
         int count = json.length();//count objects in json
 
@@ -357,7 +339,6 @@ public class ProfileActivity extends AppCompatActivity {
         Peliculas peli[] = new Peliculas[count];
         //String countStr = Integer.toString(count);
 
-        //GET movie's title  from JSON
         for (int i = 0; i < count; i++) {
             JSONObject jsonArrayChild = json.getJSONObject(i);
             peli[i] = new Peliculas();
@@ -369,17 +350,22 @@ public class ProfileActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             listaImg[i] = peli[i].getImagen();
             listaTitulo[i] = peli[i].getTitulo_FIlm();
-           numComents[i] = peli[i].getNum_Coments();
+            numComents[i] = peli[i].getNum_Coments();
 
-             Toast.makeText(ProfileActivity.this, peli[i].getImagen() + peli[i].getTitulo_FIlm()+peli[i].getNum_Coments(),
-                   Toast.LENGTH_LONG).show();
 
         }
-       // Toast.makeText(ProfileActivity.this, "loop"+peli[0].getImagen() + peli[0].getTitulo_FIlm()+ peli[0].getNum_Coments(),
-         //       Toast.LENGTH_LONG).show();
-        //TODO ADAPTER
-       // displayAdapter(listaImg, listaTitulo);// display the data from Array in gridview with adapter
+        displayAdapterForo(listaImg, listaTitulo, numComents);
 
+    }
+
+    private void displayAdapterForo(final String listaImg[], final String listaTitulo[], final String numComents[]) {
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        imagen = findViewById(R.id.imagen);
+        listview = (ListView) findViewById(R.id.listView);
+        numComments = (TextView) findViewById(R.id.numComments);
+        AdapterProfileForo adapter = new AdapterProfileForo(this, listaImg, listaTitulo, numComents);//2nd param. data
+        listview.setAdapter(adapter);
+        //Listvie ONCLICK in Adapter, don't works good here
     }
 
 

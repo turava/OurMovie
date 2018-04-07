@@ -160,5 +160,6 @@
     <string name="repita_pass">Repita la contraseña</string>
     <string name="escriba_pass">Escriba una contraseña</string>
     <string name="guardar">Guardar</string>
+    <string name="forocomments">foroComments</string>
 
 </resources>

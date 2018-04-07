@@ -1,11 +1,14 @@
 package com.example.kseniyaturava.mytest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,22 +19,41 @@ import com.squareup.picasso.Picasso;
 public class AdapterProfileForo extends ArrayAdapter<String> {
     private final Activity context;
     private final String [] listaImg;
+    private final String [] listaTitulo;
+    private final String [] numComents;
 
-    public AdapterProfileForo (Activity context, String [] listaImg) {
-        super(context, R.layout.cardview_profile_favoritas,listaImg);
+    public AdapterProfileForo(Activity context, String[] listaImg, String[] listaTitulo, String[] numComents) {
+        super(context, R.layout.listview_profile_foro,listaImg);
         this.context=context;
         this.listaImg = listaImg;
+        this.listaTitulo = listaTitulo;
+        this.numComents = numComents;
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.cardview_profile_favoritas, null,true);
+        View rowView=inflater.inflate(R.layout.listview_profile_foro, null,true);
 
         ImageView imagen = (ImageView) rowView.findViewById(R.id.imagen);
+        TextView tv_title = (TextView) rowView.findViewById(R.id.tv_title);
+        TextView numComments = (TextView) rowView.findViewById(R.id.numComments);
+        LinearLayout layout = (LinearLayout) rowView.findViewById(R.id.layout);
+
         //imagen.setImageDrawable(dir.getImage());
-        //imagen.setImageResource(listaImg[position]);
-        Picasso.with(context).load(listaImg[position]).into(imagen);
+        numComments.setText(numComents[position]);
+        tv_title.setText(listaTitulo[position]);
+        Picasso.with(context).load(listaImg[position]).fit().centerInside().into(imagen);
+
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ForoActivity.class);
+                intent.putExtra("Titulo", listaTitulo[position]);
+                context.startActivity(intent);
+            }
+        });
 
         return rowView;
     }

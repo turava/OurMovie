@@ -18,6 +18,16 @@ package com.example.kseniyaturava.mytest;
         import android.widget.ListView;
         import android.widget.TextView;
         import android.widget.Toast;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -39,11 +49,13 @@ package com.example.kseniyaturava.mytest;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
+
     TextView text_movie, text_director, text_year, text_numberAnswers, text_numberAnswers1, text_comment1, text_reply,
             text_reply2, text_comment4, text_date1, text_dateReply, text_username1;
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, button_sendReply;
     AutoCompleteTextView input_reply, input_message;
     ImageView img_user1;
+    private String user;
     ListView lvForo;
     ArrayList nombreUser=new ArrayList();
     ArrayList fechaComent=new ArrayList();
@@ -157,9 +169,17 @@ public class ForoActivity extends AppCompatActivity {
                 String titulo=text_movie.getText().toString();
                 Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
                 intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });
+        user = getIntent().getExtras().getString("User");
+        Bundle bundle=this.getIntent().getExtras();
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+            String titulo=bundle.getString("Titulo");
+            text_movie.setText(titulo);
+        }
+
 
         Thread tr=new Thread(){
             @Override
@@ -367,4 +387,14 @@ public class ForoActivity extends AppCompatActivity {
         String date = df.format(dt);
         return date;
     }
+    //Override back button android to do something
+    /*@Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
+        intent.putExtra("Titulo", text_movie.getText().toString());
+        intent.putExtra("User", user);
+        startActivity(intent);
+        super.onBackPressed();
+    }*/
 }

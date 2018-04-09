@@ -24,13 +24,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private Context mContext;
-    private String user;
+    private String user = "";
 
     public RecyclerViewAdapter(Context context,String user, ArrayList<String> names, ArrayList<String> imageUrls) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
-        user = user;
+        this.user = user;
     }
 
     @Override
@@ -56,12 +56,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Log.d(TAG, "onClick: clicked on an image: " + mNames.get(position));
-               // Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(mContext, MovieActivity.class);
                 intent.putExtra("Titulo", mNames.get(position));
                 intent.putExtra("User", user);
                 mContext.startActivity(intent);
+               // Toast.makeText(mContext,user+"pruebas", Toast.LENGTH_SHORT).show();
+
 
             }
         });

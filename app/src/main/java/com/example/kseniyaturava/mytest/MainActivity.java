@@ -71,19 +71,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             return true;
                         case R.id.searchItem:
-                            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                            Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
+                            intent1.putExtra("User", user);
+                            startActivity(intent1);
                             return true;
                         case R.id.formItem:
-                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            Intent intent2 = new Intent(getApplicationContext(), FormActivity.class);
+                            intent2.putExtra("User", user);
+                            startActivity(intent2);
                             return true;
                         case R.id.notificationItem:
-                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            Intent intent3 = new Intent(getApplicationContext(), AlertsActivity.class);
+                            intent3.putExtra("User", user);
+                            startActivity(intent3);
                             return true;
                         case R.id.profileItem:
                            // startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            intent.putExtra("User", user);
-                            startActivity(intent);
+                            Intent intent4 = new Intent(getApplicationContext(), ProfileActivity.class);
+                            intent4.putExtra("User", user);
+                            startActivity(intent4);
                             return true;
                     }
                     // finish();
@@ -113,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = this.getIntent().getExtras();
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
-            Toast.makeText(MainActivity.this,
-                    user, Toast.LENGTH_LONG).show();
         }
         //Interactua
         img_new1 = (ImageView) findViewById(R.id.img_new1);
@@ -356,7 +363,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imgList.add(peli[i].getImagen());
             }
             //muestra las imagenes en horizontal con adapter
-            initRecyclerView(imgList, titleList);
+            initRecyclerView(imgList, titleList, user);
 
         } else if (accion.equalsIgnoreCase("foro")) {
             final Peliculas  peli []= new Peliculas[3];
@@ -414,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
     }
-    private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList){
+    private void initRecyclerView(ArrayList<String> imgList, ArrayList<String> titleList, String user){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -424,6 +431,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapter);
 
         //Event onclick in RecyclerViewAdapter
+
     }
 }
 

@@ -10,8 +10,15 @@ public class Peliculas {
     private String Imagen = "";
     private String Id_Film = "";
     private String Titulo_FIlm = "";
+    private String Num_Coments = "";
 
+    public String getNum_Coments() {
+        return Num_Coments;
+    }
 
+    public void setNum_Coments(String num_Coments) {
+        Num_Coments = num_Coments;
+    }
 
     public String getId_Film() {
         return Id_Film;

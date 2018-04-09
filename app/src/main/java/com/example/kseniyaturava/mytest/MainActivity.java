@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -106,7 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        setTitle("OurMovie");
+        //setTitle("OurMovie");
+
+
+        // Customize action bar title to center and other styles
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_ourmovie);
+
+
         // Ensure correct menu item is selected
         //this part works good- the app starts on index number by case order from 0 to...
         Menu menu = BottomNavigationView.getMenu();
@@ -117,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
+
+
+
 
         //Recoge user del Login
         Bundle bundle = this.getIntent().getExtras();
@@ -390,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             img_new3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ForoActivity.class);
                     intent.putExtra("Titulo", peli[2].getTitulo_FIlm());
                     intent.putExtra("User", user);
                     startActivity(intent);
@@ -399,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             img_new2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ForoActivity.class);
                     intent.putExtra("Titulo", peli[1].getTitulo_FIlm());
                     intent.putExtra("User", user);
                     startActivity(intent);
@@ -409,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             img_new1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ForoActivity.class);
                     intent.putExtra("Titulo", peli[0].getTitulo_FIlm());
                     intent.putExtra("User", user);
                     startActivity(intent);

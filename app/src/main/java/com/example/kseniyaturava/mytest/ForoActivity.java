@@ -4,30 +4,18 @@ package com.example.kseniyaturava.mytest;
         import android.content.Context;
         import android.content.Intent;
         import android.os.Bundle;
-        import android.support.design.widget.BottomNavigationView;
         import android.support.v7.app.AppCompatActivity;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.AutoCompleteTextView;
         import android.widget.BaseAdapter;
-        import android.widget.Button;
         import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.ListView;
         import android.widget.TextView;
         import android.widget.Toast;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -39,13 +27,9 @@ import android.widget.Toast;
         import java.io.InputStreamReader;
         import java.net.HttpURLConnection;
         import java.net.URL;
-        import java.sql.Time;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
-        import java.util.Calendar;
         import java.util.Date;
-        import java.util.Locale;
-        import java.util.TimeZone;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -86,12 +70,12 @@ public class ForoActivity extends AppCompatActivity {
         button_sendReply = (ImageButton) findViewById(R.id.button_sendReply);
         lvForo=(ListView)findViewById(R.id.listview_coments);
 
+        user = getIntent().getExtras().getString("User");
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
             String titulo=bundle.getString("Titulo");
-            //String user=bundle.getString("User");
             text_movie.setText(titulo);
-            //text_username1.setText(user);
+            text_username1.setText(user);
         }
 
         recogerDatosForo();
@@ -173,13 +157,6 @@ public class ForoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        user = getIntent().getExtras().getString("User");
-        Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-            String titulo=bundle.getString("Titulo");
-            text_movie.setText(titulo);
-        }
-
 
         Thread tr=new Thread(){
             @Override

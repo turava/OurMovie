@@ -10,12 +10,7 @@
     android:background="#e5e6e4"
     tools:context="com.example.kseniyaturava.mytest.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scroll_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e5e6e4"
-        android:minHeight="1200dp">
+
 
         <LinearLayout
             android:id="@+id/layout_foro1"
@@ -115,7 +110,7 @@
 
             <ListView
                 android:id="@+id/listview_coments"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#BBDEFB">
 
@@ -195,7 +190,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+
 
     <FrameLayout
         android:id="@+id/fragmentContainer"

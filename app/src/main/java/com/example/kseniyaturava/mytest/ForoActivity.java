@@ -1,43 +1,53 @@
 package com.example.kseniyaturava.mytest;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.design.widget.BottomNavigationView;
+        import android.support.v7.app.AppCompatActivity;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.AutoCompleteTextView;
+        import android.widget.BaseAdapter;
+        import android.widget.Button;
+        import android.widget.ImageButton;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+        import org.json.JSONArray;
+        import org.json.JSONException;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+        import java.io.BufferedInputStream;
+        import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+        import java.sql.Time;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Calendar;
+        import java.util.Date;
+        import java.util.Locale;
+        import java.util.TimeZone;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-
     TextView text_movie, text_director, text_year, text_numberAnswers, text_numberAnswers1, text_comment1, text_reply,
             text_reply2, text_comment4, text_date1, text_dateReply, text_username1;
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, button_sendReply;
     AutoCompleteTextView input_reply, input_message;
     ImageView img_user1;
+    ListView lvForo;
+    ArrayList nombreUser=new ArrayList();
+    ArrayList fechaComent=new ArrayList();
+    ArrayList comentForo=new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,67 +55,35 @@ public class ForoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
         setTitle("Foro");
 
-        //User img listener
-        img_user1 = (ImageView) findViewById(R.id.img_user1);
-        img_user1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-            }
-        });
-        //acordeon appear on click icon comment/replies
-        acordeon = (ImageButton) findViewById(R.id.button_comments);
-        acordeon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_acordeon);
-                if (findMagicLl.getVisibility() == View.VISIBLE) {
-                    findMagicLl.setVisibility(View.GONE);
-                } else {
-                    findMagicLl.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        //acordeon appear on click icon atach files in Reply
-        acordeonFiles = (ImageButton) findViewById(R.id.button_addFilesReply);
-        acordeonFiles.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_fileReply);
-                if (findMagicLl.getVisibility() == View.VISIBLE) {
-                    findMagicLl.setVisibility(View.GONE);
-                } else {
-                    findMagicLl.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        //acordeon appear on click icon atach files on post
-        acordeonFilesPost = (ImageButton) findViewById(R.id.button_addFiles);
-        acordeonFilesPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout findMagicLl = (LinearLayout) findViewById(R.id.layout_file);
-                if (findMagicLl.getVisibility() == View.VISIBLE) {
-                    findMagicLl.setVisibility(View.GONE);
-                } else {
-                    findMagicLl.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         text_numberAnswers = (TextView) findViewById(R.id.text_numberAnswers);
-        text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
+        //text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
         text_comment1 = (TextView) findViewById(R.id.text_comment1);
-        text_reply = (TextView) findViewById(R.id.text_reply);
-        text_reply2 = (TextView) findViewById(R.id.text_reply2);
+        //text_reply = (TextView) findViewById(R.id.text_reply);
+        //text_reply2 = (TextView) findViewById(R.id.text_reply2);
         text_comment4 = (TextView) findViewById(R.id.text_comment4);
         text_date1 = (TextView) findViewById(R.id.text_date1);
-        text_dateReply = (TextView) findViewById(R.id.text_dateReply);
+        //text_dateReply = (TextView) findViewById(R.id.text_dateReply);
         text_username1 = (TextView) findViewById(R.id.text_username1);
         input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
-
+        text_movie =(TextView) findViewById(R.id.text_movie);
+        text_director =(TextView) findViewById(R.id.text_director);
+        text_year =(TextView) findViewById(R.id.text_year);
+        button_info = (ImageButton) findViewById(R.id.button_info);
         button_send = (ImageButton) findViewById(R.id.button_send);
+        button_sendReply = (ImageButton) findViewById(R.id.button_sendReply);
+        lvForo=(ListView)findViewById(R.id.listview_coments);
+
+        Bundle bundle=this.getIntent().getExtras();
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+            String titulo=bundle.getString("Titulo");
+            //String user=bundle.getString("User");
+            text_movie.setText(titulo);
+            //text_username1.setText(user);
+        }
+
+        recogerDatosForo();
+
         button_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +119,6 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
 
-        button_sendReply = (ImageButton) findViewById(R.id.button_sendReply);
         button_sendReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,11 +151,6 @@ public class ForoActivity extends AppCompatActivity {
             }
         });
 
-        text_movie =(TextView) findViewById(R.id.text_movie);
-        text_director =(TextView) findViewById(R.id.text_director);
-        text_year =(TextView) findViewById(R.id.text_year);
-        button_info = (ImageButton) findViewById(R.id.button_info);
-
         button_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,12 +160,6 @@ public class ForoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-            String titulo=bundle.getString("Titulo");
-            text_movie.setText(titulo);
-        }
 
         Thread tr=new Thread(){
             @Override
@@ -242,6 +208,89 @@ public class ForoActivity extends AppCompatActivity {
         tr.start();
 
     }
+
+    private void recogerDatosForo(){
+        nombreUser.clear();
+        comentForo.clear();
+        fechaComent.clear();
+
+        final ProgressDialog progressDialog=new ProgressDialog(ForoActivity.this);
+        progressDialog.setMessage("Cargando datos...");
+        progressDialog.show();
+
+        Thread tr=new Thread(){
+            @Override
+            public void run() {
+                try {
+                    final String res = recogerDatos("Matrix");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int r = objJSON(res);
+                            if (r > 0) {
+                                progressDialog.dismiss();
+                                JSONArray jsonArray = null;
+                                try {
+                                    jsonArray = new JSONArray(new String(res));
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
+                                        comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
+                                        fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
+                                    }
+                                    lvForo.setAdapter(new AdapterForo(getApplicationContext()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        tr.start();
+    }
+
+    private class AdapterForo extends BaseAdapter {
+        Context context;
+        LayoutInflater layoutInflater;
+
+        public AdapterForo(Context applicationContext) {
+            this.context = applicationContext;
+            layoutInflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return comentForo.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewGroup viewGroup = (ViewGroup) layoutInflater.inflate(R.layout.listview_coments, null);
+            text_username1 = (TextView) viewGroup.findViewById(R.id.text_username1);
+            text_date1 = (TextView) viewGroup.findViewById(R.id.text_date1);
+            text_comment1 = (TextView) viewGroup.findViewById(R.id.text_comment1);
+
+            text_username1.setText(nombreUser.get(position).toString());
+            text_date1.setText(fechaComent.get(position).toString());
+            text_comment1.setText(comentForo.get(position).toString());
+
+            return viewGroup;
+        }
+    }
+
     public int objJSON(String respuesta) {
         int res=0;
         try{
@@ -262,7 +311,7 @@ public class ForoActivity extends AppCompatActivity {
         StringBuilder resul=null;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/MovieDatos.php?Titulo_Film="+titulo);
+            url=new URL("http://www.webelicurso.hol.es/ForoComents.php?Titulo_Film="+titulo);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             resul=new StringBuilder();

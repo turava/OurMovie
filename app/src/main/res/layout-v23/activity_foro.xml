@@ -40,13 +40,12 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/matrix1"
+                            android:id="@+id/img_movie"
                             android:layout_width="60dp"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:contentDescription="@string/Movie"
                             android:scaleType="fitXY"
-                            design:srcCompat="@drawable/matrix1"
                             tools:ignore="NestedWeights" />
                     </LinearLayout>
 

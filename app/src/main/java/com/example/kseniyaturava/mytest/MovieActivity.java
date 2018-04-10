@@ -32,7 +32,7 @@ public class MovieActivity extends AppCompatActivity {
     ImageView img_movie;
     URL url2=null;
     Bitmap loadImage;
-    private String  user;
+    private String user, titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +57,17 @@ public class MovieActivity extends AppCompatActivity {
         text_numCom =(TextView) findViewById(R.id.text_numCom);
         text_numStar =(TextView) findViewById(R.id.text_numStar);
 
-
         user = getIntent().getExtras().getString("User");
+        Bundle bundle=this.getIntent().getExtras();
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+            titulo=bundle.getString("Titulo");
+            text_title.setText(titulo);
+        }
 
         button_foro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String titulo=text_title.getText().toString();
+                titulo=String.valueOf(text_title.getText());
                 Intent intent = new Intent(MovieActivity.this, ForoActivity.class);
                 intent.putExtra("Titulo", titulo);
                 intent.putExtra("User", user);
@@ -103,12 +107,7 @@ public class MovieActivity extends AppCompatActivity {
                 tr.start();
             }
         });
-        user = getIntent().getExtras().getString("User");
-        Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-            String titulo=bundle.getString("Titulo");
-            text_title.setText(titulo);
-        }
+
 
 
 

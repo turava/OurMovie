@@ -17,6 +17,8 @@ package com.example.kseniyaturava.mytest;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import com.squareup.picasso.Picasso;
+
         import org.json.JSONArray;
         import org.json.JSONException;
 
@@ -33,16 +35,18 @@ package com.example.kseniyaturava.mytest;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
+    private String titulo2;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, text_numberAnswers1, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, btReply;
     AutoCompleteTextView input_reply, input_message;
-    ImageView imgUser, iconoComents;
+    ImageView imgUser, imgMovie, iconoComents;
     ListView lvForo;
     ArrayList nombreUser=new ArrayList();
     ArrayList fechaComent=new ArrayList();
     ArrayList comentForo=new ArrayList();
+    URL url=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +56,13 @@ public class ForoActivity extends AppCompatActivity {
 
         tvNumAnswers = (TextView) findViewById(R.id.tvNumAnswers);
         //text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
-        tvComent = (TextView) findViewById(R.id.tvComent);
+        //tvComent = (TextView) findViewById(R.id.tvComent);
         //text_reply = (TextView) findViewById(R.id.text_reply);
         //text_reply2 = (TextView) findViewById(R.id.text_reply2);
-        text_comment4 = (TextView) findViewById(R.id.text_comment4);
-        tvDate = (TextView) findViewById(R.id.tvDate);
+        //text_comment4 = (TextView) findViewById(R.id.text_comment4);
+        //tvDate = (TextView) findViewById(R.id.tvDate);
         //text_dateReply = (TextView) findViewById(R.id.text_dateReply);
-        tvUserName = (TextView) findViewById(R.id.tvUserName);
+        //tvUserName = (TextView) findViewById(R.id.tvUserName);
         input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
         text_movie =(TextView) findViewById(R.id.text_movie);
@@ -69,14 +73,16 @@ public class ForoActivity extends AppCompatActivity {
         btReply = (ImageButton) findViewById(R.id.btReply);
         lvForo=(ListView)findViewById(R.id.listview_coments);
         imgUser=(ImageView) findViewById(R.id.imgUser);
+        imgMovie=(ImageView) findViewById(R.id.img_movie);
         iconoComents=(ImageView) findViewById(R.id.iconoComents);
 
         Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)&&(bundle.getString("User")!=null)){
-            String titulo=bundle.getString("Titulo");
-            String user=bundle.getString("User");
-            text_movie.setText(titulo);
-            tvUserName.setText(user);
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
+                //continua del If: &&(bundle.getString("User")!=null)){
+            titulo2=bundle.getString("Titulo");
+            //String user=bundle.getString("User");
+            text_movie.setText(titulo2);
+            //tvUserName.setText(user);
         }
 
         recogerDatosForo();
@@ -175,20 +181,21 @@ public class ForoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    final String res = recogerDatos(text_movie.getText().toString());
+                    final String res = recogerDatosComents(titulo2);
+                    final String res2 = recogerDatosPelis(titulo2);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int r = objJSON(res);
+                            int r = objJSON(res2);
                             if (r > 0) {
                                 progressDialog.dismiss();
                                 int inicio=0;
                                 int longitud;
                                 String palabra;
-                                for (int i=0;i<res.length();i++) {
-                                    if ((res.charAt(i)==(',')&& res.charAt(i+1)==('"')) || (res.charAt(i)==('}')&& res.charAt(i+1)==(']'))) {
+                                for (int i=0;i<res2.length();i++) {
+                                    if ((res2.charAt(i)==(',')&& res2.charAt(i+1)==('"')) || (res2.charAt(i)==('}')&& res2.charAt(i+1)==(']'))) {
                                         longitud = i;
-                                        palabra = res.substring(inicio, longitud);
+                                        palabra = res2.substring(inicio, longitud);
                                         inicio = longitud + 1;
                                         if (palabra.contains("Anyo_Film")) {
                                             String anyo = palabra.substring(13, palabra.length() - 1);
@@ -196,13 +203,17 @@ public class ForoActivity extends AppCompatActivity {
                                         } else if (palabra.contains("Director_Film")) {
                                             String director = palabra.substring(17, palabra.length() - 1);
                                             text_director.setText(director);
-                                        } else if (palabra.contains("Num_Coments")) {
-                                            String num_com = palabra.substring(15, palabra.length() - 1);
-                                            tvNumAnswers.setText(num_com);
-                                            //text_numberAnswers1.setText(num_com);
                                         } else if (palabra.contains("Imagen")) {
                                             String imagen = palabra.substring(10, palabra.length() - 1);
-                                            //Falta código aquí, para que muestre la imagen de la pelicula en el lado superior izq.
+                                            try{
+                                                url = new URL(imagen);
+                                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                                conn.connect();
+                                                Picasso.with(ForoActivity.this).load(String.valueOf(url)).into(imgMovie);
+                                            } catch (IOException e) {
+                                                Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(),Toast.LENGTH_LONG).show();
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 }
@@ -213,6 +224,7 @@ public class ForoActivity extends AppCompatActivity {
                                         nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
                                         comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
                                         fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
+
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {
@@ -261,10 +273,13 @@ public class ForoActivity extends AppCompatActivity {
             tvUserName = (TextView) viewGroup.findViewById(R.id.tvUserName);
             tvDate = (TextView) viewGroup.findViewById(R.id.tvDate);
             tvComent = (TextView) viewGroup.findViewById(R.id.tvComent);
+            tvNumAnswers= (TextView) findViewById(R.id.tvNumAnswers);
 
             tvUserName.setText(nombreUser.get(position).toString());
             tvDate.setText(fechaComent.get(position).toString());
             tvComent.setText(comentForo.get(position).toString());
+            //tvNumAnswers.setText
+            //iconoComents.set
 
             return viewGroup;
         }
@@ -283,7 +298,7 @@ public class ForoActivity extends AppCompatActivity {
         return res;
     }
 
-    public String recogerDatos (String titulo) throws IOException {
+    public String recogerDatosComents (String titulo) throws IOException {
         URL url=null;
         String linea="";
         int respuesta=0;
@@ -291,6 +306,31 @@ public class ForoActivity extends AppCompatActivity {
 
         try {
             url=new URL("http://www.webelicurso.hol.es/ForoComents.php?Titulo_Film="+titulo);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+
+    public String recogerDatosPelis (String titulo) throws IOException {
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/MovieDatos.php?Titulo_Film="+titulo);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             resul=new StringBuilder();

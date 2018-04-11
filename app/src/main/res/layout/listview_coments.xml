@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -88,7 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="boton" />
+                android:contentDescription="boton"
+                android:background="#ffffff"
+                android:src="@drawable/ic_reply" />
 
             <ImageView
                 android:id="@+id/iconoComents"
@@ -96,7 +99,8 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:contentDescription="boton"
-                design:srcCompat="@drawable/ic_chat"/>
+                android:background="#ffffff"
+                android:src="@drawable/ic_chat"/>
 
             <TextView
                 android:id="@+id/tvNumAnswers"

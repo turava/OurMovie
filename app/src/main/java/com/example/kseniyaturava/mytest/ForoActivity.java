@@ -54,15 +54,12 @@ public class ForoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
         setTitle("Foro");
 
-        tvNumAnswers = (TextView) findViewById(R.id.tvNumAnswers);
+        //tvNumAnswers = (TextView) findViewById(R.id.tvNumAnswers);
         //text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
-        //tvComent = (TextView) findViewById(R.id.tvComent);
         //text_reply = (TextView) findViewById(R.id.text_reply);
         //text_reply2 = (TextView) findViewById(R.id.text_reply2);
         //text_comment4 = (TextView) findViewById(R.id.text_comment4);
-        //tvDate = (TextView) findViewById(R.id.tvDate);
         //text_dateReply = (TextView) findViewById(R.id.text_dateReply);
-        //tvUserName = (TextView) findViewById(R.id.tvUserName);
         input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
         text_movie =(TextView) findViewById(R.id.text_movie);
@@ -133,7 +130,7 @@ public class ForoActivity extends AppCompatActivity {
                 //text_numberAnswers1.setText(valorFinal);
                 //text_dateReply.setText(getDate());
                 //text_reply.setText(input_reply.getText());
-                //Thread tr=new Thread(){
+                //Thread tr2=new Thread(){
                     //@Override
                     //public void run() {
                         //try {
@@ -150,21 +147,21 @@ public class ForoActivity extends AppCompatActivity {
                         //}
                     //}
                 //};
-                //tr.start();
+                //tr2.start();
             //}
         //});
 
-        //button_info.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
-                //String titulo=text_movie.getText().toString();
-                //String user=tvUserName.getText().toString();
-                //Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
-                //intent.putExtra("Titulo", titulo);
-                //intent.putExtra("User", user);
-                //startActivity(intent);
-            //}
-        //});
+        button_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String titulo=text_movie.getText().toString();
+                String user=tvUserName.getText().toString();
+                Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
+                intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
+                startActivity(intent);
+            }
+        });
 
     }
 

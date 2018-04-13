@@ -4,6 +4,7 @@ package com.example.kseniyaturava.mytest;
         import android.content.Context;
         import android.content.Intent;
         import android.os.Bundle;
+        import android.support.annotation.DrawableRes;
         import android.support.v7.app.AppCompatActivity;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -46,6 +47,7 @@ public class ForoActivity extends AppCompatActivity {
     ArrayList nombreUser=new ArrayList();
     ArrayList fechaComent=new ArrayList();
     ArrayList comentForo=new ArrayList();
+    ArrayList numAnswers=new ArrayList();
     URL url=null;
 
     @Override
@@ -54,15 +56,11 @@ public class ForoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
         setTitle("Foro");
 
-        tvNumAnswers = (TextView) findViewById(R.id.tvNumAnswers);
         //text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
-        //tvComent = (TextView) findViewById(R.id.tvComent);
         //text_reply = (TextView) findViewById(R.id.text_reply);
         //text_reply2 = (TextView) findViewById(R.id.text_reply2);
         //text_comment4 = (TextView) findViewById(R.id.text_comment4);
-        //tvDate = (TextView) findViewById(R.id.tvDate);
         //text_dateReply = (TextView) findViewById(R.id.text_dateReply);
-        //tvUserName = (TextView) findViewById(R.id.tvUserName);
         input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
         text_movie =(TextView) findViewById(R.id.text_movie);
@@ -70,11 +68,9 @@ public class ForoActivity extends AppCompatActivity {
         text_year =(TextView) findViewById(R.id.text_year);
         button_info = (ImageButton) findViewById(R.id.button_info);
         button_send = (ImageButton) findViewById(R.id.button_send);
-        btReply = (ImageButton) findViewById(R.id.btReply);
         lvForo=(ListView)findViewById(R.id.listview_coments);
         imgUser=(ImageView) findViewById(R.id.imgUser);
         imgMovie=(ImageView) findViewById(R.id.img_movie);
-        iconoComents=(ImageView) findViewById(R.id.iconoComents);
 
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
@@ -122,49 +118,17 @@ public class ForoActivity extends AppCompatActivity {
             //}
         //});
 
-        //btReply.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //String valor=String.valueOf(tvNumAnswers.getText());
-                //int num=Integer.parseInt(valor);
-                //int numFinal=num+1;
-                //String valorFinal=String.valueOf(numFinal);
-                //tvNumAnswers.setText(valorFinal);
-                //text_numberAnswers1.setText(valorFinal);
-                //text_dateReply.setText(getDate());
-                //text_reply.setText(input_reply.getText());
-                //Thread tr=new Thread(){
-                    //@Override
-                    //public void run() {
-                        //try {
-                            //sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            //guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
-                            //runOnUiThread(new Runnable() {
-                                //@Override
-                                //public void run() {
-                                    //Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
-                                //}
-                            //});
-                        //} catch (IOException e) {
-                            //e.printStackTrace();
-                        //}
-                    //}
-                //};
-                //tr.start();
-            //}
-        //});
-
-        //button_info.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
-                //String titulo=text_movie.getText().toString();
-                //String user=tvUserName.getText().toString();
-                //Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
-                //intent.putExtra("Titulo", titulo);
-                //intent.putExtra("User", user);
-                //startActivity(intent);
-            //}
-        //});
+        button_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String titulo=text_movie.getText().toString();
+                String user=tvUserName.getText().toString();
+                Intent intent = new Intent(ForoActivity.this, MovieActivity.class);
+                intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -172,6 +136,7 @@ public class ForoActivity extends AppCompatActivity {
         nombreUser.clear();
         comentForo.clear();
         fechaComent.clear();
+        numAnswers.clear();
 
         final ProgressDialog progressDialog=new ProgressDialog(ForoActivity.this);
         progressDialog.setMessage("Cargando datos...");
@@ -224,7 +189,7 @@ public class ForoActivity extends AppCompatActivity {
                                         nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
                                         comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
                                         fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
-
+                                        numAnswers.add(jsonArray.getJSONObject(i).getString("numComents"));
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {
@@ -273,13 +238,47 @@ public class ForoActivity extends AppCompatActivity {
             tvUserName = (TextView) viewGroup.findViewById(R.id.tvUserName);
             tvDate = (TextView) viewGroup.findViewById(R.id.tvDate);
             tvComent = (TextView) viewGroup.findViewById(R.id.tvComent);
-            tvNumAnswers= (TextView) findViewById(R.id.tvNumAnswers);
+            tvNumAnswers= (TextView) viewGroup.findViewById(R.id.tvNumAnswers);
+            btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
+            iconoComents=(ImageView) viewGroup.findViewById(R.id.iconoComents);
+
+            btReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String valor=String.valueOf(tvNumAnswers.getText());
+                    int num=Integer.parseInt(valor);
+                    int numFinal=num+1;
+                    String valorFinal=String.valueOf(numFinal);
+                    tvNumAnswers.setText(valorFinal);
+                    //text_numberAnswers1.setText(valorFinal);
+                    //text_dateReply.setText(getDate());
+                    //text_reply.setText(input_reply.getText());
+                    Thread tr2=new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
+                                //guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    tr2.start();
+
+                }
+            });
 
             tvUserName.setText(nombreUser.get(position).toString());
             tvDate.setText(fechaComent.get(position).toString());
             tvComent.setText(comentForo.get(position).toString());
-            //tvNumAnswers.setText
-            //iconoComents.set
+            tvNumAnswers.setText(numAnswers.get(position).toString());
 
             return viewGroup;
         }

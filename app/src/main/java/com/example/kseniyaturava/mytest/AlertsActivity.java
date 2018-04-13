@@ -25,6 +25,7 @@ import java.net.URL;
 public class AlertsActivity extends AppCompatActivity {
    private String user;
    private ListView listView;
+    private String titulo;
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,6 +95,9 @@ public class AlertsActivity extends AppCompatActivity {
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
         }
+        Toast.makeText(AlertsActivity.this,
+                "user"+user, Toast.LENGTH_LONG).show();
+
 
         /*la1=(LinearLayout) findViewById(R.id.layout_alert1);
         la2=(LinearLayout) findViewById(R.id.layout_alert2);
@@ -140,12 +144,17 @@ public class AlertsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //QUERYS y CONEXIONES
-                final String QUERY_NOTIFICATIONS = "http://www.webelicurso.hol.es/Notifications.php?user=" + user;
+                final String QUERY_NOTIFICATIONS = "http://www.webelicurso.hol.es/Notifications.php?user="+user;
                 final String notificationsJson = connectDB(QUERY_NOTIFICATIONS);
                 //final String QUERY_USER_DESCR = "http://www.webelicurso.hol.es/ProfileUserDescription.php?user=" + user;
                 //final String DescripJson = connectDB(QUERY_USER_DESCR);
                 //final String QUERY_FORO = "http://www.webelicurso.hol.es/ProfileForos.php?user=" + user;
                 //final String forosJson = connectDB(QUERY_FORO);
+
+                //TODO
+                //user="eli.coca";
+                // final String QUERY_insert = "http://www.webelicurso.hol.es/ForoNotif.php?user="+user+"titulo="+titulo;
+                //connectDB(QUERY_insert);
 
 
                 runOnUiThread(new Runnable() {
@@ -159,7 +168,7 @@ public class AlertsActivity extends AppCompatActivity {
                                     try {
                                         r = objJSON(notificationsJson);
 
-                                        GetNotifications(notificationsJson, user);
+                                      GetNotifications(notificationsJson, user);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -172,45 +181,6 @@ public class AlertsActivity extends AppCompatActivity {
                             };
                             runnable.run();
 
-                            //Get User's description
-                           /* final Runnable runnable1 = new Runnable() {
-                                public void run() {
-                                    int r = 0;
-                                    try {
-                                        r = objJSON(DescripJson);
-
-                                        GetDescription(DescripJson, user);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (r < 0) {
-                                        Toast.makeText(AlertsActivity.this,
-                                                "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            };
-                            runnable1.run();*/
-                            //Get Data for "Foros" TAB
-                          /*  final Runnable runnable2 = new Runnable() {
-                                public void run() {
-                                    int r = 0;
-                                    try {
-                                        //TODO comentario en el foro
-                                        // r = objJSON(commJson);
-                                        // GetComentario(commJson);
-                                        r = objJSON(DescripJson);
-                                        GetForos(forosJson, user);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (r < 0) {
-                                        Toast.makeText(AlertsActivity.this,
-                                                "No se puede establecer la conexión a internet", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            };
-                            runnable2.run();*/
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -269,9 +239,11 @@ public class AlertsActivity extends AppCompatActivity {
         String[] listaTexto = new String[count];
         String[] listaFechas = new String[count];
         String[] listaForos = new String[count];
-        String[] listaCom = new String[count];
-        String[] listaSubc = new String[count];
-        String[] listaIdForo = new String[count];
+        //String[] listaCom = new String[count];
+        //String[] listaSubc = new String[count];
+        //String[] listaIdForo = new String[count];
+        String[] listaUser = new String[count];
+        String[] listaNotif = new String[count];
         Notifications notifications[] = new Notifications[count];
         //String countStr = Integer.toString(count);
 
@@ -282,11 +254,13 @@ public class AlertsActivity extends AppCompatActivity {
             notifications[i].setTexto(jsonArrayChild.optString("Texto"));
             notifications[i].setFecha(jsonArrayChild.optString("Fecha"));
             notifications[i].setTitulo_Film(jsonArrayChild.optString("Titulo_Film"));
-            notifications[i].setId_Comentario(jsonArrayChild.optString("Id_Comentario"));
-            notifications[i].setId_Subcomentario(jsonArrayChild.optString("Id_Subcomentario"));
-            notifications[i].setId_Foro(jsonArrayChild.optString("Id_Foro"));
+            //notifications[i].setId_Comentario(jsonArrayChild.optString("Id_Comentario"));
+            //notifications[i].setId_Subcomentario(jsonArrayChild.optString("Id_Subcomentario"));
+            //notifications[i].setId_Foro(jsonArrayChild.optString("Id_Foro"));
+            notifications[i].setUser(jsonArrayChild.optString("User"));
+            notifications[i].setId_Notificacion(jsonArrayChild.optString("Id_Notificacion"));
 
-            //Toast.makeText(AlertsActivity.this, "sub"+notifications[i].getId_Subcomentario()+"com"+notifications[i].getId_Comentario(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(AlertsActivity.this, "notif"+notifications[i].getId_Notificacion(), Toast.LENGTH_LONG).show();
 
         }
         //loop to set the values from object to the array
@@ -294,18 +268,20 @@ public class AlertsActivity extends AppCompatActivity {
             listaTexto[i] = notifications[i].getTexto();
             listaFechas[i] = notifications[i].getFecha();
             listaForos[i] = notifications[i].getTitulo_Film();
-            listaCom[i] = notifications[i].getId_Comentario();
-            listaSubc[i] = notifications[i].getId_Subcomentario();
-            listaIdForo[i] = notifications[i].getId_Foro();
+            //listaCom[i] = notifications[i].getId_Comentario();
+            //listaSubc[i] = notifications[i].getId_Subcomentario();
+            //listaIdForo[i] = notifications[i].getId_Foro();
+            listaUser[i] = notifications[i].getUser();
+            listaNotif[i] = notifications[i].getId_Notificacion();
 
         }
 
-        displayAdapterUnread(listaTexto, listaFechas, listaForos, user, listaCom, listaSubc, listaIdForo);// display the data from Array in gridview with adapter
+        displayAdapterUnread(listaTexto, listaFechas, listaForos, user, listaUser, listaNotif);// display the data from Array in gridview with adapter
     }
     private void displayAdapterUnread(final String listaTexto[], final String listaFechas[], final String listaForos[],
-                                      String user, final String listaCom[], final String listaSubc[], final String listaIdForo []) {
+                                      String user, final String listaUser[], final String listaNotif[]) {
         listView = (ListView) findViewById(R.id.listView);
-        AdapterNotifications adapter = new AdapterNotifications(this, listaTexto, listaFechas, listaForos, user,  listaCom, listaSubc, listaIdForo);//2nd param. data
+        AdapterNotifications adapter = new AdapterNotifications(this, listaTexto, listaFechas, listaForos, user, listaUser, listaNotif);//2nd param. data
         listView.setAdapter(adapter);
         //Listvie ONCLICK in Adapter, don't works good here
 

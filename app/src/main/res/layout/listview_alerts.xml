@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/layout_header"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
@@ -36,6 +36,7 @@
                 android:id="@+id/layout_header_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -51,19 +52,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Nuevo mensaje en el foro "
+                        android:text="Nuevo mensaje de  "
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tv_header"
+                        android:id="@+id/tv_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Foro"
+                        android:text="TextView"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
+
+                <TextView
+                    android:id="@+id/tv_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Foro"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_date"

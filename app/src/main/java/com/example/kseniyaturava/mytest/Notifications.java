@@ -11,6 +11,17 @@ public class Notifications {
     private String Id_Comentario;
     private String Id_Subcomentario;
     private String Id_Foro;
+    private String User;
+    private String Id_Notificacion;
+
+    public String getId_Notificacion() {
+        return Id_Notificacion;
+    }
+
+    public void setId_Notificacion(String id_Notificacion) {
+        Id_Notificacion = id_Notificacion;
+    }
+
 
     public String getId_Foro() {
         return Id_Foro;
@@ -62,5 +73,11 @@ public class Notifications {
         Fecha = fecha;
     }
 
+    public String getUser() {
+        return User;
+    }
 
+    public void setUser(String user) {
+        User = user;
+    }
 }

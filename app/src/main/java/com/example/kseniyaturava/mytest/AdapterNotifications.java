@@ -9,8 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -24,21 +29,25 @@ public class AdapterNotifications extends ArrayAdapter<String> {
     private final String [] listaFechas;
     private final String [] listaForos;
     private final String user;
-    private final String [] listaCom;
-    private final String [] listaSubc;
-    private final String [] listaIdForo;
+    //private final String [] listaCom;
+    //private final String [] listaSubc;
+    //private final String [] listaIdForo;
+    private final String [] listaUser;
+    private final String [] listaNotif;
 
     public AdapterNotifications(Activity context, String[] listaTexto, String[] listaFechas, String[] listaForos,
-                                String user, String[] listaCom, String[] listaSubc, String[] listaIdForo) {
+                                String user, String[] listaUser, String[] listaNotif) {
         super(context, R.layout.listview_alerts,listaTexto);
         this.context=context;
         this.listaTexto = listaTexto;
         this.listaFechas = listaFechas;
         this.listaForos = listaForos;
         this.user = user;
-        this.listaCom = listaCom;
-        this.listaSubc = listaSubc;
-        this.listaIdForo = listaIdForo;
+        //this.listaCom = listaCom;
+        //this.listaSubc = listaSubc;
+       // this.listaIdForo = listaIdForo;
+        this.listaUser = listaUser;
+        this.listaNotif = listaNotif;
     }
 
     @Override
@@ -50,11 +59,13 @@ public class AdapterNotifications extends ArrayAdapter<String> {
         TextView tv_comment = (TextView) rowView.findViewById(R.id.tv_comment);
         TextView tv_date = (TextView) rowView.findViewById(R.id.tv_date);
         TextView tv_header = (TextView) rowView.findViewById(R.id.tv_header);
+        TextView tv_user = (TextView) rowView.findViewById(R.id.tv_user);
          final LinearLayout layout = (LinearLayout) rowView.findViewById(R.id.layout);
         //imagen.setImageDrawable(dir.getImage());
         tv_date.setText(listaFechas[position]);
         tv_comment.setText(listaTexto[position]);
         tv_header.setText(listaForos[position]);
+        tv_user.setText(listaUser[position]);
         layout.setBackgroundColor(Color.rgb(218,236,241));
         //Picasso.with(context).load(listaImg[position]).fit().centerInside().into(imagen);
 
@@ -63,35 +74,38 @@ public class AdapterNotifications extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 layout.setBackgroundColor(Color.rgb(255,255,255));
+                Toast.makeText(context, "Hello"+user+"notif"+listaNotif[position], Toast.LENGTH_SHORT).show();
 
+               final String QUERY_NOTIFICATIONS =
+                       "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+user+"&notificacion="+listaNotif[position];
+
+              // connectDB(QUERY_NOTIFICATIONS);
                 Thread tr = new Thread() {
                     @Override
                     public void run() {
 
 
                         try{//QUERYS y CONEXIONES
-                        if(listaSubc[position].equalsIgnoreCase("0")) {
-//                            Toast.makeText(context, "n"+listaSubc[position], Toast.LENGTH_SHORT).show();
-                            try {
-                                updateNotification(user, listaCom[position], listaSubc[position], listaIdForo[position]);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }else{}
 
 
+                            updateNotification(QUERY_NOTIFICATIONS);
+//                            Toast.makeText(context, "Hello"+user+"notif"+listaNotif[position], Toast.LENGTH_SHORT).show();
                         /*try{
                             //Runnable to UPDATE Notification to READ
                             context.runOnUiThread(new Runnable() {
                                 public void run() {
 
-
+                                    try {
+                                        updateNotification(user, listaNotif[position]);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
 
                                 }
 
 
-                            });*/
+                            });  */
                         } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -115,19 +129,20 @@ public class AdapterNotifications extends ArrayAdapter<String> {
     }
     //METHODS TO CONNECT WITH BD
 
-    public void updateNotification(String user, String id_coment, String id_subcom, String id_foro)
+    public void updateNotification(String QUERY_NOTIFICATIONS)
             throws IOException{
         URL url=null;
         int respuesta;
 
         try {
-            int foro = Integer.parseInt(id_foro);
+            //int foro = Integer.parseInt(id_foro);
 
-            int coment = Integer.parseInt(id_coment);
+           // int notificacion = Integer.parseInt(notification);
 
-            String QUERY_NOTIFICATIONS =
-                    "http://www.webelicurso.hol.es/NotificatinUpdate.php?foro="+foro+"&coment="+coment;
+            //String QUERY_NOTIFICATIONS =
+              //      "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+user+"&notificacion="+notificacion;
 
+          //  Toast.makeText(context, "Hello"+user+"notif"+notificacion, Toast.LENGTH_SHORT).show();
 
            // final String QUERY_NOTIFICATIONS =
              //       "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+ user;
@@ -141,6 +156,29 @@ public class AdapterNotifications extends ArrayAdapter<String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public String connectDB(String QUERY) {
+        URL url = null;
+        String linea = "";
+        int respuesta = 0;
+        StringBuilder resul = null;
+
+        try {
+            url = new URL(QUERY);
+            HttpURLConnection conection = (HttpURLConnection) url.openConnection();
+            respuesta = conection.getResponseCode();
+            resul = new StringBuilder();
+            if (respuesta == HttpURLConnection.HTTP_OK) {
+                InputStream in = new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                while ((linea = reader.readLine()) != null) {
+                    resul.append(linea);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
     }
 
 }

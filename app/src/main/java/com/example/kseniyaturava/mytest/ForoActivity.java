@@ -1,8 +1,9 @@
 package com.example.kseniyaturava.mytest;
 
-        import android.app.ProgressDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;

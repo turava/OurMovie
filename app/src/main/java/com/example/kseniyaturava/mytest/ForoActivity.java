@@ -1,39 +1,37 @@
 package com.example.kseniyaturava.mytest;
 
-        import android.app.ProgressDialog;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.graphics.drawable.AnimationDrawable;
-        import android.os.Bundle;
-        import android.support.annotation.DrawableRes;
-        import android.support.v7.app.AppCompatActivity;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AutoCompleteTextView;
-        import android.widget.BaseAdapter;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-        import java.io.BufferedInputStream;
-        import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.io.InputStreamReader;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
-        import java.util.Date;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -272,6 +270,7 @@ public class ForoActivity extends AppCompatActivity {
                             try {
                                 sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
                                 //guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
+                                createNotification(tvUserName.getText().toString().trim(),text_movie.getText().toString());
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -308,6 +307,23 @@ public class ForoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return res;
+    }
+    //After the coment was uploaded to bd, insert notification to users from the same foro
+    public void createNotification(String user, String titulo)
+    {
+        URL url=null;
+        int respuesta;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/ForoNotif.php?user="+user+"titulo="+titulo);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //el valor de numComents que coje es de la columna Id_Subcomentario de la tabla comentarios, ya que son los

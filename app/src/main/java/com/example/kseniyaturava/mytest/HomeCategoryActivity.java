@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kseniyaturava.mytest.Adapters.AdapterItem;
+import com.example.kseniyaturava.mytest.Objects.Peliculas;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

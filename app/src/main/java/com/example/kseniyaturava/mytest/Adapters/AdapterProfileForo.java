@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.kseniyaturava.mytest.ForoActivity;
+import com.example.kseniyaturava.mytest.R;
 import com.squareup.picasso.Picasso;
 
 /**

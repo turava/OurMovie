@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.kseniyaturava.mytest.Adapters.RecyclerViewAdapter;
+import com.example.kseniyaturava.mytest.Objects.Peliculas;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

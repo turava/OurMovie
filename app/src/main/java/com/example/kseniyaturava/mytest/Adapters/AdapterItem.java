@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.example.kseniyaturava.mytest.R;
 import com.squareup.picasso.Picasso;
 
 /**

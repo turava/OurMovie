@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,18 +7,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.example.kseniyaturava.mytest.R;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by kseniyaturava on 2/4/18.
+ * Created by kseniyaturava on 7/4/18.
  */
 
-public class Adapterlv extends ArrayAdapter<String> {
+public class AdapterProfileFavorites  extends ArrayAdapter<String> {
     private final Activity context;
     private final String [] listaImg;
 
-    public Adapterlv (Activity context, String [] listaImg) {
-        super(context, R.layout.listview_main,listaImg);
+    public AdapterProfileFavorites(Activity context, String[] listaImg, String[] listaTitulo) {
+        super(context, R.layout.cardview_profile_favoritas,listaImg);
         this.context=context;
         this.listaImg = listaImg;
     }
@@ -26,7 +27,7 @@ public class Adapterlv extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.listview_main, null,true);
+        View rowView=inflater.inflate(R.layout.cardview_profile_favoritas, null,true);
 
         ImageView imagen = (ImageView) rowView.findViewById(R.id.imagen);
         //imagen.setImageDrawable(dir.getImage());
@@ -36,5 +37,4 @@ public class Adapterlv extends ArrayAdapter<String> {
         return rowView;
     }
 }
-
 

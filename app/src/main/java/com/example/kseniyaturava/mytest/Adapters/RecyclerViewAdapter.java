@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.kseniyaturava.mytest.MovieActivity;
+import com.example.kseniyaturava.mytest.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

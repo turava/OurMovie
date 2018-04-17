@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Objects;
 
 /**
  * Created by kseniyaturava on 5/4/18.

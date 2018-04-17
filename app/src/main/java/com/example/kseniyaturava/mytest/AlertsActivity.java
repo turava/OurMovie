@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.kseniyaturava.mytest.Adapters.AdapterNotifications;
+import com.example.kseniyaturava.mytest.Objects.Notifications;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

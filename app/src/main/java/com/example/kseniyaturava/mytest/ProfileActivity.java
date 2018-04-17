@@ -17,6 +17,10 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kseniyaturava.mytest.Adapters.AdapterProfileFavorites;
+import com.example.kseniyaturava.mytest.Adapters.AdapterProfileForo;
+import com.example.kseniyaturava.mytest.Objects.Peliculas;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

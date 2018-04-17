@@ -1,296 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_foro"
+    tools:context="com.example.kseniyaturava.mytest.MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e5e6e4"
-    android:orientation="vertical"
-    android:layout_gravity="top"
-    tools:context="com.example.kseniyaturava.mytest.MainActivity">
-
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:scrollbarStyle="insideInset">
 
     <LinearLayout
-        android:id="@+id/layout_foro1"
+        android:id="@+id/activity_foro"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#e5e6e4"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layout_movie"
+            android:id="@+id/layout_foro"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="0dp"
-            android:background="@color/colorBlanco"
+            android:layout_height="wrap_content"
+            android:background="#e5e6e4"
+            android:layout_gravity="top"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layout_movie"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/img_movie"
-                        android:layout_width="60dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/Movie"
-                        android:scaleType="fitXY"
-                        tools:ignore="NestedWeights" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="260dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/colorBlanco"
-                    android:orientation="vertical"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:id="@+id/text_movie"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_weight="1"
-                        android:text="@string/title_movie_foro"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/text_director"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/director_foro" />
-
-                    <TextView
-                        android:id="@+id/text_year"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/date_movie" />
-
-                </LinearLayout>
+                android:layout_marginBottom="0dp"
+                android:background="@color/colorBlanco"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="20dp">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/button_info"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_movie"
+                            android:layout_width="60dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/Movie"
+                            android:scaleType="fitXY"
+                            tools:ignore="NestedWeights" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:background="@color/colorBlanco"
-                        android:contentDescription="@string/icon_info"
-                        android:scaleType="fitXY"
-                        app:srcCompat="@drawable/ic_info" />
+                        android:orientation="vertical"
+                        android:paddingStart="10dp">
+
+                        <TextView
+                            android:id="@+id/text_movie"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_weight="1"
+                            android:text="@string/title_movie_foro"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:ignore="NestedWeights" />
+
+                        <TextView
+                            android:id="@+id/text_director"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/director_foro" />
+
+                        <TextView
+                            android:id="@+id/text_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/date_movie" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="20dp">
+
+                        <ImageButton
+                            android:id="@+id/button_info"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorBlanco"
+                            android:contentDescription="@string/icon_info"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/ic_info" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <ListView
+            <ListView
             android:id="@+id/listview_coments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#BBDEFB">
 
-        </ListView>
+            </ListView>
 
-        <LinearLayout
-            android:id="@+id/layout_inputReply"
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="top"
-                android:background="@drawable/line_top_foro" />
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="0"
+            android:background="@color/colorBlanco"
+            android:clipToPadding="false"
+            android:isScrollContainer="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/layout_input"
+                    android:id="@+id/layout_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/button_addFilesReply"
+                    <TextView
+                        android:id="@+id/tvEscribir"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_weight="1"
                         android:background="@color/colorBlanco"
-                        android:contentDescription="@string/icon_addfile"
+                        android:paddingStart="10dp"
                         android:paddingTop="6dp"
-                        design:srcCompat="@drawable/ic_file" />
+                        android:text="Texto:" />
 
                     <LinearLayout
-                        android:id="@+id/layout_2inputReply"
+                        android:id="@+id/layout_input"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/botton_style"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:orientation="vertical">
 
                         <AutoCompleteTextView
-                            android:id="@+id/input_reply"
+                            android:id="@+id/input_message"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/botton_style"
                             android:fontFamily="sans-serif"
                             android:hint="@string/mensaje"
+                            android:minHeight="30dp"
                             android:textAlignment="viewStart"
                             android:textAppearance="@style/TextAppearance.AppCompat"
                             android:textColor="@color/background2"
                             android:textColorHighlight="@android:color/transparent"
                             android:textColorLink="@color/foroButton"
                             android:textCursorDrawable="@color/foroButton" />
+
                     </LinearLayout>
 
                     <ImageButton
-                        android:id="@+id/button_sendReply"
+                        android:id="@+id/button_send"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/colorBlanco"
                         android:contentDescription="@string/icon_sendMessage"
                         design:srcCompat="@android:drawable/ic_menu_send" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/layout_foro1"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:background="@color/colorBlanco">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/layout_file"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView33"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_weight="1"
-                    design:srcCompat="@drawable/blade19" />
-
-                <ImageView
-                    android:id="@+id/imageView34"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_weight="1"
-                    design:srcCompat="@drawable/blade2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_type"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_height="4dp"
+                android:layout_gravity="top"
+                android:background="@drawable/shadow" />
 
-                <ImageButton
-                    android:id="@+id/button_addFiles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorBlanco"
-                    android:contentDescription="@string/icon_addfile"
-                    android:paddingTop="6dp"
-                    design:srcCompat="@drawable/ic_file" />
-
-                <LinearLayout
-                    android:id="@+id/layour_input"
-                    android:layout_width="240dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/input_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/botton_style"
-                        android:fontFamily="sans-serif"
-                        android:hint="@string/mensaje"
-                        android:minHeight="30dp"
-                        android:textAlignment="viewStart"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textColor="@color/background2"
-                        android:textColorHighlight="@android:color/transparent"
-                        android:textColorLink="@color/foroButton"
-                        android:textCursorDrawable="@color/foroButton" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/button_send"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/colorBlanco"
-                    android:contentDescription="@string/icon_sendMessage"
-                    design:srcCompat="@android:drawable/ic_menu_send" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_gravity="top"
-            android:background="@drawable/shadow" />
+        </FrameLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

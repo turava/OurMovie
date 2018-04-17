@@ -338,6 +338,8 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
+    //el valor de numComents que coje es de la columna Id_Subcomentario de la tabla comentarios, ya que son los
+    //subcomentarios escritos sobre un comentario, no el total de comentarios escritos del foro
     public String recogerDatosComents (String titulo) throws IOException {
         URL url=null;
         String linea="";
@@ -388,6 +390,7 @@ public class ForoActivity extends AppCompatActivity {
         return resul.toString();
     }
 
+    //suma 1 al campo Num_Coments de la tabla peliculas cada vez que alguien añade un comentario al foro
     public void sumarComent(String comentario, String titulo)  throws IOException{
         URL url=null;
         int respuesta;

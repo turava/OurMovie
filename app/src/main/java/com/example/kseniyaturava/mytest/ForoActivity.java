@@ -67,7 +67,6 @@ public class ForoActivity extends AppCompatActivity {
         button_info = (ImageButton) findViewById(R.id.button_info);
         button_send = (ImageButton) findViewById(R.id.button_send);
         lvForo=(ListView)findViewById(R.id.listview_coments);
-        imgUser=(ImageView) findViewById(R.id.imgUser);
         imgMovie=(ImageView) findViewById(R.id.img_movie);
 
         Bundle bundle=this.getIntent().getExtras();
@@ -239,6 +238,19 @@ public class ForoActivity extends AppCompatActivity {
             tvNumAnswers= (TextView) viewGroup.findViewById(R.id.tvNumAnswers);
             btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
             iconoComents=(ImageView) viewGroup.findViewById(R.id.iconoComents);
+            imgUser = (ImageView) viewGroup.findViewById(R.id.imgUser);
+
+            AnimationDrawable imguser=(AnimationDrawable) imgUser.getDrawable();
+            imguser.start();
+            imgUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String user=tvUserName.getText().toString();
+                    Intent intent = new Intent(ForoActivity.this, ProfileActivity.class);
+                    intent.putExtra("User", user);
+                    startActivity(intent);
+                }
+            });
 
             btReply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -368,7 +380,7 @@ public class ForoActivity extends AppCompatActivity {
         int respuesta;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/ComentUpdate.php?Num_Coments="+comentario+"&Titulo_Film="+titulo);
+            url=new URL("http://www.webelicurso.hol.es/ComentUpdate2.php?Num_Coments="+comentario+"&Titulo_Film="+titulo);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){

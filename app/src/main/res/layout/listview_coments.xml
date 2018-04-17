@@ -32,7 +32,7 @@
                 android:contentDescription="imagen"
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
-                design:srcCompat="@android:drawable/ic_dialog_map"/>
+                android:src="@drawable/imguser"/>
 
             <LinearLayout
                 android:id="@+id/layout_datosUser"

@@ -67,7 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:text="Cuenta sobre ti"
+                        android:text="¿Qué te cuentas?"
                         android:textSize="18sp" />
                 </LinearLayout>
 

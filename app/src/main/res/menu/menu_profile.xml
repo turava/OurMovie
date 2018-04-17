@@ -5,7 +5,7 @@
 
     <item android:id="@+id/menuProfile"
         android:title="Search"
-        android:icon="@drawable/ic_settings_18"
+        android:icon="@drawable/ic_settings24dp"
 
         app:showAsAction="always"  >
     </item>

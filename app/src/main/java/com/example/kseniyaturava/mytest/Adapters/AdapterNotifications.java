@@ -1,4 +1,4 @@
-package com.example.kseniyaturava.mytest;
+package com.example.kseniyaturava.mytest.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.kseniyaturava.mytest.ForoActivity;
+import com.example.kseniyaturava.mytest.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

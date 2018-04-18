@@ -35,10 +35,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-    private String titulo2, user2;
+    private String titulo2, user2, idForo, idUser;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
@@ -111,16 +112,45 @@ public class ForoActivity extends AppCompatActivity {
                 comentForo.add(tvComent.getText());
                 nombreUser.add(tvUserName.getText());
 
-
                 Thread tr=new Thread(){
                     @Override
                     public void run() {
                         try {
                             sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            guardarComent(text_movie.getText().toString(), user2, input_message.getText().toString(), tvDate.getText().toString());
+                            final String res3 = guardarComent(text_movie.getText().toString(), user2);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    int r = objJSON(res3);
+                                    if (r > 0) {
+                                        int inicio=0;
+                                        int longitud;
+                                        String palabra;
+                                        for (int i=0;i<res3.length();i++) {
+                                            if ((res3.charAt(i) == (',') && res3.charAt(i + 1) == ('"')) || (res3.charAt(i) == ('}') && res3.charAt(i + 1) == (']'))) {
+                                                longitud = i;
+                                                palabra = res3.substring(inicio, longitud);
+                                                inicio = longitud + 1;
+                                                if (palabra.contains("Id_Foro")) {
+                                                    idForo = palabra.substring(13, palabra.length() - 1);
+                                                } else if (palabra.contains("Id_User")) {
+                                                    idUser = palabra.substring(11, palabra.length() - 1);
+                                                }
+                                            }
+                                        }
+                                        Thread tr5=new Thread(){
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    guardarComent2(idForo.toString(), idUser.toString(), input_message.getText().toString(), tvDate.getText().toString());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        };
+                                        tr5.start();
+                                    }
+
                                     Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
                                 }
                             });
@@ -367,6 +397,7 @@ public class ForoActivity extends AppCompatActivity {
         return resul.toString();
     }
 
+    //
     public String recogerDatosPelis (String titulo) throws IOException {
         URL url=null;
         String linea="";
@@ -409,13 +440,39 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    //guarda en tabla omentarios los datos del nuevo coment
-    public void guardarComent(String titulo, String user, String mensaje, String fecha)  throws IOException{
+    //primera parte para guardar los coments en la tabla comentarios. Aquí usamos título y user para conseguir id_foro y id_user
+    public String guardarComent(String titulo, String user)  throws IOException{
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Titulo_Film="+titulo+"&User="+user);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+    //segunda parte para guardar los coments en la tabla comentarios. Aquí usamos id_foro y id_user conseguidos antes, más el
+    //comentario y fecha para guardar toda la info en la tabla comentarios
+    public void guardarComent2(String idForo, String idUser, String comentario, String fecha) throws IOException{
         URL url=null;
         int respuesta;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Titulo="+titulo+"&User="+user+"&Texto="+mensaje+"&Fecha="+fecha);
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert2.php?Id_Foro="+idForo+"&Id_User="+idUser+"&Texto="+comentario+"&Fecha="+fecha);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){

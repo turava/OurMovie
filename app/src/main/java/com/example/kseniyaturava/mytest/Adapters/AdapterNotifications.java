@@ -21,6 +21,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by kseniyaturava on 8/4/18.
@@ -32,25 +36,21 @@ public class AdapterNotifications extends ArrayAdapter<String> {
     private final String [] listaFechas;
     private final String [] listaForos;
     private final String user;
-    //private final String [] listaCom;
-    //private final String [] listaSubc;
-    //private final String [] listaIdForo;
     private final String [] listaUser;
     private final String [] listaNotif;
+    private final String [] listaLeido;
 
     public AdapterNotifications(Activity context, String[] listaTexto, String[] listaFechas, String[] listaForos,
-                                String user, String[] listaUser, String[] listaNotif) {
+                                String user, String[] listaUser, String[] listaNotif, String[] listaLeido) {
         super(context, R.layout.listview_alerts,listaTexto);
         this.context=context;
         this.listaTexto = listaTexto;
         this.listaFechas = listaFechas;
         this.listaForos = listaForos;
         this.user = user;
-        //this.listaCom = listaCom;
-        //this.listaSubc = listaSubc;
-       // this.listaIdForo = listaIdForo;
         this.listaUser = listaUser;
         this.listaNotif = listaNotif;
+        this.listaLeido = listaLeido;
     }
 
     @Override
@@ -64,51 +64,31 @@ public class AdapterNotifications extends ArrayAdapter<String> {
         TextView tv_header = (TextView) rowView.findViewById(R.id.tv_header);
         TextView tv_user = (TextView) rowView.findViewById(R.id.tv_user);
          final LinearLayout layout = (LinearLayout) rowView.findViewById(R.id.layout);
-        //imagen.setImageDrawable(dir.getImage());
-        tv_date.setText(listaFechas[position]);
+
+       //Write
+        tv_date.setText(parseDate(listaFechas[position]));//parsed date from function
         tv_comment.setText(listaTexto[position]);
         tv_header.setText(listaForos[position]);
         tv_user.setText(listaUser[position]);
-        layout.setBackgroundColor(Color.rgb(218,236,241));
-        //Picasso.with(context).load(listaImg[position]).fit().centerInside().into(imagen);
+        Toast.makeText(context, "1"+listaLeido[position], Toast.LENGTH_SHORT).show();
 
-
+        if(Integer.parseInt(listaLeido[position]) == 0)
+        {
+            layout.setBackgroundColor(Color.rgb(218,236,241));
+        }
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layout.setBackgroundColor(Color.rgb(255,255,255));
-                Toast.makeText(context, "Hello"+user+"notif"+listaNotif[position], Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "Hello"+user+"notif"+listaNotif[position], Toast.LENGTH_SHORT).show();
 
                final String QUERY_NOTIFICATIONS =
                        "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+user+"&notificacion="+listaNotif[position];
-
-              // connectDB(QUERY_NOTIFICATIONS);
                 Thread tr = new Thread() {
                     @Override
                     public void run() {
-
-
                         try{//QUERYS y CONEXIONES
-
-
                             updateNotification(QUERY_NOTIFICATIONS);
-//                            Toast.makeText(context, "Hello"+user+"notif"+listaNotif[position], Toast.LENGTH_SHORT).show();
-                        /*try{
-                            //Runnable to UPDATE Notification to READ
-                            context.runOnUiThread(new Runnable() {
-                                public void run() {
-
-                                    try {
-                                        updateNotification(user, listaNotif[position]);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                    Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
-
-                                }
-
-
-                            });  */
                         } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -130,26 +110,40 @@ public class AdapterNotifications extends ArrayAdapter<String> {
 
         return rowView;
     }
+    //Parse Date and Time
+    private String parseDate(String listaFecha) {
+        //Calendar in spanish
+        Locale locale = new Locale ( "es" , "ES" );
+       // el que parsea
+        SimpleDateFormat parseador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat parseadorHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // el que formatea
+        //SimpleDateFormat formateador = new SimpleDateFormat("EEEE MMM dd/MM/yy", locale);
+        SimpleDateFormat formateador = new SimpleDateFormat("dd MMMM", locale);
+        SimpleDateFormat formateadorHora = new SimpleDateFormat("HH:mm");
+
+        Date date = null;
+        try {
+            date = parseador.parse(listaFecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date hora = null;
+        try {
+            hora = parseadorHora.parse(listaFecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formateador.format(date)+" a las "+formateadorHora.format(hora);
+    }
+
     //METHODS TO CONNECT WITH BD
 
     public void updateNotification(String QUERY_NOTIFICATIONS)
             throws IOException{
         URL url=null;
         int respuesta;
-
         try {
-            //int foro = Integer.parseInt(id_foro);
-
-           // int notificacion = Integer.parseInt(notification);
-
-            //String QUERY_NOTIFICATIONS =
-              //      "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+user+"&notificacion="+notificacion;
-
-          //  Toast.makeText(context, "Hello"+user+"notif"+notificacion, Toast.LENGTH_SHORT).show();
-
-           // final String QUERY_NOTIFICATIONS =
-             //       "http://www.webelicurso.hol.es/NotificatinUpdate.php?user="+ user;
-
             url=new URL(QUERY_NOTIFICATIONS);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();

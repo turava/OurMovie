@@ -36,7 +36,9 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SettingsProfile" />
-        <activity android:name=".SettingsPassword"></activity>
+        <activity android:name=".SettingsPassword">
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

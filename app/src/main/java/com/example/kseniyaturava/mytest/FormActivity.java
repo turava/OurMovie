@@ -1,17 +1,16 @@
 package com.example.kseniyaturava.mytest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -29,6 +28,7 @@ public class FormActivity extends AppCompatActivity {
 
     Button sendForm;
     EditText etTitulo, etDirector, etActor1, etActor2, etActor3, etActor4, etAño, etGenero, etDescripcion;
+    private String user;
 
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
@@ -39,27 +39,33 @@ public class FormActivity extends AppCompatActivity {
                     //type inside the instructions TODO
                     switch (item.getItemId()) {
                         case R.id.homeItem:
-                            //setTitle("Explore");//Set the title ActionBar
-                            //instance Activity
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Intent intent0 = new Intent(getApplicationContext(), MainActivity.class);
+                            intent0.putExtra("User", user);
+                            startActivity(intent0);
                            return true;
                         case R.id.searchItem:
-                            // setTitle("Search");
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                            //startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                           // startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                            Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
+                            intent1.putExtra("User", user);
+                            startActivity(intent1);
                             return true;
                         case R.id.formItem:
-                            // setTitle("Form");
-                            startActivity(new Intent(getApplicationContext(), FormActivity.class));
-                            // startActivity(new Intent(MainActivity.this, FormActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), FormActivity.class));
+                            Intent intent2 = new Intent(getApplicationContext(), FormActivity.class);
+                            intent2.putExtra("User", user);
+                            startActivity(intent2);
                             return true;
                         case R.id.notificationItem:
-                            // setTitle("Notifications");
-                            startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                           // startActivity(new Intent(getApplicationContext(), AlertsActivity.class));
+                            Intent intent3 = new Intent(getApplicationContext(), AlertsActivity.class);
+                            intent3.putExtra("User", user);
+                            startActivity(intent3);
                             return true;
                         case R.id.profileItem:
-                            // setTitle("Profile");
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            Intent intent4 = new Intent(getApplicationContext(), ProfileActivity.class);
+                            intent4.putExtra("User", user);
+                            startActivity(intent4);
                             return true;
                     }
                     // finish();
@@ -86,6 +92,24 @@ public class FormActivity extends AppCompatActivity {
         etDescripcion =(EditText) findViewById(R.id.etDescripcion);
 
         setTitle("Form");
+
+        // Customize action bar title to center and other styles
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_form);
+
+        //  Back Button
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back36);
+
+
+        //Recoge user
+        Bundle bundle = this.getIntent().getExtras();
+        if ((bundle != null)&&(bundle.getString("User")!=null)){
+           user = bundle.getString("User");
+            Toast.makeText(FormActivity.this,
+                    user, Toast.LENGTH_LONG).show();
+        }
+
         //here the icon change color
         Menu menu = BottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -132,5 +156,20 @@ public class FormActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    /*
+      //Button back
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+     */
 
 }

@@ -35,10 +35,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-    private String titulo2, user;
+    private String titulo2, user2, idForo, idUser;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
@@ -83,15 +84,16 @@ public class ForoActivity extends AppCompatActivity {
         tvNumAnswers= (TextView) findViewById(R.id.tvNumAnswers);
 
         Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-                //continua del If: &&(bundle.getString("User")!=null)){
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null) && (bundle.getString("User")!=null)){
             titulo2=bundle.getString("Titulo");
-            user=bundle.getString("User");
+            user2=bundle.getString("User");
             text_movie.setText(titulo2);
-            //tvUserName.setText(user);
+            recogerDatosForo();
+        } else{
+            Toast.makeText(ForoActivity.this, "Ha ocurrido algún error con la peli o el user", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ForoActivity.this, MainActivity.class);
+            startActivity(intent);
         }
-
-        recogerDatosForo();
 
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,20 +103,54 @@ public class ForoActivity extends AppCompatActivity {
                 int numFinal=num+1;
                 String valorFinal=String.valueOf(numFinal);
                 tvNumAnswers.setText(valorFinal);
-                //text_numberAnswers1.setText(valorFinal);
+
                 tvDate.setText(getDate());
-                tvComent.setText(input_message.getText());
-                //tvUserName.setText(user);
-                //imgUser.setImage(user);
+                tvComent.setText(input_message.getText().toString());
+                tvUserName.setText(user2);
+
+                fechaComent.add(tvDate.getText());
+                comentForo.add(tvComent.getText());
+                nombreUser.add(tvUserName.getText());
+
                 Thread tr=new Thread(){
                     @Override
                     public void run() {
                         try {
                             sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            guardarComent(text_movie.getText().toString(), user, input_message.getText().toString(), tvDate.getText().toString());
+                            final String res3 = guardarComent(text_movie.getText().toString(), user2);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    int r = objJSON(res3);
+                                    if (r > 0) {
+                                        int inicio=0;
+                                        int longitud;
+                                        String palabra;
+                                        for (int i=0;i<res3.length();i++) {
+                                            if ((res3.charAt(i) == (',') && res3.charAt(i + 1) == ('"')) || (res3.charAt(i) == ('}') && res3.charAt(i + 1) == (']'))) {
+                                                longitud = i;
+                                                palabra = res3.substring(inicio, longitud);
+                                                inicio = longitud + 1;
+                                                if (palabra.contains("Id_Foro")) {
+                                                    idForo = palabra.substring(13, palabra.length() - 1);
+                                                } else if (palabra.contains("Id_User")) {
+                                                    idUser = palabra.substring(11, palabra.length() - 1);
+                                                }
+                                            }
+                                        }
+                                        Thread tr5=new Thread(){
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    guardarComent2(idForo.toString(), idUser.toString(), input_message.getText().toString(), tvDate.getText().toString());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        };
+                                        tr5.start();
+                                    }
+
                                     Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
                                 }
                             });
@@ -145,7 +181,6 @@ public class ForoActivity extends AppCompatActivity {
         nombreUser.clear();
         comentForo.clear();
         fechaComent.clear();
-        //numAnswers.clear();
 
         final ProgressDialog progressDialog=new ProgressDialog(ForoActivity.this);
         progressDialog.setMessage("Cargando datos...");
@@ -201,7 +236,6 @@ public class ForoActivity extends AppCompatActivity {
                                         nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
                                         comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
                                         fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
-                                        //numAnswers.add(jsonArray.getJSONObject(i).getString("numComents"));
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {
@@ -253,14 +287,20 @@ public class ForoActivity extends AppCompatActivity {
             btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
             imgUser = (ImageView) viewGroup.findViewById(R.id.imgUser);
 
+            tvUserName.setText(nombreUser.get(position).toString());
+            tvDate.setText(fechaComent.get(position).toString());
+            tvComent.setText(comentForo.get(position).toString());
+
             AnimationDrawable imguser=(AnimationDrawable) imgUser.getDrawable();
             imguser.start();
+
+            //no funciona bien, al clickar en la imagen, a veces redirige al Profile del user correcto pero a veces no
             imgUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String user=tvUserName.getText().toString();
+                    user2=tvUserName.getText().toString();
                     Intent intent = new Intent(ForoActivity.this, ProfileActivity.class);
-                    intent.putExtra("User", user);
+                    intent.putExtra("User", user2);
                     startActivity(intent);
                 }
             });
@@ -273,7 +313,6 @@ public class ForoActivity extends AppCompatActivity {
                     int numFinal=num+1;
                     String valorFinal=String.valueOf(numFinal);
                     tvNumAnswers.setText(valorFinal);
-                    //text_numberAnswers1.setText(valorFinal);
                     //text_dateReply.setText(getDate());
                     //text_reply.setText(input_reply.getText());
                     Thread tr3=new Thread(){
@@ -298,11 +337,6 @@ public class ForoActivity extends AppCompatActivity {
 
                 }
             });
-
-            tvUserName.setText(nombreUser.get(position).toString());
-            tvDate.setText(fechaComent.get(position).toString());
-            tvComent.setText(comentForo.get(position).toString());
-            //tvNumAnswers.setText(numAnswers.get(position).toString());
 
             return viewGroup;
         }
@@ -338,8 +372,6 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    //el valor de numComents que coje es de la columna Id_Subcomentario de la tabla comentarios, ya que son los
-    //subcomentarios escritos sobre un comentario, no el total de comentarios escritos del foro
     public String recogerDatosComents (String titulo) throws IOException {
         URL url=null;
         String linea="";
@@ -365,6 +397,7 @@ public class ForoActivity extends AppCompatActivity {
         return resul.toString();
     }
 
+    //
     public String recogerDatosPelis (String titulo) throws IOException {
         URL url=null;
         String linea="";
@@ -407,13 +440,39 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    //guarda en tabla omentarios los datos del nuevo coment
-    public void guardarComent(String titulo, String user, String mensaje, String fecha)  throws IOException{
+    //primera parte para guardar los coments en la tabla comentarios. Aquí usamos título y user para conseguir id_foro y id_user
+    public String guardarComent(String titulo, String user)  throws IOException{
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Titulo_Film="+titulo+"&User="+user);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+    //segunda parte para guardar los coments en la tabla comentarios. Aquí usamos id_foro y id_user conseguidos antes, más el
+    //comentario y fecha para guardar toda la info en la tabla comentarios
+    public void guardarComent2(String idForo, String idUser, String comentario, String fecha) throws IOException{
         URL url=null;
         int respuesta;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Titulo="+titulo+"&User="+user+"&Texto="+mensaje+"&Fecha="+fecha);
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert2.php?Id_Foro="+idForo+"&Id_User="+idUser+"&Texto="+comentario+"&Fecha="+fecha);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){
@@ -424,9 +483,10 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
+    //saca hora de GMT+00:00 cuando debería ser GMT+02:00, pdte averiguar cómo arreglarlo
     public String getDate(){
         Date dt = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String date = df.format(dt);
         return date;
     }

@@ -81,7 +81,8 @@ public class MovieActivity extends AppCompatActivity {
         button_foro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                titulo=String.valueOf(text_title.getText());
+                titulo=String.valueOf(text_title.getText().toString());
+                user=String.valueOf(user);
                 Intent intent = new Intent(MovieActivity.this, ForoActivity.class);
                 intent.putExtra("Titulo", titulo);
                 intent.putExtra("User", user);

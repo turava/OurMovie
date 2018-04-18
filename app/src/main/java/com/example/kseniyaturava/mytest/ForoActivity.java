@@ -38,7 +38,7 @@ import java.util.Date;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-    private String titulo2, user;
+    private String titulo2, user2;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
@@ -83,15 +83,16 @@ public class ForoActivity extends AppCompatActivity {
         tvNumAnswers= (TextView) findViewById(R.id.tvNumAnswers);
 
         Bundle bundle=this.getIntent().getExtras();
-        if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
-                //continua del If: &&(bundle.getString("User")!=null)){
+        if ((bundle!=null)&&(bundle.getString("Titulo")!=null) && (bundle.getString("User")!=null)){
             titulo2=bundle.getString("Titulo");
-            user=bundle.getString("User");
+            user2=bundle.getString("User");
             text_movie.setText(titulo2);
-            //tvUserName.setText(user);
+            recogerDatosForo();
+        } else{
+            Toast.makeText(ForoActivity.this, "Ha ocurrido algún error con la peli o el user", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ForoActivity.this, MainActivity.class);
+            startActivity(intent);
         }
-
-        recogerDatosForo();
 
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,17 +102,22 @@ public class ForoActivity extends AppCompatActivity {
                 int numFinal=num+1;
                 String valorFinal=String.valueOf(numFinal);
                 tvNumAnswers.setText(valorFinal);
-                //text_numberAnswers1.setText(valorFinal);
+
                 tvDate.setText(getDate());
-                tvComent.setText(input_message.getText());
-                //tvUserName.setText(user);
-                //imgUser.setImage(user);
+                tvComent.setText(input_message.getText().toString());
+                tvUserName.setText(user2);
+
+                fechaComent.add(tvDate.getText());
+                comentForo.add(tvComent.getText());
+                nombreUser.add(tvUserName.getText());
+
+
                 Thread tr=new Thread(){
                     @Override
                     public void run() {
                         try {
                             sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            guardarComent(text_movie.getText().toString(), user, input_message.getText().toString(), tvDate.getText().toString());
+                            guardarComent(text_movie.getText().toString(), user2, input_message.getText().toString(), tvDate.getText().toString());
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -145,7 +151,6 @@ public class ForoActivity extends AppCompatActivity {
         nombreUser.clear();
         comentForo.clear();
         fechaComent.clear();
-        //numAnswers.clear();
 
         final ProgressDialog progressDialog=new ProgressDialog(ForoActivity.this);
         progressDialog.setMessage("Cargando datos...");
@@ -201,7 +206,6 @@ public class ForoActivity extends AppCompatActivity {
                                         nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
                                         comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
                                         fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
-                                        //numAnswers.add(jsonArray.getJSONObject(i).getString("numComents"));
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {
@@ -253,14 +257,20 @@ public class ForoActivity extends AppCompatActivity {
             btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
             imgUser = (ImageView) viewGroup.findViewById(R.id.imgUser);
 
+            tvUserName.setText(nombreUser.get(position).toString());
+            tvDate.setText(fechaComent.get(position).toString());
+            tvComent.setText(comentForo.get(position).toString());
+
             AnimationDrawable imguser=(AnimationDrawable) imgUser.getDrawable();
             imguser.start();
+
+            //no funciona bien, al clickar en la imagen, a veces redirige al Profile del user correcto pero a veces no
             imgUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String user=tvUserName.getText().toString();
+                    user2=tvUserName.getText().toString();
                     Intent intent = new Intent(ForoActivity.this, ProfileActivity.class);
-                    intent.putExtra("User", user);
+                    intent.putExtra("User", user2);
                     startActivity(intent);
                 }
             });
@@ -273,7 +283,6 @@ public class ForoActivity extends AppCompatActivity {
                     int numFinal=num+1;
                     String valorFinal=String.valueOf(numFinal);
                     tvNumAnswers.setText(valorFinal);
-                    //text_numberAnswers1.setText(valorFinal);
                     //text_dateReply.setText(getDate());
                     //text_reply.setText(input_reply.getText());
                     Thread tr3=new Thread(){
@@ -298,11 +307,6 @@ public class ForoActivity extends AppCompatActivity {
 
                 }
             });
-
-            tvUserName.setText(nombreUser.get(position).toString());
-            tvDate.setText(fechaComent.get(position).toString());
-            tvComent.setText(comentForo.get(position).toString());
-            //tvNumAnswers.setText(numAnswers.get(position).toString());
 
             return viewGroup;
         }
@@ -338,8 +342,6 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    //el valor de numComents que coje es de la columna Id_Subcomentario de la tabla comentarios, ya que son los
-    //subcomentarios escritos sobre un comentario, no el total de comentarios escritos del foro
     public String recogerDatosComents (String titulo) throws IOException {
         URL url=null;
         String linea="";
@@ -424,9 +426,10 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
+    //saca hora de GMT+00:00 cuando debería ser GMT+02:00, pdte averiguar cómo arreglarlo
     public String getDate(){
         Date dt = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String date = df.format(dt);
         return date;
     }

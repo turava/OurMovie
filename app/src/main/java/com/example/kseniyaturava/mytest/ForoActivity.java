@@ -35,11 +35,11 @@ import java.util.Date;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-    private String titulo2;
+    private String titulo2, user;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, text_numberAnswers1, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
-    ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, button_send, btReply;
+    ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, btSend, btReply;
     AutoCompleteTextView input_reply, input_message;
     ImageView imgUser, imgMovie, iconoComents;
     ListView lvForo;
@@ -66,7 +66,7 @@ public class ForoActivity extends AppCompatActivity {
         text_director =(TextView) findViewById(R.id.text_director);
         text_year =(TextView) findViewById(R.id.text_year);
         button_info = (ImageButton) findViewById(R.id.button_info);
-        button_send = (ImageButton) findViewById(R.id.button_send);
+        btSend = (ImageButton) findViewById(R.id.btSend);
         lvForo=(ListView)findViewById(R.id.listview_coments);
         imgMovie=(ImageView) findViewById(R.id.img_movie);
 
@@ -74,47 +74,46 @@ public class ForoActivity extends AppCompatActivity {
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
                 //continua del If: &&(bundle.getString("User")!=null)){
             titulo2=bundle.getString("Titulo");
-            //String user=bundle.getString("User");
+            user=bundle.getString("User");
             text_movie.setText(titulo2);
             //tvUserName.setText(user);
         }
 
         recogerDatosForo();
 
-        //button_send.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //String valor=String.valueOf(tvNumAnswers.getText());
-                //int num=Integer.parseInt(valor);
-                //int numFinal=num+1;
-                //String valorFinal=String.valueOf(numFinal);
-                //tvNumAnswers.setText(valorFinal);
+        btSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valor=String.valueOf(tvNumAnswers.getText());
+                int num=Integer.parseInt(valor);
+                int numFinal=num+1;
+                String valorFinal=String.valueOf(numFinal);
+                tvNumAnswers.setText(valorFinal);
                 //text_numberAnswers1.setText(valorFinal);
-                //Los 4 campos siguientes deben recogerse de la base, pero de momento los asigno al escribir. Faltará cambiar
-                //tvDate.setText(getDate());
-                //tvComent.setText(input_message.getText());
-                //text_username1.setText(user);
-                //img_user1.setImage(user);
-                //Thread tr=new Thread(){
-                    //@Override
-                    //public void run() {
-                        //try {
-                            //sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            //guardarComent(input_message.getText().toString(), tvDate.getText().toString());
-                            //runOnUiThread(new Runnable() {
-                                //@Override
-                                //public void run() {
-                                    //Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
-                                //}
-                            //});
-                        //} catch (IOException e) {
-                            //e.printStackTrace();
-                        //}
-                    //}
-                //};
-                //tr.start();
-            //}
-        //});
+                tvDate.setText(getDate());
+                tvComent.setText(input_message.getText());
+                //tvUserName.setText(user);
+                //imgUser.setImage(user);
+                Thread tr=new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
+                            guardarComent(text_movie.getText().toString(), user, input_message.getText().toString(), tvDate.getText().toString());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                tr.start();
+            }
+        });
 
         button_info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +139,7 @@ public class ForoActivity extends AppCompatActivity {
         progressDialog.setMessage("Cargando datos...");
         progressDialog.show();
 
-        Thread tr=new Thread(){
+        Thread tr2=new Thread(){
             @Override
             public void run() {
                 try {
@@ -203,7 +202,7 @@ public class ForoActivity extends AppCompatActivity {
                 }
             }
         };
-        tr.start();
+        tr2.start();
     }
 
     private class AdapterForo extends BaseAdapter {
@@ -264,7 +263,7 @@ public class ForoActivity extends AppCompatActivity {
                     //text_numberAnswers1.setText(valorFinal);
                     //text_dateReply.setText(getDate());
                     //text_reply.setText(input_reply.getText());
-                    Thread tr2=new Thread(){
+                    Thread tr3=new Thread(){
                         @Override
                         public void run() {
                             try {
@@ -282,7 +281,7 @@ public class ForoActivity extends AppCompatActivity {
                             }
                         }
                     };
-                    tr2.start();
+                    tr3.start();
 
                 }
             });
@@ -395,12 +394,13 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    public void guardarComent(String mensaje, String fecha)  throws IOException{
+    //guarda en tabla omentarios los datos del nuevo coment
+    public void guardarComent(String titulo, String user, String mensaje, String fecha)  throws IOException{
         URL url=null;
         int respuesta;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Texto="+mensaje+"&Fecha="+fecha);
+            url=new URL("http://www.webelicurso.hol.es/MessageInsert.php?Titulo="+titulo+"&User="+user+"&Texto="+mensaje+"&Fecha="+fecha);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){

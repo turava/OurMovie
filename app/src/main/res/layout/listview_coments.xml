@@ -76,7 +76,7 @@
             android:textSize="16sp" />
 
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:id="@+id/layout_botones"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -86,29 +86,20 @@
 
             <ImageButton
                 android:id="@+id/btReply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="boton"
                 android:background="#ffffff"
                 android:src="@drawable/ic_reply" />
 
-            <ImageView
-                android:id="@+id/iconoComents"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:contentDescription="boton"
-                android:background="#ffffff"
-                android:src="@drawable/ic_chat"/>
-
             <TextView
-                android:id="@+id/tvNumAnswers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tvAnswer"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="0"
+                android:text="Responde a este comentario"
                 android:textAlignment="center"
                 android:textSize="12sp" />
 

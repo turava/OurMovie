@@ -40,7 +40,7 @@ public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
     private String titulo2, user;
 
-    TextView text_movie, text_director, text_year, tvNumAnswers, text_numberAnswers1, tvComent, text_reply,
+    TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
     ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, btSend, btReply;
     AutoCompleteTextView input_reply, input_message;
@@ -49,7 +49,6 @@ public class ForoActivity extends AppCompatActivity {
     ArrayList nombreUser=new ArrayList();
     ArrayList fechaComent=new ArrayList();
     ArrayList comentForo=new ArrayList();
-    ArrayList numAnswers=new ArrayList();
     URL url=null;
 
     @Override
@@ -67,7 +66,6 @@ public class ForoActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back36);
 
 
-        //text_numberAnswers1 = (TextView) findViewById(R.id.text_numberAnswers1);
         //text_reply = (TextView) findViewById(R.id.text_reply);
         //text_reply2 = (TextView) findViewById(R.id.text_reply2);
         //text_comment4 = (TextView) findViewById(R.id.text_comment4);
@@ -81,6 +79,8 @@ public class ForoActivity extends AppCompatActivity {
         btSend = (ImageButton) findViewById(R.id.btSend);
         lvForo=(ListView)findViewById(R.id.listview_coments);
         imgMovie=(ImageView) findViewById(R.id.img_movie);
+        iconoComents=(ImageView) findViewById(R.id.iconoComents);
+        tvNumAnswers= (TextView) findViewById(R.id.tvNumAnswers);
 
         Bundle bundle=this.getIntent().getExtras();
         if ((bundle!=null)&&(bundle.getString("Titulo")!=null)){
@@ -145,7 +145,7 @@ public class ForoActivity extends AppCompatActivity {
         nombreUser.clear();
         comentForo.clear();
         fechaComent.clear();
-        numAnswers.clear();
+        //numAnswers.clear();
 
         final ProgressDialog progressDialog=new ProgressDialog(ForoActivity.this);
         progressDialog.setMessage("Cargando datos...");
@@ -188,6 +188,9 @@ public class ForoActivity extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(),Toast.LENGTH_LONG).show();
                                                 e.printStackTrace();
                                             }
+                                        } else if (palabra.contains("Num_Coments")) {
+                                            String numcoments = palabra.substring(15, palabra.length() - 1);
+                                            tvNumAnswers.setText(numcoments);
                                         }
                                     }
                                 }
@@ -198,7 +201,7 @@ public class ForoActivity extends AppCompatActivity {
                                         nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
                                         comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
                                         fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
-                                        numAnswers.add(jsonArray.getJSONObject(i).getString("numComents"));
+                                        //numAnswers.add(jsonArray.getJSONObject(i).getString("numComents"));
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {
@@ -247,9 +250,7 @@ public class ForoActivity extends AppCompatActivity {
             tvUserName = (TextView) viewGroup.findViewById(R.id.tvUserName);
             tvDate = (TextView) viewGroup.findViewById(R.id.tvDate);
             tvComent = (TextView) viewGroup.findViewById(R.id.tvComent);
-            tvNumAnswers= (TextView) viewGroup.findViewById(R.id.tvNumAnswers);
             btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
-            iconoComents=(ImageView) viewGroup.findViewById(R.id.iconoComents);
             imgUser = (ImageView) viewGroup.findViewById(R.id.imgUser);
 
             AnimationDrawable imguser=(AnimationDrawable) imgUser.getDrawable();
@@ -301,7 +302,7 @@ public class ForoActivity extends AppCompatActivity {
             tvUserName.setText(nombreUser.get(position).toString());
             tvDate.setText(fechaComent.get(position).toString());
             tvComent.setText(comentForo.get(position).toString());
-            tvNumAnswers.setText(numAnswers.get(position).toString());
+            //tvNumAnswers.setText(numAnswers.get(position).toString());
 
             return viewGroup;
         }

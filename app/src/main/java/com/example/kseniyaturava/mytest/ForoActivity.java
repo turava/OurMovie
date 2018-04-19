@@ -34,7 +34,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -503,12 +505,16 @@ public class ForoActivity extends AppCompatActivity {
         }
     }
 
-    //saca hora de GMT+00:00 cuando debería ser GMT+02:00, pdte averiguar cómo arreglarlo
     public String getDate(){
         Date dt = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Locale locale = new Locale ( "es" , "ES" );
+        SimpleDateFormat df = new SimpleDateFormat("dd MMMM", locale);
+        //SimpleDateFormat dh = new SimpleDateFormat("HH:mm");
+        Calendar dh = Calendar.getInstance();
         String date = df.format(dt);
-        return date;
+        int hour = dh.get(Calendar.HOUR_OF_DAY);
+        int min = dh.get(Calendar.MINUTE);
+        return date + " a las " + (hour+2) + ":" + min;
     }
     //Override back button android to do something
     /*@Override

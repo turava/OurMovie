@@ -35,7 +35,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
@@ -149,6 +148,27 @@ public class ForoActivity extends AppCompatActivity {
                                             }
                                         };
                                         tr5.start();
+                                        //Notifications
+                                        Thread tr6=new Thread(){
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
+
+                                                    runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+
+                                                            Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
+
+                                                        }
+                                                    });
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        };
+                                        tr6.start();
                                     }
 
                                     Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
@@ -361,7 +381,7 @@ public class ForoActivity extends AppCompatActivity {
         int respuesta;
 
         try {
-            url=new URL("http://www.webelicurso.hol.es/ForoNotif.php?user="+user+"titulo="+titulo);
+            url=new URL("http://www.webelicurso.hol.es/ForoNotif.php?user="+user+"&titulo="+titulo);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){

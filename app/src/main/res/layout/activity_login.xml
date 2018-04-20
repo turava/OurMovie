@@ -91,6 +91,18 @@
                 android:text="@string/register"
                 android:background="@android:color/holo_red_light"/>
 
+            <ImageButton
+                android:id="@+id/imgFilm"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="false"
+                android:contentDescription="imagen"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@drawable/rollopeli4"
+                />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

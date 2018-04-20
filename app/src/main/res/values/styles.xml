@@ -29,6 +29,12 @@
         <item name="android:textColorSecondary">#999</item>
     </style>
 
+    <style name="ColorHint" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#3f51b5</item>
+        <item name="colorControlActivated">#3f51b5</item>
+        <item name="android:textColorHint">#3f51b5</item>
+    </style>
+
    <!-- <style name="MyActionBar"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/actionbar_border</item>

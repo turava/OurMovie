@@ -343,17 +343,6 @@ public class ForoActivity extends AppCompatActivity {
             AnimationDrawable imguser=(AnimationDrawable) imgUser.getDrawable();
             imguser.start();
 
-            //no funciona bien, al clickar en la imagen, a veces redirige al Profile del user correcto pero a veces no
-            imgUser.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    user2=tvUserName.getText().toString();
-                    Intent intent = new Intent(ForoActivity.this, ProfileActivity.class);
-                    intent.putExtra("User", user2);
-                    startActivity(intent);
-                }
-            });
-
             btReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

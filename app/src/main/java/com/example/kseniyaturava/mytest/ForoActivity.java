@@ -40,7 +40,7 @@ import java.util.Locale;
 
 public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
-    private String titulo2, user2, idForo, idUser;
+    private String titulo2, user2, idForo, idUser, res;
 
     TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
@@ -212,7 +212,13 @@ public class ForoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    final String res = recogerDatosComents(titulo2);
+                    res = recogerDatosComents(titulo2);
+                    //Si aún no hay comentarios en el foro de la pelicula, da error al intentar añadir el primero en
+                    // los ArrayLists, por lo que es necesario inicializarlos aunque sea con un registro de datos vacíos
+                    if (res.equals("[]")){
+                        String res3="[{'User':'','Fecha':'','Texto':''}]";
+                        res=res3;
+                    }
                     final String res2 = recogerDatosPelis(titulo2);
                     runOnUiThread(new Runnable() {
                         @Override
@@ -254,10 +260,19 @@ public class ForoActivity extends AppCompatActivity {
                                 JSONArray jsonArray = null;
                                 try {
                                     jsonArray = new JSONArray(new String(res));
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                        nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
-                                        comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
-                                        fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
+                                    //si solo hay 1 comentario y es el de los datos vacíos, le asignamos unos valores
+                                    //predeterminados que no se guardan en la bbdd. En el momento que se escriba
+                                    //un comentario real, dejará de aparecer el predeterminado y solo saldrán los reales
+                                    if (res.equals("[{'User':'','Fecha':'','Texto':''}]")){
+                                        nombreUser.add(0,"OurMovie");
+                                        comentForo.add(0,"Aún no hay ningún comentario en este foro, no esperes más y escribe algo!!");
+                                        fechaComent.add(0,"Ahora");
+                                    }else {
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            nombreUser.add(jsonArray.getJSONObject(i).getString("User"));
+                                            comentForo.add(jsonArray.getJSONObject(i).getString("Texto"));
+                                            fechaComent.add(jsonArray.getJSONObject(i).getString("Fecha"));
+                                        }
                                     }
                                     lvForo.setAdapter(new AdapterForo(getApplicationContext()));
                                 } catch (JSONException e) {

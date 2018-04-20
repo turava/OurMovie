@@ -157,9 +157,9 @@
             android:isScrollContainer="false">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/layout_type"

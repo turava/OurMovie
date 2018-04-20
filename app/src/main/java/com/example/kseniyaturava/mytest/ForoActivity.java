@@ -109,9 +109,20 @@ public class ForoActivity extends AppCompatActivity {
                 tvComent.setText(input_message.getText().toString());
                 tvUserName.setText(user2);
 
-                fechaComent.add(tvDate.getText());
-                comentForo.add(tvComent.getText());
-                nombreUser.add(tvUserName.getText());
+                //Si añadimos un comentario por primera vez en un foro, lo pondremos en la primera posición y el mensaje
+                //predeterminado que había, lo borramos
+                if(nombreUser.size()==1 && nombreUser.get(0)=="OurMovie"){
+                    fechaComent.add(0,tvDate.getText());
+                    comentForo.add(0,tvComent.getText());
+                    nombreUser.add(0,tvUserName.getText());
+                    fechaComent.remove(1);
+                    comentForo.remove(1);
+                    nombreUser.remove(1);
+                } else {
+                    fechaComent.add(tvDate.getText());
+                    comentForo.add(tvComent.getText());
+                    nombreUser.add(tvUserName.getText());
+                }
 
                 Thread tr=new Thread(){
                     @Override
@@ -262,7 +273,8 @@ public class ForoActivity extends AppCompatActivity {
                                     jsonArray = new JSONArray(new String(res));
                                     //si solo hay 1 comentario y es el de los datos vacíos, le asignamos unos valores
                                     //predeterminados que no se guardan en la bbdd. En el momento que se escriba
-                                    //un comentario real, dejará de aparecer el predeterminado y solo saldrán los reales
+                                    //un comentario real y se refresque la pantalla, dejará de aparecer el predeterminado y
+                                    // solo saldrán los reales
                                     if (res.equals("[{'User':'','Fecha':'','Texto':''}]")){
                                         nombreUser.add(0,"OurMovie");
                                         comentForo.add(0,"Aún no hay ningún comentario en este foro, no esperes más y escribe algo!!");

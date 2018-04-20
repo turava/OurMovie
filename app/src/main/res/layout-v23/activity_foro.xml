@@ -137,10 +137,10 @@
             </LinearLayout>
 
             <ListView
-            android:id="@+id/listview_coments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#BBDEFB">
+                android:id="@+id/listview_coments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#BBDEFB">
 
             </ListView>
 

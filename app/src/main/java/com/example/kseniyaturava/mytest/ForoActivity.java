@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,8 +45,8 @@ public class ForoActivity extends AppCompatActivity {
 
     TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
             text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
-    ImageButton button_info, acordeon, acordeonFiles, acordeonFilesPost, btSend, btReply;
-    AutoCompleteTextView input_reply, input_message;
+    ImageButton button_info, acordeonFiles, acordeonFilesPost, btSend, btReply, btSendReply;
+    AutoCompleteTextView input_reply, input_message, input_messageReply;
     ImageView imgUser, imgMovie, iconoComents;
     ListView lvForo;
     ArrayList nombreUser=new ArrayList();
@@ -67,12 +68,6 @@ public class ForoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back36);
 
-
-        //text_reply = (TextView) findViewById(R.id.text_reply);
-        //text_reply2 = (TextView) findViewById(R.id.text_reply2);
-        //text_comment4 = (TextView) findViewById(R.id.text_comment4);
-        //text_dateReply = (TextView) findViewById(R.id.text_dateReply);
-        input_reply = (AutoCompleteTextView) findViewById(R.id.input_reply);
         input_message = (AutoCompleteTextView) findViewById(R.id.input_message);
         text_movie =(TextView) findViewById(R.id.text_movie);
         text_director =(TextView) findViewById(R.id.text_director);
@@ -273,7 +268,7 @@ public class ForoActivity extends AppCompatActivity {
                                     jsonArray = new JSONArray(new String(res));
                                     //si solo hay 1 comentario y es el de los datos vacíos, le asignamos unos valores
                                     //predeterminados que no se guardan en la bbdd. En el momento que se escriba
-                                    //un comentario real y se refresque la pantalla, dejará de aparecer el predeterminado y
+                                    //un comentario real y se envíe, dejará de aparecer el predeterminado y
                                     // solo saldrán los reales
                                     if (res.equals("[{'User':'','Fecha':'','Texto':''}]")){
                                         nombreUser.add(0,"OurMovie");
@@ -335,6 +330,10 @@ public class ForoActivity extends AppCompatActivity {
             tvComent = (TextView) viewGroup.findViewById(R.id.tvComent);
             btReply = (ImageButton) viewGroup.findViewById(R.id.btReply);
             imgUser = (ImageView) viewGroup.findViewById(R.id.imgUser);
+            input_messageReply = (AutoCompleteTextView) findViewById(R.id.input_messageReply);
+            btSendReply = (ImageButton) viewGroup.findViewById(R.id.btSendReply);
+            final LinearLayout acordeon= (LinearLayout) viewGroup.findViewById(R.id.layout_acordeon);
+            final String dateReply=getDate();
 
             tvUserName.setText(nombreUser.get(position).toString());
             tvDate.setText(fechaComent.get(position).toString());
@@ -346,23 +345,83 @@ public class ForoActivity extends AppCompatActivity {
             btReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    acordeon.setVisibility(View.VISIBLE);
+                }
+            });
+
+            btSendReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     String valor=String.valueOf(tvNumAnswers.getText());
                     int num=Integer.parseInt(valor);
                     int numFinal=num+1;
                     String valorFinal=String.valueOf(numFinal);
                     tvNumAnswers.setText(valorFinal);
-                    //text_dateReply.setText(getDate());
-                    //text_reply.setText(input_reply.getText());
+
+                    tvDate.setText(getDate());
+                    tvUserName.setText(user2);
+                    tvComent.setText(input_messageReply.getText());
+
+                    fechaComent.add(tvDate.getText());
+                    comentForo.add(tvComent.getText());
+                    nombreUser.add(tvUserName.getText());
+
                     Thread tr3=new Thread(){
                         @Override
                         public void run() {
                             try {
                                 sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                                //guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
-                                createNotification(tvUserName.getText().toString().trim(),text_movie.getText().toString());
+                                final String res4 = guardarComent(text_movie.getText().toString(), user2);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        int r = objJSON(res4);
+                                        if (r > 0) {
+                                            int inicio=0;
+                                            int longitud;
+                                            String palabra;
+                                            for (int i=0;i<res4.length();i++) {
+                                                if ((res4.charAt(i) == (',') && res4.charAt(i + 1) == ('"')) || (res4.charAt(i) == ('}') && res4.charAt(i + 1) == (']'))) {
+                                                    longitud = i;
+                                                    palabra = res4.substring(inicio, longitud);
+                                                    inicio = longitud + 1;
+                                                    if (palabra.contains("Id_Foro")) {
+                                                        idForo = palabra.substring(13, palabra.length() - 1);
+                                                    } else if (palabra.contains("Id_User")) {
+                                                        idUser = palabra.substring(11, palabra.length() - 1);
+                                                    }
+                                                }
+                                            }
+                                            Thread tr7=new Thread(){
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        guardarComent2(idForo.toString(), idUser.toString(), input_messageReply.getText().toString(), tvDate.getText().toString());
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            };
+                                            tr7.start();
+                                            //Notifications
+                                            Thread tr6=new Thread(){
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
+                                                        runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            };
+                                            tr6.start();
+                                        }
                                         Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
                                     }
                                 });
@@ -372,10 +431,8 @@ public class ForoActivity extends AppCompatActivity {
                         }
                     };
                     tr3.start();
-
                 }
             });
-
             return viewGroup;
         }
     }

@@ -162,5 +162,14 @@
     <string name="escriba_pass">Escriba una contraseña</string>
     <string name="guardar">Guardar</string>
     <string name="forocomments">foroComments</string>
+    <string name="director2">Director</string>
+    <string name="actores2">Actores</string>
+    <string name="estrellas">estrellas</string>
+    <string name="imagen">imagen</string>
+    <string name="fecha">fecha</string>
+    <string name="comentario">comentario</string>
+    <string name="boton">boton</string>
+    <string name="responde_a_este_comentario">Responde a este comentario</string>
+    <string name="texto">Texto:</string>
 
 </resources>

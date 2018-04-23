@@ -43,10 +43,9 @@ public class ForoActivity extends AppCompatActivity {
     private TextView movieDescription;
     private String titulo2, user2, idForo, idUser, res;
 
-    TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, text_reply,
-            text_reply2, text_comment4, tvDate, text_dateReply, tvUserName;
-    ImageButton button_info, acordeonFiles, acordeonFilesPost, btSend, btReply, btSendReply;
-    AutoCompleteTextView input_reply, input_message, input_messageReply;
+    TextView text_movie, text_director, text_year, tvNumAnswers, tvComent, tvDate, tvUserName;
+    ImageButton button_info, btSend, btReply, btSendReply;
+    AutoCompleteTextView input_message, input_messageReply;
     ImageView imgUser, imgMovie, iconoComents;
     ListView lvForo;
     ArrayList nombreUser=new ArrayList();
@@ -105,10 +104,6 @@ public class ForoActivity extends AppCompatActivity {
 
                     tvDate.setText(getDate());
                     tvUserName.setText(user2);
-
-                    if(input_message.getText().toString()==""){
-                        Toast.makeText(ForoActivity.this, "El campo de texto no puede estar vacío", Toast.LENGTH_LONG).show();
-                    }
                     tvComent.setText(input_message.getText().toString());
 
                     //Si añadimos un comentario por primera vez en un foro, lo pondremos en la primera posición y el mensaje
@@ -196,7 +191,6 @@ public class ForoActivity extends AppCompatActivity {
                     };
                     tr.start();
                 }
-
             }
         });
 
@@ -211,7 +205,6 @@ public class ForoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void recogerDatosForo(){
@@ -342,7 +335,7 @@ public class ForoActivity extends AppCompatActivity {
             input_messageReply = (AutoCompleteTextView) findViewById(R.id.input_messageReply);
             btSendReply = (ImageButton) viewGroup.findViewById(R.id.btSendReply);
             final LinearLayout acordeon= (LinearLayout) viewGroup.findViewById(R.id.layout_acordeon);
-            final String dateReply=getDate();
+            //final String dateReply=getDate();
 
             tvUserName.setText(nombreUser.get(position).toString());
             tvDate.setText(fechaComent.get(position).toString());

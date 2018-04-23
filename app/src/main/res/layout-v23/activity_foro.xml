@@ -193,6 +193,7 @@
                             android:fontFamily="sans-serif"
                             android:hint="@string/mensaje"
                             android:minHeight="30dp"
+                            android:maxLength="180"
                             android:textAlignment="viewStart"
                             android:textAppearance="@style/TextAppearance.AppCompat"
                             android:textColor="@color/background2"

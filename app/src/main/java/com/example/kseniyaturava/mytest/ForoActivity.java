@@ -94,100 +94,109 @@ public class ForoActivity extends AppCompatActivity {
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String valor=String.valueOf(tvNumAnswers.getText());
-                int num=Integer.parseInt(valor);
-                int numFinal=num+1;
-                String valorFinal=String.valueOf(numFinal);
-                tvNumAnswers.setText(valorFinal);
+                if(input_message.getText().toString().equals("")){
+                    Toast.makeText(ForoActivity.this, "El campo de texto no puede estar vacío", Toast.LENGTH_LONG).show();
+                }else{
+                    String valor=String.valueOf(tvNumAnswers.getText());
+                    int num=Integer.parseInt(valor);
+                    int numFinal=num+1;
+                    String valorFinal=String.valueOf(numFinal);
+                    tvNumAnswers.setText(valorFinal);
 
-                tvDate.setText(getDate());
-                tvComent.setText(input_message.getText().toString());
-                tvUserName.setText(user2);
+                    tvDate.setText(getDate());
+                    tvUserName.setText(user2);
 
-                //Si añadimos un comentario por primera vez en un foro, lo pondremos en la primera posición y el mensaje
-                //predeterminado que había, lo borramos
-                if(nombreUser.size()==1 && nombreUser.get(0)=="OurMovie"){
-                    fechaComent.add(0,tvDate.getText());
-                    comentForo.add(0,tvComent.getText());
-                    nombreUser.add(0,tvUserName.getText());
-                    fechaComent.remove(1);
-                    comentForo.remove(1);
-                    nombreUser.remove(1);
-                } else {
-                    fechaComent.add(tvDate.getText());
-                    comentForo.add(tvComent.getText());
-                    nombreUser.add(tvUserName.getText());
+                    if(input_message.getText().toString()==""){
+                        Toast.makeText(ForoActivity.this, "El campo de texto no puede estar vacío", Toast.LENGTH_LONG).show();
+                    }
+                    tvComent.setText(input_message.getText().toString());
+
+                    //Si añadimos un comentario por primera vez en un foro, lo pondremos en la primera posición y el mensaje
+                    //predeterminado que había, lo borramos
+                    if(nombreUser.size()==1 && nombreUser.get(0)=="OurMovie"){
+                        fechaComent.add(0,tvDate.getText());
+                        comentForo.add(0,tvComent.getText());
+                        nombreUser.add(0,tvUserName.getText());
+                        fechaComent.remove(1);
+                        comentForo.remove(1);
+                        nombreUser.remove(1);
+                    } else {
+                        fechaComent.add(tvDate.getText());
+                        comentForo.add(tvComent.getText());
+                        nombreUser.add(tvUserName.getText());
+                    }
+
+                    Thread tr=new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
+                                final String res3 = guardarComent(text_movie.getText().toString(), user2);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int r = objJSON(res3);
+                                        if (r > 0) {
+                                            int inicio=0;
+                                            int longitud;
+                                            String palabra;
+                                            for (int i=0;i<res3.length();i++) {
+                                                if ((res3.charAt(i) == (',') && res3.charAt(i + 1) == ('"')) || (res3.charAt(i) == ('}') && res3.charAt(i + 1) == (']'))) {
+                                                    longitud = i;
+                                                    palabra = res3.substring(inicio, longitud);
+                                                    inicio = longitud + 1;
+                                                    if (palabra.contains("Id_Foro")) {
+                                                        idForo = palabra.substring(13, palabra.length() - 1);
+                                                    } else if (palabra.contains("Id_User")) {
+                                                        idUser = palabra.substring(11, palabra.length() - 1);
+                                                    }
+                                                }
+                                            }
+                                            Thread tr5=new Thread(){
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        guardarComent2(idForo.toString(), idUser.toString(), input_message.getText().toString(), tvDate.getText().toString());
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            };
+                                            tr5.start();
+                                            //Notifications
+                                            Thread tr6=new Thread(){
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
+
+                                                        runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+
+                                                                Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
+
+                                                            }
+                                                        });
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            };
+                                            tr6.start();
+                                        }
+
+                                        Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    tr.start();
                 }
 
-                Thread tr=new Thread(){
-                    @Override
-                    public void run() {
-                        try {
-                            sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                            final String res3 = guardarComent(text_movie.getText().toString(), user2);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int r = objJSON(res3);
-                                    if (r > 0) {
-                                        int inicio=0;
-                                        int longitud;
-                                        String palabra;
-                                        for (int i=0;i<res3.length();i++) {
-                                            if ((res3.charAt(i) == (',') && res3.charAt(i + 1) == ('"')) || (res3.charAt(i) == ('}') && res3.charAt(i + 1) == (']'))) {
-                                                longitud = i;
-                                                palabra = res3.substring(inicio, longitud);
-                                                inicio = longitud + 1;
-                                                if (palabra.contains("Id_Foro")) {
-                                                    idForo = palabra.substring(13, palabra.length() - 1);
-                                                } else if (palabra.contains("Id_User")) {
-                                                    idUser = palabra.substring(11, palabra.length() - 1);
-                                                }
-                                            }
-                                        }
-                                        Thread tr5=new Thread(){
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    guardarComent2(idForo.toString(), idUser.toString(), input_message.getText().toString(), tvDate.getText().toString());
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        };
-                                        tr5.start();
-                                        //Notifications
-                                        Thread tr6=new Thread(){
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
-
-                                                    runOnUiThread(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-
-                                                            Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
-
-                                                        }
-                                                    });
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        };
-                                        tr6.start();
-                                    }
-
-                                    Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                tr.start();
             }
         });
 
@@ -352,85 +361,90 @@ public class ForoActivity extends AppCompatActivity {
             btSendReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String valor=String.valueOf(tvNumAnswers.getText());
-                    int num=Integer.parseInt(valor);
-                    int numFinal=num+1;
-                    String valorFinal=String.valueOf(numFinal);
-                    tvNumAnswers.setText(valorFinal);
+                    if(input_messageReply.getText().toString().equals("")){
+                        Toast.makeText(ForoActivity.this, "El campo de texto no puede estar vacío", Toast.LENGTH_LONG).show();
+                    }else{
+                        String valor=String.valueOf(tvNumAnswers.getText());
+                        int num=Integer.parseInt(valor);
+                        int numFinal=num+1;
+                        String valorFinal=String.valueOf(numFinal);
+                        tvNumAnswers.setText(valorFinal);
 
-                    tvDate.setText(getDate());
-                    tvUserName.setText(user2);
-                    tvComent.setText(input_messageReply.getText());
+                        tvDate.setText(getDate());
+                        tvUserName.setText(user2);
+                        tvComent.setText(input_messageReply.getText());
 
-                    fechaComent.add(tvDate.getText());
-                    comentForo.add(tvComent.getText());
-                    nombreUser.add(tvUserName.getText());
+                        fechaComent.add(tvDate.getText());
+                        comentForo.add(tvComent.getText());
+                        nombreUser.add(tvUserName.getText());
 
-                    Thread tr3=new Thread(){
-                        @Override
-                        public void run() {
-                            try {
-                                sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
-                                final String res4 = guardarComent(text_movie.getText().toString(), user2);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        int r = objJSON(res4);
-                                        if (r > 0) {
-                                            int inicio=0;
-                                            int longitud;
-                                            String palabra;
-                                            for (int i=0;i<res4.length();i++) {
-                                                if ((res4.charAt(i) == (',') && res4.charAt(i + 1) == ('"')) || (res4.charAt(i) == ('}') && res4.charAt(i + 1) == (']'))) {
-                                                    longitud = i;
-                                                    palabra = res4.substring(inicio, longitud);
-                                                    inicio = longitud + 1;
-                                                    if (palabra.contains("Id_Foro")) {
-                                                        idForo = palabra.substring(13, palabra.length() - 1);
-                                                    } else if (palabra.contains("Id_User")) {
-                                                        idUser = palabra.substring(11, palabra.length() - 1);
+                        Thread tr3=new Thread(){
+                            @Override
+                            public void run() {
+                                try {
+                                    sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
+                                    final String res4 = guardarComent(text_movie.getText().toString(), user2);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            int r = objJSON(res4);
+                                            if (r > 0) {
+                                                int inicio=0;
+                                                int longitud;
+                                                String palabra;
+                                                for (int i=0;i<res4.length();i++) {
+                                                    if ((res4.charAt(i) == (',') && res4.charAt(i + 1) == ('"')) || (res4.charAt(i) == ('}') && res4.charAt(i + 1) == (']'))) {
+                                                        longitud = i;
+                                                        palabra = res4.substring(inicio, longitud);
+                                                        inicio = longitud + 1;
+                                                        if (palabra.contains("Id_Foro")) {
+                                                            idForo = palabra.substring(13, palabra.length() - 1);
+                                                        } else if (palabra.contains("Id_User")) {
+                                                            idUser = palabra.substring(11, palabra.length() - 1);
+                                                        }
                                                     }
                                                 }
+                                                Thread tr7=new Thread(){
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            guardarComent2(idForo.toString(), idUser.toString(), input_messageReply.getText().toString(), tvDate.getText().toString());
+                                                        } catch (IOException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                };
+                                                tr7.start();
+                                                //Notifications
+                                                Thread tr6=new Thread(){
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                };
+                                                tr6.start();
                                             }
-                                            Thread tr7=new Thread(){
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        guardarComent2(idForo.toString(), idUser.toString(), input_messageReply.getText().toString(), tvDate.getText().toString());
-                                                    } catch (IOException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            };
-                                            tr7.start();
-                                            //Notifications
-                                            Thread tr6=new Thread(){
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
-                                                        runOnUiThread(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
-                                                            }
-                                                        });
-                                                    } catch (Exception e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            };
-                                            tr6.start();
+                                            Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
                                         }
-                                        Toast.makeText(ForoActivity.this, "Comentario guardado satisfactoriamente", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                    });
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    };
-                    tr3.start();
+                        };
+                        tr3.start();
+                    }
+
                 }
             });
             return viewGroup;

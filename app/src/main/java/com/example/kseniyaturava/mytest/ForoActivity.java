@@ -153,7 +153,7 @@ public class ForoActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
+                                                    createNotification(user2,text_movie.getText().toString());
 
                                                     runOnUiThread(new Runnable() {
                                                         @Override
@@ -341,7 +341,7 @@ public class ForoActivity extends AppCompatActivity {
                             try {
                                 sumarComent(tvNumAnswers.getText().toString(), text_movie.getText().toString());
                                 //guardarComent(input_reply.getText().toString(), text_dateReply.getText().toString());
-                                createNotification(tvUserName.getText().toString().trim(),text_movie.getText().toString());
+                                //createNotification(tvUserName.getText().toString().trim(),user2);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

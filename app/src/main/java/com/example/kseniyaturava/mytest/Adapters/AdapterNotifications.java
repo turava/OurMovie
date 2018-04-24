@@ -100,6 +100,7 @@ public class AdapterNotifications extends ArrayAdapter<String> {
                 tr.start();
                 Intent intent = new Intent(context, ForoActivity.class);
                 intent.putExtra("Titulo", listaForos[position]);
+                intent.putExtra("User", user);
                 context.startActivity(intent);
 
 

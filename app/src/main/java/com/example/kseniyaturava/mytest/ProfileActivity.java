@@ -363,16 +363,16 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         }
-        displayAdapterForo(listaImg, listaTitulo, numComents);
+        displayAdapterForo(listaImg, listaTitulo, numComents, user);
 
     }
 
-    private void displayAdapterForo(final String listaImg[], final String listaTitulo[], final String numComents[]) {
+    private void displayAdapterForo(final String[] listaImg, final String[] listaTitulo, final String[] numComents, String user) {
         tv_title = (TextView) findViewById(R.id.tv_title);
         imagen = findViewById(R.id.imagen);
         listview = (ListView) findViewById(R.id.listView);
         numComments = (TextView) findViewById(R.id.numComments);
-        AdapterProfileForo adapter = new AdapterProfileForo(this, listaImg, listaTitulo, numComents);//2nd param. data
+        AdapterProfileForo adapter = new AdapterProfileForo(this, listaImg, listaTitulo, numComents, user);//2nd param. data
         listview.setAdapter(adapter);
         //Listvie ONCLICK in Adapter, don't works good here
     }

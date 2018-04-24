@@ -23,13 +23,15 @@ public class AdapterProfileForo extends ArrayAdapter<String> {
     private final String [] listaImg;
     private final String [] listaTitulo;
     private final String [] numComents;
+    private final String user;
 
-    public AdapterProfileForo(Activity context, String[] listaImg, String[] listaTitulo, String[] numComents) {
+    public AdapterProfileForo(Activity context, String[] listaImg, String[] listaTitulo, String[] numComents, String user) {
         super(context, R.layout.listview_profile_foro,listaImg);
         this.context=context;
         this.listaImg = listaImg;
         this.listaTitulo = listaTitulo;
         this.numComents = numComents;
+        this.user = user;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class AdapterProfileForo extends ArrayAdapter<String> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, ForoActivity.class);
                 intent.putExtra("Titulo", listaTitulo[position]);
+                intent.putExtra("User", user);
                 context.startActivity(intent);
             }
         });

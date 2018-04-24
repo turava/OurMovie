@@ -16,6 +16,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="password">Password</string>
     <string name="action_sign_in">Log in</string>
     <string name="action_sign_in_short">Log in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -161,5 +162,14 @@
     <string name="escriba_pass">Escriba una contraseña</string>
     <string name="guardar">Guardar</string>
     <string name="forocomments">foroComments</string>
+    <string name="director2">Director</string>
+    <string name="actores2">Actores</string>
+    <string name="estrellas">estrellas</string>
+    <string name="imagen">imagen</string>
+    <string name="fecha">fecha</string>
+    <string name="comentario">comentario</string>
+    <string name="boton">boton</string>
+    <string name="responde_a_este_comentario">Responde a este comentario</string>
+    <string name="texto">Texto:</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back36);
 
 
-        btRegister = (Button) findViewById(R.id.register_button);
+        btRegister = (Button) findViewById(R.id.btRegister);
         etPassword = (EditText) findViewById(R.id.password);
         etEmail = (EditText) findViewById(R.id.email);
         etUser = (EditText) findViewById(R.id.user);
@@ -50,15 +51,25 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            insertarUser(etEmail.getText().toString(), etUser.getText().toString(), etNombre.getText().toString(), etEdad.getText().toString(), etCiudad.getText().toString(), etPassword.getText().toString());
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(RegisterActivity.this, "Bienvenido a OurMovie!!", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
+                            if (!(etEmail.getText().toString().equals("")) && !(etUser.getText().toString().equals("")) && !(etNombre.getText().toString().equals("")) && !(etEdad.getText().toString().equals("")) && !(etCiudad.getText().toString().equals("")) && !(etPassword.getText().toString().equals(""))){
+                                insertarUser(etEmail.getText().toString(), etUser.getText().toString(), etNombre.getText().toString(), etEdad.getText().toString(), etCiudad.getText().toString(), etPassword.getText().toString());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(RegisterActivity.this, "Bienvenido a OurMovie!!", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        intent.putExtra("User", etUser.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                });
+                            } else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Falta por rellenar algun campo", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

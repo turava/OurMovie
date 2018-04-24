@@ -156,6 +156,7 @@ public class SearchActivity extends AppCompatActivity {
                 String titulo = (String)(lv.getItemAtPosition(position));
                 Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
                 intent.putExtra("Titulo", titulo);
+                intent.putExtra("User", user);
                 startActivity(intent);
             }
         });

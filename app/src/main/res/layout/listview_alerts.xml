@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Foro"
+                    android:text="@string/foro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -58,15 +58,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Nuevo mensaje de  "
+                        android:text="@string/nuevo_mensaje_de"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tv_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:text="TextView"
+                        android:text="@string/textview"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -93,7 +94,7 @@
 
             <TextView
                 android:id="@+id/tv_comment"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:layout_weight="1"

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/amiko"
-        android:text="Nuevo usuario"
+        android:text="@string/nuevo_usuario"
         android:textAppearance="@style/CustomTabWidgetText"
         android:textColor="@color/colorBlanco"
         android:textSize="24sp" />

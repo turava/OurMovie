@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/monoton"
-        android:text="OURMOVIE"
+        android:text="@string/ourmovie"
         android:textColor="@color/colorBlanco"
         android:textSize="24sp" />
 </LinearLayout>

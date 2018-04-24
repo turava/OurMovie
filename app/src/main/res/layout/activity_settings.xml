@@ -18,7 +18,8 @@
             android:layout_marginBottom="-2dp"
             android:background="@drawable/botton_style"
             android:orientation="horizontal"
-            android:paddingLeft="10dp">
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/setting_Editprofile"
@@ -26,7 +27,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:paddingTop="14dp"
-                android:text="Redactar perfil"
+                android:text="@string/redactar_perfil"
                 android:textColor="@color/colorBlack" />
 
             <ImageButton
@@ -38,6 +39,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:background="@color/colorAlerts"
+                android:contentDescription="@string/iconright"
                 app:srcCompat="@drawable/ic_right48" />
 
         </LinearLayout>
@@ -50,7 +52,8 @@
             android:layout_weight="1"
             android:background="@drawable/botton_style"
             android:orientation="horizontal"
-            android:paddingStart="10dp">
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/edit_pasword"
@@ -58,8 +61,9 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:paddingTop="14dp"
-                android:text="Cambiar contraseña"
-                android:textColor="@color/colorBlack" />
+                android:text="@string/cambiar_contrase_a"
+                android:textColor="@color/colorBlack"
+                tools:ignore="NestedWeights" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
@@ -70,6 +74,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:background="@color/colorAlerts"
+                android:contentDescription="@string/iconright"
                 app:srcCompat="@drawable/ic_right48" />
 
         </LinearLayout>
@@ -81,7 +86,8 @@
             android:layout_weight="1"
             android:background="@drawable/botton_style"
             android:orientation="horizontal"
-            android:paddingStart="10dp">
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/textView7"
@@ -89,8 +95,9 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:paddingTop="14dp"
-                android:text="Condiciones"
-                android:textColor="@color/colorBlack" />
+                android:text="@string/condiciones"
+                android:textColor="@color/colorBlack"
+                tools:ignore="NestedWeights" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
@@ -100,6 +107,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:background="@color/colorAlerts"
+                android:contentDescription="@string/iconright"
                 app:srcCompat="@drawable/ic_right48" />
         </LinearLayout>
 
@@ -110,11 +118,11 @@
 
             <Button
                 android:id="@+id/btn_LogOut"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/holo_red_light"
-                android:text="Cerrar sesión" />
+                android:text="@string/cerrar_sesi_n" />
         </LinearLayout>
 
     </LinearLayout>

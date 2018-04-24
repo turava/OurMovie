@@ -246,7 +246,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/botton_style"
                             android:fontFamily="@font/amiko"
-                            android:text="Acción"
+                            android:text="@string/acci_n"
                             android:textAllCaps="false"
                             android:textColor="#505254" />
                     </LinearLayout>

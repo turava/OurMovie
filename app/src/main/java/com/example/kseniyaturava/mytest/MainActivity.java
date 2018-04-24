@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        //CONNECTION TO DB TODO
+        //CONNECTION TO DB
 
         Thread tr = new Thread() {
         @Override
@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //bucle para cargar los valores de la clase en el id de imageView
             //fit estira las imagenes, centercrop, centra pero recorta
             for (int i = 0; i < peli.length; i++) {
-                //TODO subir nuevas imagenes
+
                 Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_accion);
                 Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_drama);
                 Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_fiction);
@@ -392,7 +392,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int i = 0; i < peli.length; i++) {
 
                 //asignaos con el mismo json, urls a las img Interactua
-                //TODO asignar imagenes
                 Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_new1);
                 Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_new2);
                 Picasso.with(MainActivity.this).load(peli[2].getImagen()).fit().centerCrop().into(img_new3);

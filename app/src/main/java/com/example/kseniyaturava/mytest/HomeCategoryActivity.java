@@ -128,8 +128,7 @@ public class HomeCategoryActivity extends AppCompatActivity {
 
                 final String QUERY_CATHEGORY = "http://www.webelicurso.hol.es/Categoria.php?categoria="+categoria;
 
-                //TODO query con el parametro de la categoria, que busca peliculas donde categoria sea =...
-                final String cathegoryJSON = connectDB(QUERY_CATHEGORY);
+                 final String cathegoryJSON = connectDB(QUERY_CATHEGORY);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -201,7 +200,6 @@ public class HomeCategoryActivity extends AppCompatActivity {
         return resul.toString();
     }
 
-//TODO
     //Get the data from Json and create the object to show with adapter on the screen
     public String[] showJSON(String respuesta, String user) throws JSONException {
 

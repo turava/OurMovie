@@ -108,9 +108,6 @@ public class SettingsProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //TODO validar datos antes
-
-
 
                 Thread tr = new Thread() {
             @Override

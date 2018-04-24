@@ -7,6 +7,6 @@
         android:id="@+id/imagen"
         android:layout_width="136dp"
         android:layout_height="136dp"
-        android:scaleType="fitXY"
-        />
+        android:contentDescription="@string/favouritemovies"
+        android:scaleType="fitXY" />
 </LinearLayout>

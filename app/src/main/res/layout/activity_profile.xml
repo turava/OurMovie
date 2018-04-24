@@ -31,7 +31,8 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
               <!--  <ImageView
                     android:id="@+id/imageView11"
@@ -42,7 +43,7 @@
                     design:srcCompat="@drawable/american" />-->
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -67,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:text="¿Qué te cuentas?"
+                        android:text="@string/qu_te_cuentas"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -106,9 +107,6 @@
                                 android:id="@+id/listView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentTop="true"
                                 android:columnWidth="136dp"
                                 android:gravity="center"
                                 android:horizontalSpacing="1dp"

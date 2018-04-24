@@ -36,7 +36,7 @@ public class FormActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     //we are on the method when the menu's item is selected
-                    //type inside the instructions TODO
+                    //type inside the instructions
                     switch (item.getItemId()) {
                         case R.id.homeItem:
                             //startActivity(new Intent(getApplicationContext(), MainActivity.class));

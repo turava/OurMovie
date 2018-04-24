@@ -4,7 +4,7 @@
     <string name="Form">form</string>
     <string name="Profile">profile</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--  Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Alerts">Alerts</string>
     <string name="Home">Home</string>
@@ -171,5 +171,32 @@
     <string name="boton">boton</string>
     <string name="responde_a_este_comentario">Responde a este comentario</string>
     <string name="texto">Texto:</string>
+    <!--<string name="foro">Foro</string>-->
+    <string name="nuevo_mensaje_de">Nuevo mensaje de </string>
+    <string name="textview">TextView</string>
+    <string name="categoria">Categoría</string>
+    <string name="formulario">Formulario</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="peliculat">Película</string>
+    <string name="ourmovie">OURMOVIE</string>
+    <string name="perfil">Perfil</string>
+    <string name="nuevo_usuario">Nuevo usuario</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="cambiar_contrase_a">Cambiar Contraseña</string>
+    <string name="redactar_perfil">Redactar Perfil</string>
+    <string name="qu_te_cuentas">¿Qué te cuentas?</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="condiciones">Condiciones</string>
+    <string name="iconright">iconRight</string>
+    <string name="acci_n">Acción</string>
+    <string name="e_mail">E-mail</string>
+    <string name="ciudad_">Ciudad</string>
+    <string name="edad_">Edad</string>
+    <string name="guardar_">Guardar</string>
+    <string name="usuario_">Usuario</string>
+    <string name="cuenta_sobre_ti">Cuenta sobre ti...</string>
+    <string name="favouritemovies">favouriteMovies</string>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 
 </resources>

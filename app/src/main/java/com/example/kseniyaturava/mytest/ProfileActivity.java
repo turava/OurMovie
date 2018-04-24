@@ -141,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
                 final String DescripJson = connectDB(QUERY_USER_DESCR);
                 final String QUERY_FORO = "http://www.webelicurso.hol.es/ProfileForos.php?user=" + user;
                 final String forosJson = connectDB(QUERY_FORO);
-                //TODO comentario foro
+                // comentario foro
                 //final String QUERY_FORO_COMM = "http://www.webelicurso.hol.es/ProfileForoComments.php?user=" + user;
                 //final String commJson = connectDB(QUERY_FORO_COMM);
 
@@ -193,7 +193,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void run() {
                                     int r = 0;
                                     try {
-                                        //TODO comentario en el foro
+                                        //comentario en el foro
                                        // r = objJSON(commJson);
                                        // GetComentario(commJson);
                                         r = objJSON(DescripJson);

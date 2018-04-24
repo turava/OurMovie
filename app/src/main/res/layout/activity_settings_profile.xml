@@ -18,7 +18,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:theme="@style/ColorHint">
 
                 <AutoCompleteTextView
                     android:id="@+id/et_user"
@@ -29,13 +31,18 @@
                     android:maxLength="30"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:theme="@style/ColorHint">
 
                 <EditText
                     android:id="@+id/et_description"
@@ -45,11 +52,14 @@
                     android:ems="10"
                     android:hint="Cuenta sobre ti..."
                     android:inputType="textMultiLine"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,11 +68,13 @@
                 android:text="Datos Personales"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold" />-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:theme="@style/ColorHint">
 
                 <EditText
                     android:id="@+id/et_email"
@@ -71,12 +83,17 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="E-mail"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:theme="@style/ColorHint">
 
                 <EditText
                     android:id="@+id/et_city"
@@ -85,12 +102,17 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Ciudad"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:theme="@style/ColorHint">
 
                 <EditText
                     android:id="@+id/et_age"
@@ -99,15 +121,19 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Edad"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/holo_red_light"
                 android:text="Guardar"
-                android:textColor="@color/colorBlack"/>
+                android:textColor="@color/colorBlanco" />
 
         </LinearLayout>
     </ScrollView>

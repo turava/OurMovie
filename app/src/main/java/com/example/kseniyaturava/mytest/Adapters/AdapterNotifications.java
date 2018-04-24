@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kseniyaturava.mytest.ForoActivity;
 import com.example.kseniyaturava.mytest.R;
@@ -70,11 +69,13 @@ public class AdapterNotifications extends ArrayAdapter<String> {
         tv_comment.setText(listaTexto[position]);
         tv_header.setText(listaForos[position]);
         tv_user.setText(listaUser[position]);
-        Toast.makeText(context, "1"+listaLeido[position], Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, listaLeido[position], Toast.LENGTH_SHORT).show();
 
         if(Integer.parseInt(listaLeido[position]) == 0)
         {
-            layout.setBackgroundColor(Color.rgb(218,236,241));
+            //layout.setBackgroundColor(Color.rgb(192,220,243));
+            layout.setBackgroundColor(Color.parseColor("#BBDEFB"));
+
         }
         layout.setOnClickListener(new View.OnClickListener() {
             @Override

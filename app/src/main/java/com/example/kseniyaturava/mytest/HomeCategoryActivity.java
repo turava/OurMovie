@@ -118,8 +118,6 @@ public class HomeCategoryActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
-            Toast.makeText(HomeCategoryActivity.this,
-                    user, Toast.LENGTH_LONG).show();
         }
 
         //CONNECTION TO DB
@@ -252,9 +250,8 @@ public class HomeCategoryActivity extends AppCompatActivity {
                 intent.putExtra("Titulo", listaTitulo[position]);
                 intent.putExtra("User", user);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),
-                                user+"Categoria",
-                        Toast.LENGTH_LONG).show();
+             //   Toast.makeText(getApplicationContext(),
+              //     user+"Categoria",Toast.LENGTH_LONG).show();
             }
         });
 

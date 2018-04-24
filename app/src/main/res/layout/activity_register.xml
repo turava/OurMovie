@@ -41,11 +41,11 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:maxLines="1"
                     android:maxLength="30"
-                    android:singleLine="true" />
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
 

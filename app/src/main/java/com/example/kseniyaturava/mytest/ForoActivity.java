@@ -165,14 +165,6 @@ public class ForoActivity extends AppCompatActivity {
                                                     try {
                                                         createNotification(tvUserName.getText().toString(),text_movie.getText().toString());
 
-                                                        runOnUiThread(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-
-                                                                Toast.makeText(ForoActivity.this, "Notif"+tvUserName.getText().toString()+text_movie.getText().toString(), Toast.LENGTH_LONG).show();
-
-                                                            }
-                                                        });
                                                     } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }

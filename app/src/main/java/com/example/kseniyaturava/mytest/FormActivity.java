@@ -106,8 +106,7 @@ public class FormActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         if ((bundle != null)&&(bundle.getString("User")!=null)){
            user = bundle.getString("User");
-            Toast.makeText(FormActivity.this,
-                    user, Toast.LENGTH_LONG).show();
+          //  Toast.makeText(FormActivity.this,user, Toast.LENGTH_LONG).show();
         }
 
         //here the icon change color

@@ -98,8 +98,8 @@ public class AlertsActivity extends AppCompatActivity {
         if ((bundle != null)&&(bundle.getString("User")!=null)){
             user = bundle.getString("User");
         }
-        Toast.makeText(AlertsActivity.this,
-                "user"+user, Toast.LENGTH_LONG).show();
+        //Toast.makeText(AlertsActivity.this,
+        //        "user"+user, Toast.LENGTH_LONG).show();
 
         Thread tr = new Thread() {
             @Override

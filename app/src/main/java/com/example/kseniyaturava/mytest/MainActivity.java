@@ -129,8 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
 
-
-
         //Recoge user del Login
         Bundle bundle = this.getIntent().getExtras();
         if ((bundle != null)&&(bundle.getString("User")!=null)){
@@ -216,8 +214,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     //resultado de la conexión
                     try {
-                        Toast.makeText(MainActivity.this,
-                                user, Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(MainActivity.this,
+                     //           user, Toast.LENGTH_LONG).show();
 
 
                         final Runnable runnable = new Runnable() {

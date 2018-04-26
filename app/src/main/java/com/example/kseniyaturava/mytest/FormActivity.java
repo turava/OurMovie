@@ -13,7 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -28,7 +35,7 @@ public class FormActivity extends AppCompatActivity {
 
     Button sendForm;
     EditText etTitulo, etDirector, etActor1, etActor2, etActor3, etActor4, etAño, etGenero, etDescripcion;
-    private String user;
+    private String user, idGenero;
 
     private
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
@@ -124,9 +131,31 @@ public class FormActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             insertarDatos(etTitulo.getText().toString(),etAño.getText().toString(),etGenero.getText().toString(),etDirector.getText().toString(),etActor1.getText().toString(),etActor2.getText().toString(),etActor3.getText().toString(),etActor4.getText().toString(),etDescripcion.getText().toString());
+                            actualizarIdForoPeli(etTitulo.getText().toString());
+                            final String id = encontrarIdGeneroPeli(etTitulo.getText().toString(), etGenero.getText().toString());
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    int r = objJSON(id);
+                                    if (r > 0) {
+                                        int inicio = 0;
+                                        int longitud= id.length()-1;
+                                        String palabra;
+                                        palabra = id.substring(inicio, longitud);
+                                        idGenero = palabra.substring(15, palabra.length() - 2);
+
+                                        Thread trUp = new Thread() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    actualizarIdGeneroPeli(etTitulo.getText().toString(), idGenero);
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        };
+                                        trUp.start();
+                                    }
                                     Toast.makeText(FormActivity.this, "Insertada pelicula en la base", Toast.LENGTH_LONG).show();
                                 }
                             });
@@ -140,12 +169,91 @@ public class FormActivity extends AppCompatActivity {
         });
     }
 
+    public int objJSON(String respuesta) {
+        int res=0;
+        try{
+            JSONArray json=new JSONArray(respuesta);
+            if(json.length()>0){
+                res=1;
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    //Insertamos los datos que ha introducido el user en la tabla peliculas
     public void insertarDatos(String titulo, String año, String genero, String director, String actor1, String actor2, String actor3, String actor4, String descripcion)  throws IOException{
         URL url=null;
         int respuesta;
 
         try {
             url=new URL("http://www.webelicurso.hol.es/FormInsert.php?Titulo_Film="+titulo+"&Anyo_Film="+año+"&Genero_Film="+genero+"&Director_Film="+director+"&Actor1="+actor1+"&Actor2="+actor2+"&Actor3="+actor3+"&Actor4="+actor4+"&Descripcion_Film="+descripcion);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //En el formulario de nueva pelicula que rellena el user, no se le piden algunos campos internos de la base como los id y
+    // quedan con valor 0.
+    //Es el caso de Id_Foro, que debe ser el mismo que el campo autocompletable de la tabla peliculas Id_Film y aquí hacemos
+    // que se actualice una vez el registro de nueva peli ya ha volcado a la tabla.
+    public void actualizarIdForoPeli (String titulo) throws IOException{
+        URL url=null;
+        int respuesta;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/PeliUpdate.php?Titulo_Film="+titulo);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Lo mismo ocurre con el Id_Genero. En este caso, necesitamos primero hacer un select para encontrar el id que le corresponde
+    //en la tabla genero.
+    public String encontrarIdGeneroPeli(String titulo, String genero)  throws IOException{
+        URL url=null;
+        String linea="";
+        int respuesta=0;
+        StringBuilder resul=null;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/PeliUpdate2.php?Titulo_Film="+titulo+"&Genero_Film="+genero);
+            HttpURLConnection conection=(HttpURLConnection)url.openConnection();
+            respuesta=conection.getResponseCode();
+            resul=new StringBuilder();
+            if (respuesta==HttpURLConnection.HTTP_OK){
+                InputStream in=new BufferedInputStream(conection.getInputStream());
+                BufferedReader reader=new BufferedReader(new InputStreamReader(in));
+                while((linea=reader.readLine())!=null){
+                    resul.append(linea);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resul.toString();
+    }
+
+    //Por último, actualizamos en la tabla peliculas el Id_Genero encontrado para dejar el nuevo registro creado con todos
+    //los datos completos.
+    public void actualizarIdGeneroPeli(String titulo, String idGenero) throws IOException{
+        URL url=null;
+        int respuesta;
+
+        try {
+            url=new URL("http://www.webelicurso.hol.es/PeliUpdate3.php?Titulo_Film="+titulo+"&Id_Genero="+idGenero);
             HttpURLConnection conection=(HttpURLConnection)url.openConnection();
             respuesta=conection.getResponseCode();
             if (respuesta==HttpURLConnection.HTTP_OK){

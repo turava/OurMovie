@@ -132,7 +132,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:maxLength="10"
+                android:maxLength="15"
                 android:labelFor="@+id/tvGenero" />
 
             <TextView
@@ -318,13 +318,13 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:background="@drawable/et_border"
-                android:hint="@string/descripci_n_de_la_pel_cula_l_mite_200_caracteres"
+                android:hint="@string/descripci_n_de_la_pel_cula_l_mite_500_caracteres"
                 android:fontFamily="@font/amiko"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:inputType="textMultiLine"
-                android:maxLength="200"
+                android:maxLength="500"
                 android:labelFor="@+id/tvDescripcion" />
 
             <Button

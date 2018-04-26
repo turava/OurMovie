@@ -62,7 +62,7 @@
     <string name="actor_actriz_secundari">actor/actriz secundari@</string>
     <string name="a_o_de_la_pel_cula">año de la película</string>
     <string name="g_nero_de_la_pel_cula">género de la película</string>
-    <string name="descripci_n_de_la_pel_cula_l_mite_200_caracteres">descripción de la película, límite 200 caracteres</string>
+    <string name="descripci_n_de_la_pel_cula_l_mite_500_caracteres">descripción de la película, límite 500 caracteres</string>
     <string name="tu_nombre_de_usuario">tu nombre de usuario</string>
     <string name="el_actor_revelaci_n_de_blade_runner_jared_leto_vendr_a_espanya_de_visita">El actor revelación de Blade Runner, Jared Leto, vendrá a Espanya de visita</string>
     <string name="mensaje_de_foro_respondido">Mensaje de foro respondido</string>

@@ -117,6 +117,24 @@
                 android:textSize="16sp"
                 android:text="@string/g_nero" />
 
+            <Spinner
+                android:id="@+id/listaGenero"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="6dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/et_border"
+                android:entries="@array/generos"
+                android:fontFamily="@font/amiko"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:maxLength="15"
+                android:labelFor="@+id/tvGenero" >
+            </Spinner>
+
             <EditText
                 android:id="@+id/etGenero"
                 android:layout_width="match_parent"
@@ -132,8 +150,9 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:maxLength="15"
-                android:labelFor="@+id/tvGenero" />
+                android:focusable="false"
+                android:labelFor="@+id/listaGenero"
+                 />
 
             <TextView
                 android:id="@+id/tvDirector"

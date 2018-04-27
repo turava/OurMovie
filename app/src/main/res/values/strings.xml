@@ -199,4 +199,13 @@
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
 
+    <string-array name="generos">
+        <item>Elige una opción del desplegable</item>
+        <item>Acción</item>
+        <item>Ciencia Ficción</item>
+        <item>Comedia</item>
+        <item>Drama</item>
+        <item>Terror</item>
+    </string-array>
+
 </resources>

@@ -9,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -34,7 +37,7 @@ public class FormActivity extends AppCompatActivity {
     //method Listener
 
     Button sendForm;
-    EditText etTitulo, etDirector, etActor1, etActor2, etActor3, etActor4, etAño, etGenero, etDescripcion;
+    EditText etTitulo, etDirector, etActor1, etActor2, etActor3, etActor4, etAño, etDescripcion, etGenero;
     private String user, idGenero;
 
     private
@@ -123,6 +126,25 @@ public class FormActivity extends AppCompatActivity {
         //disabled shift mode
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView );
 
+        final Spinner listaGenero = (Spinner) findViewById(R.id.listaGenero);
+        ArrayAdapter AdapterGenero = ArrayAdapter.createFromResource(this, R.array.generos, android.R.layout.simple_spinner_item);
+        AdapterGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listaGenero.setAdapter(AdapterGenero);
+
+
+        listaGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> AdapterGenero, View view, int position, long id) {
+                String generoFinal = (String)(listaGenero.getItemAtPosition(position));
+                etGenero.setText(generoFinal);
+            }
+
+            public void onNothingSelected(AdapterView<?> AdapterGenero) {
+
+            }
+
+        });
+
         sendForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,35 +152,44 @@ public class FormActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            insertarDatos(etTitulo.getText().toString(),etAño.getText().toString(),etGenero.getText().toString(),etDirector.getText().toString(),etActor1.getText().toString(),etActor2.getText().toString(),etActor3.getText().toString(),etActor4.getText().toString(),etDescripcion.getText().toString());
-                            actualizarIdForoPeli(etTitulo.getText().toString());
-                            final String id = encontrarIdGeneroPeli(etTitulo.getText().toString(), etGenero.getText().toString());
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int r = objJSON(id);
-                                    if (r > 0) {
-                                        int inicio = 0;
-                                        int longitud= id.length()-1;
-                                        String palabra;
-                                        palabra = id.substring(inicio, longitud);
-                                        idGenero = palabra.substring(15, palabra.length() - 2);
+                            if (!(etTitulo.getText().toString().equals("")) && !(etAño.getText().toString().equals("")) && !(etGenero.getText().toString().equals("")) && !(etGenero.getText().toString().equals("Elige una opción del desplegable")) && !(etDirector.getText().toString().equals("")) && !(etActor1.getText().toString().equals("")) && !(etActor2.getText().toString().equals(""))&& !(etActor3.getText().toString().equals(""))&& !(etActor4.getText().toString().equals(""))&& !(etDescripcion.getText().toString().equals(""))){
+                                insertarDatos(etTitulo.getText().toString(),etAño.getText().toString(),etGenero.getText().toString(),etDirector.getText().toString(),etActor1.getText().toString(),etActor2.getText().toString(),etActor3.getText().toString(),etActor4.getText().toString(),etDescripcion.getText().toString());
+                                actualizarIdForoPeli(etTitulo.getText().toString());
+                                final String id = encontrarIdGeneroPeli(etTitulo.getText().toString(), etGenero.getText().toString());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int r = objJSON(id);
+                                        if (r > 0) {
+                                            int inicio = 0;
+                                            int longitud= id.length()-1;
+                                            String palabra;
+                                            palabra = id.substring(inicio, longitud);
+                                            idGenero = palabra.substring(15, palabra.length() - 2);
 
-                                        Thread trUp = new Thread() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    actualizarIdGeneroPeli(etTitulo.getText().toString(), idGenero);
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
+                                            Thread trUp = new Thread() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        actualizarIdGeneroPeli(etTitulo.getText().toString(), idGenero);
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
                                                 }
-                                            }
-                                        };
-                                        trUp.start();
+                                            };
+                                            trUp.start();
+                                        }
+                                        Toast.makeText(FormActivity.this, "Insertada pelicula en la base", Toast.LENGTH_LONG).show();
                                     }
-                                    Toast.makeText(FormActivity.this, "Insertada pelicula en la base", Toast.LENGTH_LONG).show();
-                                }
-                            });
+                                });
+                            } else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Falta por rellenar algun campo", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

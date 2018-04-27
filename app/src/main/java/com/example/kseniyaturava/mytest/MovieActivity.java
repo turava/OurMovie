@@ -2,7 +2,9 @@ package com.example.kseniyaturava.mytest;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -182,7 +184,7 @@ public class MovieActivity extends AppCompatActivity {
                                                 conn.connect();
                                                 Picasso.with(MovieActivity.this).load(String.valueOf(url2)).into(img_movie);
                                             } catch (IOException e) {
-                                                Toast.makeText(getApplicationContext(), "Error cargando la imagen: "+e.getMessage(),Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), "Esta peli aún no tiene la imagen pregrabada. En breve lo estará!",Toast.LENGTH_LONG).show();
                                                 e.printStackTrace();
                                             }
                                         }

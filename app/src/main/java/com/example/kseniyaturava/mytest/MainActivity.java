@@ -2,6 +2,7 @@ package com.example.kseniyaturava.mytest;
 //import android.app.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -40,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       @author Kseniyaa Turava
       @author Elisenda Coca
      */
-    //Menu & Activities code here
-    //method Listener
     private ImageView img_horror;//genero
     private ImageView img_drama;
     private ImageView img_comedy;
@@ -50,14 +49,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_new2;//interactua
     private ImageView img_new3;//interactua
     private ImageView img_new1;//interactua
-    private String user;
+    private String user="";
+    private SharedPreferences SharedPreferences;
 
 
     //Recycler
     private static final String TAG = "MainActivity";
     private ArrayList<String> titleList = new ArrayList<>();
     private ArrayList<String> imgList = new ArrayList<>();
-
 
     final String QUERY_CATEGORY = "http://www.webelicurso.hol.es/homeConnection.php?";
     final String QUERY_NEWS = "http://www.webelicurso.hol.es/homeConnection2.php?";
@@ -98,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(intent4);
                             return true;
                     }
-                    // finish();
                     return false;
                 }
             };
@@ -106,6 +104,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Shared Preferences
+        SharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
+        //Get user from LoginActivity
+        Bundle bundle = this.getIntent().getExtras();
+       String userSP= SharedPreferences.getString("User", "");
+        if(!userSP.trim().isEmpty()){
+            user= SharedPreferences.getString("User", "");
+            setContentView(R.layout.activity_main);
+        }
+        //Check if MainActivity starts from Login o Register
+        else if ((bundle != null)&&(bundle.getString("User")!=null)){
+            user = bundle.getString("User");
+        }
+        //When user is empty,and App isCreated first time
+        else if(user.isEmpty()){
+           // setContentView(R.layout.activity_login);
+           Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+           startActivity(intent);
+        }
+
         setContentView(R.layout.activity_main);
         BottomNavigationView BottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -129,11 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationViewHelper.removeShiftMode(BottomNavigationView);
 
 
-        //Recoge user del Login
-        Bundle bundle = this.getIntent().getExtras();
-        if ((bundle != null)&&(bundle.getString("User")!=null)){
-            user = bundle.getString("User");
-        }
+
         //Interactua
         img_new1 = (ImageView) findViewById(R.id.img_new1);
         img_new2 = (ImageView) findViewById(R.id.img_new2);
@@ -150,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+
+
         img_drama = (ImageView) findViewById(R.id.img_drama);
         img_drama.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,9 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     //resultado de la conexión
                     try {
-                     //   Toast.makeText(MainActivity.this,
-                     //           user, Toast.LENGTH_LONG).show();
-
 
                         final Runnable runnable = new Runnable() {
                             public void run() {
@@ -250,7 +263,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             }
                         };
-                        //runnable1.wait(1*1000);
                         runnable1.run();
                         final Runnable runnable2= new Runnable() {
                             public void run() {
@@ -390,7 +402,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }//bucle para cargar los valores de la clase en el id de imageView
             //fit estira las imagenes, centercrop, centra pero recorta
             for (int i = 0; i < peli.length; i++) {
-
                 //asignaos con el mismo json, urls a las img Interactua
                 Picasso.with(MainActivity.this).load(peli[0].getImagen()).fit().centerCrop().into(img_new1);
                 Picasso.with(MainActivity.this).load(peli[1].getImagen()).fit().centerCrop().into(img_new2);
@@ -443,6 +454,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Event onclick in RecyclerViewAdapter
 
     }
+
 }
 
 

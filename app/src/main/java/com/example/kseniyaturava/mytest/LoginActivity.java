@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -70,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private Button btLogin, btRegister;
+    private SharedPreferences SharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         user = (AutoCompleteTextView) findViewById(R.id.user);
         populateAutoComplete();
+        //  Shared Preference
+        SharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
+
 
         mPasswordView = (EditText) findViewById(R.id.password);
         btLogin = (Button) findViewById(R.id.btLogin);
@@ -101,6 +107,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 //return false;
             //}
         //});
+        user.setText(SharedPreferences.getString("User", ""));
+        mPasswordView.setText(SharedPreferences.getString("Password", ""));
+
 
         btLogin.setOnClickListener(new OnClickListener() {
             @Override
@@ -132,6 +141,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 };
                 tr.start();
+
+                //  Shared Preference
+                SharedPreferences.Editor editor = SharedPreferences.edit();
+                editor.putString("User", user.getText().toString());
+                editor.putString("Password", mPasswordView.getText().toString());
+                editor.commit();
             }
         });
 

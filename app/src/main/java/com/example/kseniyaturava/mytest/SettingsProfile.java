@@ -82,7 +82,7 @@ public class SettingsProfile extends AppCompatActivity {
 
                                     int r = 0;
                                     try {
-                                        String  accion = "categoria";
+                                       // String  accion = "categoria";
                                         r = objJSON(userDataJson);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -108,7 +108,7 @@ public class SettingsProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                validateData();
                 Thread tr = new Thread() {
             @Override
             public void run()
@@ -120,16 +120,34 @@ public class SettingsProfile extends AppCompatActivity {
                     String city = et_city.getText().toString().trim();
                     String description = et_description.getText().toString().trim();
                     String userName = et_user.getText().toString().trim();
-                    insertarDatos(user, userName, description, email, age, city);
-                    runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
+                    if(validateData()==true) {
+                        insertarDatos(user, userName, description, email, age, city);
+                        runOnUiThread(new Runnable()
                         {
-                            Toast.makeText(SettingsProfile.this,
-                                    "Se han guardado los cambios", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                            @Override
+                            public void run()
+                            {
+                                Toast.makeText(SettingsProfile.this,
+                                        "Se han guardado los cambios", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        //Return to profile activity after update
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        intent.putExtra("User", et_user.getText().toString().trim());
+                        startActivity(intent);
+                    }
+                    else{
+                        runOnUiThread(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                Toast.makeText(SettingsProfile.this,
+                                        "Error en los datos, vuelve a intentarlo", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+
                 } catch (IOException e)
                 {
                     e.printStackTrace();
@@ -137,14 +155,41 @@ public class SettingsProfile extends AppCompatActivity {
             }
         };
         tr.start();
-                //Return to profile activity after update
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                intent.putExtra("User", et_user.getText().toString().trim());
-                startActivity(intent);
+
             }
         });
 
         }
+
+    private boolean validateData() {
+        String email = et_email.getText().toString().trim();
+        String age = et_age.getText().toString().trim();
+        String userName = et_user.getText().toString().trim();
+        boolean value=true;
+        if(!(email.contains("@") && email.contains(".")) || email.isEmpty()){
+            value = false;
+        }
+        if(userName.length() <= 1 || userName.isEmpty())
+        {
+            value = false;
+        }
+        if(age.isEmpty())
+        {
+            value = false;
+        }
+        try{
+            int ageN = Integer.parseInt(age);
+            if(ageN <16 || ageN >100)
+            {
+                value = false;
+            }
+        }
+        catch(Exception e){
+            value = false;
+        }
+        return value;
+
+    }
 
     //Update query for boton "save" event
     public void insertarDatos(String user, String userName, String description, String email, String age, String city)

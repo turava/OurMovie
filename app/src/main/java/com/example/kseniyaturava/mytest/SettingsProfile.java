@@ -1,5 +1,6 @@
 package com.example.kseniyaturava.mytest;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,13 +29,14 @@ import java.net.URL;
 
 public class SettingsProfile extends AppCompatActivity {
     private String user;
-    private EditText et_user;
+    private AutoCompleteTextView et_user;
     private EditText et_description;
     private EditText et_email;
     private EditText et_city;
     private EditText et_age;
     private Button btn_save;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ public class SettingsProfile extends AppCompatActivity {
         }
         //Inicializacion de eventos
 
-        et_user = (EditText) findViewById(R.id.et_user);
+        et_user = (AutoCompleteTextView) findViewById(R.id.et_user);
         et_user.setText(user);
         et_description = (EditText) findViewById(R.id.et_description);
         et_email = (EditText) findViewById(R.id.et_email);
@@ -169,7 +172,7 @@ public class SettingsProfile extends AppCompatActivity {
         if(!(email.contains("@") && email.contains(".")) || email.isEmpty()){
             value = false;
         }
-        if(userName.length() <= 1 || userName.isEmpty())
+        if(userName.length() <= 1 || userName.isEmpty() || userName.equals("Usuario"))
         {
             value = false;
         }
@@ -179,7 +182,7 @@ public class SettingsProfile extends AppCompatActivity {
         }
         try{
             int ageN = Integer.parseInt(age);
-            if(ageN <16 || ageN >100)
+            if(ageN <14 || ageN >100)
             {
                 value = false;
             }

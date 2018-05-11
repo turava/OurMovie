@@ -53,7 +53,7 @@ public class ForoActivityTest {
                                         withClassName(is("android.support.design.widget.TextInputLayout")),
                                         0),
                                 0)));
-        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("p"), closeSoftKeyboard());
+        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.password),
@@ -62,7 +62,7 @@ public class ForoActivityTest {
                                         withClassName(is("android.support.design.widget.TextInputLayout")),
                                         0),
                                 0)));
-        appCompatEditText.perform(scrollTo(), replaceText("p"), closeSoftKeyboard());
+        appCompatEditText.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.btLogin), withText("Log in"),

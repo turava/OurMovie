@@ -32,21 +32,90 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
+    /*
+        This Test is to prove the login registration
+    */
+
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
     public void loginActivityTest() {
+
+        //Message error with an invalid user or/and password
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatAutoCompleteTextView = onView(
+                allOf(withId(R.id.user),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.design.widget.TextInputLayout")),
+                                        0),
+                                0)));
+        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("eli"), closeSoftKeyboard());
+
+        ViewInteraction appCompatAutoCompleteTextView2 = onView(
+                allOf(withId(R.id.user), withText("eli"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.design.widget.TextInputLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatAutoCompleteTextView2.perform(closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.password),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.design.widget.TextInputLayout")),
+                                        0),
+                                0)));
+        appCompatEditText.perform(scrollTo(), replaceText("eli"), closeSoftKeyboard());
+
+        //Press Button Login -> We received a message saying that some field is not correct
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.btLogin), withText("Log in"),
+                        childAtPosition(
+                                allOf(withId(R.id.loginForm),
+                                        childAtPosition(
+                                                withId(R.id.login_form),
+                                                0)),
+                                2)));
+        appCompatButton.perform(scrollTo(), click());
+
+        //Enter with a valid user
+
+        try {
+            Thread.sleep(1800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatAutoCompleteTextView3 = onView(
                 allOf(withId(R.id.user),
                 childAtPosition(
                 childAtPosition(
                 withClassName(is("android.support.design.widget.TextInputLayout")),
                 0),
                 0)));
-        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
+        appCompatAutoCompleteTextView3.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
 
-        ViewInteraction appCompatAutoCompleteTextView2 = onView(
+        ViewInteraction appCompatAutoCompleteTextView4 = onView(
                 allOf(withId(R.id.user), withText("eli.coca"),
                 childAtPosition(
                 childAtPosition(
@@ -54,18 +123,26 @@ public class LoginActivityTest {
                 0),
                 0),
                 isDisplayed()));
-        appCompatAutoCompleteTextView2.perform(closeSoftKeyboard());
+        appCompatAutoCompleteTextView4.perform(closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText = onView(
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                 childAtPosition(
                 childAtPosition(
                 withClassName(is("android.support.design.widget.TextInputLayout")),
                 0),
                 0)));
-        appCompatEditText.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
+        appCompatEditText2.perform(scrollTo(), replaceText("eli.coca"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton = onView(
+        ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.btLogin), withText("Log in"),
                 childAtPosition(
                 allOf(withId(R.id.loginForm),
@@ -73,7 +150,15 @@ public class LoginActivityTest {
                 withId(R.id.login_form),
                 0)),
                 2)));
-        appCompatButton.perform(scrollTo(), click());
+        appCompatButton2.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay. -> go to MainActivity ok
+
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

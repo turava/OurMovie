@@ -31,11 +31,24 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class RegisterActivityTest {
 
+    /*
+        This Test is to prove a new user registration
+    */
+
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
     public void registerActivityTest() {
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.btRegister), withText("Register New Account"),
                         childAtPosition(
@@ -55,6 +68,14 @@ public class RegisterActivityTest {
                                 0)));
         appCompatEditText.perform(scrollTo(), replaceText("d@d"), closeSoftKeyboard());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.user),
                         childAtPosition(
@@ -63,6 +84,14 @@ public class RegisterActivityTest {
                                         0),
                                 0)));
         appCompatEditText2.perform(scrollTo(), replaceText("d"), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.nombre),
@@ -73,6 +102,14 @@ public class RegisterActivityTest {
                                 0)));
         appCompatEditText3.perform(scrollTo(), replaceText("d"), closeSoftKeyboard());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.edad),
                         childAtPosition(
@@ -82,6 +119,14 @@ public class RegisterActivityTest {
                                 0)));
         appCompatEditText4.perform(scrollTo(), replaceText("25"), closeSoftKeyboard());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.ciudad),
                         childAtPosition(
@@ -90,6 +135,14 @@ public class RegisterActivityTest {
                                         0),
                                 0)));
         appCompatEditText5.perform(scrollTo(), replaceText("d"), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //We leave an unfilled field and press Button register
 
@@ -101,6 +154,14 @@ public class RegisterActivityTest {
                                         0),
                                 0)));
         appCompatEditText6.perform(scrollTo(), replaceText(""), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.btRegister), withText("Register"),
@@ -131,6 +192,14 @@ public class RegisterActivityTest {
                                         0),
                                 0)));
         appCompatEditText7.perform(scrollTo(), replaceText("d"), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.btRegister), withText("Register"),

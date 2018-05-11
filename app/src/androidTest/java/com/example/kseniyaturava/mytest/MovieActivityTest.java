@@ -73,6 +73,14 @@ public class MovieActivityTest {
                                 2)));
         appCompatButton.perform(scrollTo(), click());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //MainActivity click on MovieActivity: doesn't work correctly (error explained in MainActivityTest.java)
         //so we will get to MovieActivity through HomeCategoryActivity
 
@@ -85,6 +93,14 @@ public class MovieActivityTest {
                                                 1)),
                                 0)));
         appCompatImageView.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Show MovieActivity ok
 
@@ -99,7 +115,7 @@ public class MovieActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(800);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -119,7 +135,7 @@ public class MovieActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(1200);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

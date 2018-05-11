@@ -74,6 +74,14 @@ public class ForoActivityTest {
                                 2)));
         appCompatButton.perform(scrollTo(), click());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //ForoActivity is not available from the bottomNavigation, so we access it through MovieActivity
         //and we will get to MovieActivity through HomeCategoryActivity
 
@@ -86,6 +94,14 @@ public class ForoActivityTest {
                                                 1)),
                                 0)));
         appCompatImageView.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Show MovieActivity ok
 
@@ -105,7 +121,7 @@ public class ForoActivityTest {
             e.printStackTrace();
         }
 
-        //Click on Button foro
+        //Click on Button foro -> go to ForoActivity ok
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.button_foro), withText("Foro"),
@@ -118,12 +134,6 @@ public class ForoActivityTest {
         appCompatButton2.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
-
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         //Show ForoActivity ok with the comments of that movie
 
@@ -173,7 +183,7 @@ public class ForoActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(800);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -255,7 +265,7 @@ public class ForoActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(800);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -39,7 +39,7 @@ import static org.hamcrest.Matchers.is;
 public class SearchActivityTest {
 
     /*
-        This Test doesn't need login registration, so it starts in SearchActivity directly with all the films in database
+        This Test doesn't need login registration, so it starts in SearchActivity directly showing all the movies in database
     */
 
     @Rule
@@ -83,6 +83,14 @@ public class SearchActivityTest {
                         isDisplayed()));
         appCompatImageView.perform(click());
 
+        // Added a sleep statement to match the app's execution delay.
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //Write the beginning of a title that we know exists in database
 
         ViewInteraction searchAutoComplete = onView(
@@ -125,7 +133,7 @@ public class SearchActivityTest {
             e.printStackTrace();
         }
 
-        //Click on the movie found and go to MovieActivity
+        //Click on the movie found and go to MovieActivity ok
 
         DataInteraction appCompatTextView = onData(anything())
                 .inAdapterView(allOf(withId(R.id.listViewMovies),
@@ -192,7 +200,7 @@ public class SearchActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -213,7 +221,7 @@ public class SearchActivityTest {
         // Added a sleep statement to match the app's execution delay.
 
         try {
-            Thread.sleep(800);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
